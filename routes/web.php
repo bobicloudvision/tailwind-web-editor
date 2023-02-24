@@ -24,6 +24,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/editor', function () {
+    return Inertia::render('Editor/Page', [
+
+    ]);
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
