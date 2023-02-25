@@ -156,9 +156,9 @@
 
                 <!-- Secondary column (hidden on smaller screens) -->
                 <aside class="hidden w-60 bg-white border-l border-gray-200 overflow-y-auto lg:block">
-
-                    selected element
-
+                    <div class="p-6">
+                    <div id="lastSelectedElement"></div>
+                    </div>
                 </aside>
             </div>
         </div>
@@ -242,7 +242,7 @@ export default {
 
 
 function runLiveEdit() {
-    
+
     let editorIframe = document.getElementById('js-tailwind-editor-iframe');
     editorIframe.onload = function () {
 
@@ -271,6 +271,14 @@ function runLiveEdit() {
             'b',
             'button',
         ];
+
+
+        let lastSelectedElement = null;
+        editorIframeBody.addEventListener('click', function( event ){
+            if(!lastSelectedElement.contains(event.target)) {
+                removeAllContentEditableElements();
+            }
+        });
 
         for (var i = 0; i < contentEditableElementsTags.length; i++) {
             let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
@@ -321,6 +329,9 @@ function runLiveEdit() {
                 editorTag[j].addEventListener('dblclick', function () {
                     removeAllContentEditableElements();
                     this.setAttribute('contenteditable', 'true');
+                    lastSelectedElement = this;
+                    console.log(this);
+                    document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
                 });
 
                 editorTag[j].addEventListener('mouseenter', function () {
