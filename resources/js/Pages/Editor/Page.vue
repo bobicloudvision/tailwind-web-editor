@@ -154,7 +154,7 @@
                              class="min-w-0 flex-1 h-full flex flex-col lg:order-last">
 
                         <div class="bg-gray-50 p-5">
-                            <iframe id="js-tailwind-editor-iframe" src="simple-theme.html"></iframe>
+                            <iframe id="js-tailwind-editor-iframe" src="/"></iframe>
                         </div>
 
                     </section>

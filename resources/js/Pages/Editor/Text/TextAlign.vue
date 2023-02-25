@@ -53,10 +53,11 @@ export default {
     },
     mounted() {
         document.addEventListener("JsLiveEdit::ElementChange", (event) => {
-           if (event.detail.elementType == 'text') {
 
-               this.currentElement = event.detail.element;
-               this.currentAlign = ref();
+            this.currentElement = event.detail.element;
+            this.currentAlign = ref(false);
+
+           if (event.detail.elementType == 'text') {
 
                if (event.detail.element.classList.contains('text-right')) {
                    this.currentAlign = textAlignOptions.find(option => option.name === 'right');
