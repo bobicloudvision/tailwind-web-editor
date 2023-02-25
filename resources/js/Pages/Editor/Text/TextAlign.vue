@@ -1,10 +1,10 @@
 <template>
     <div>
-        <RadioGroup v-model="mem">
-            <RadioGroupLabel class="sr-only"> Choose a memory option </RadioGroupLabel>
+        <RadioGroup v-model="currentAlign" v-on:update:modelValue="changeAlign">
+            <RadioGroupLabel class="sr-only"> Choose a currentAlignory option </RadioGroupLabel>
             <div class="relative z-0 inline-flex shadow-sm rounded-md">
-                <RadioGroupOption as="template" v-for="option in memoryOptions" :key="option.name" :value="option" :disabled="!option.inStock" v-slot="{ active, checked }">
-                    <div :class="[option.inStock ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border py-1 px-1 items-center justify-center text-sm font-medium uppercase']">
+                <RadioGroupOption as="template" v-for="option in textAlignOptions" :key="option.name" :value="option" :disabled="!option.isActive" v-slot="{ active, checked }">
+                    <div :class="[option.isActive ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border py-1 px-1 items-center justify-center text-sm font-medium uppercase']">
                         <RadioGroupLabel as="p">
                             {{ option.name }}
                         </RadioGroupLabel>
@@ -19,25 +19,67 @@
 import { ref } from 'vue'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 
-const memoryOptions = [
-    { name: 'Left', inStock: true },
-    { name: 'Center', inStock: true },
-    { name: 'Right', inStock: true },
+const textAlignOptions = [
+    { name: 'left', isActive: true },
+    { name: 'center', isActive: true },
+    { name: 'right', isActive: true },
 ]
 
 export default {
+    props: [],
+    emits: ['enlarge-text'],
     components: {
         RadioGroup,
         RadioGroupLabel,
         RadioGroupOption,
     },
-    setup() {
-        const mem = ref(memoryOptions[2])
+    methods: {
+        changeAlign: function () {
 
-        return {
-            memoryOptions,
-            mem,
+            this.currentElement.classList.remove('text-right');
+            this.currentElement.classList.remove('text-left');
+            this.currentElement.classList.remove('text-center');
+
+            if (this.currentAlign.name === 'left') {
+                this.currentElement.classList.add('text-left');
+            }
+            if (this.currentAlign.name === 'right') {
+                this.currentElement.classList.add('text-right');
+            }
+            if (this.currentAlign.name === 'center') {
+                this.currentElement.classList.add('text-center');
+            }
         }
     },
+    mounted() {
+        document.addEventListener("JsLiveEdit::ElementChange", (event) => {
+           if (event.detail.elementType == 'text') {
+
+               this.currentElement = event.detail.element;
+               this.currentAlign = ref();
+
+               if (event.detail.element.classList.contains('text-right')) {
+                   this.currentAlign = textAlignOptions.find(option => option.name === 'right');
+               }
+
+               if (event.detail.element.classList.contains('text-left')) {
+                   this.currentAlign = textAlignOptions.find(option => option.name === 'left');
+               }
+
+               if (event.detail.element.classList.contains('text-center')) {
+                   this.currentAlign = textAlignOptions.find(option => option.name === 'center');
+               }
+           }
+        });
+    },
+    data() {
+        let currentElement = false;
+        let currentAlign = ref();
+        return {
+            currentElement: currentElement,
+            currentAlign: currentAlign,
+            textAlignOptions,
+        }
+    }
 }
 </script>

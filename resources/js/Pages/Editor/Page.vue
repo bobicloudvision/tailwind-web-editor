@@ -254,26 +254,13 @@ export default {
         XIcon,
         TextAlign
     },
-    methods: {
-        elementChange: function (action, value) {
-            if (action === 'align') {
-                lastSelectedElement.classList.remove('text-right');
-                lastSelectedElement.classList.remove('text-left');
-                lastSelectedElement.classList.remove('text-center');
-                if (value === 'left') {
-                    lastSelectedElement.classList.add('text-left');
-                }
-                if (value === 'right') {
-                    lastSelectedElement.classList.add('text-right');
-                }
-                if (value === 'center') {
-                    lastSelectedElement.classList.add('text-center');
-                }
-            }
-        }
-    },
     mounted() {
         runLiveEdit();
+
+        document.addEventListener("JsLiveEdit::ElementChange", (event) => {
+            lastSelectedElement = event.detail.element;
+        });
+
     },
     setup() {
         const mobileMenuOpen = ref(false)
@@ -282,7 +269,7 @@ export default {
             sidebarNavigation,
             userNavigation,
             mobileMenuOpen,
-            selectedElement,
+            lastSelectedElement,
             textAlignOptions,
         }
     },
@@ -399,6 +386,16 @@ function runLiveEdit() {
                     document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
 
                     lastSelectedElement = this;
+
+                    let elementType = 'text';
+
+                    let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChange', {
+                        detail: {
+                            element: this,
+                            elementType: elementType,
+                        }
+                    })
+                    document.dispatchEvent(liveEditEvent);
 
                 });
 
