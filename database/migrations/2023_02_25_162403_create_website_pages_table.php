@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('website_pages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('page_author_id')->nullable()->cascadeOnDelete();
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('content');
