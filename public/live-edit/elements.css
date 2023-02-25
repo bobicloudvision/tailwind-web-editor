@@ -3,14 +3,13 @@
 }
 
 .js-live-edit-element[contenteditable='true'] {
-    caret-color: #127de8;
-    outline: 2px solid #127de8;
+    caret-color: #3592f5;
+    outline: 2px dashed rgba(53, 146, 245, 0.64);
 }
 
 .js-live-edit-element-border {
-    border: 2px dashed #5dce91
+    border: 2px dashed #27eeb9
 }
 .js-live-edit-element-background {
     background: #eefaf4;
 }
-
