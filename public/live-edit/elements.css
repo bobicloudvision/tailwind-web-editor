@@ -4,12 +4,12 @@
 
 .js-live-edit-element[contenteditable='true'] {
     caret-color: #3592f5;
-    outline: 2px dashed rgba(53, 146, 245, 0.64);
+    outline: 0px;
 }
 
 .js-live-edit-element-border {
-    border: 2px dashed #27eeb9
+    border: 2px dashed rgba(53, 146, 245, 0.42);
 }
 .js-live-edit-element-background {
-    background: #eefaf4;
+    background: #eef3fa;
 }

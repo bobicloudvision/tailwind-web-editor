@@ -1,4 +1,5 @@
 <template>
+
     <div class="h-full flex">
 
         <!-- Narrow sidebar -->
@@ -87,8 +88,8 @@
                         <MenuAlt2Icon class="h-6 w-6" aria-hidden="true"/>
                     </button>
                     <div class="flex-1 flex justify-between px-4 sm:px-6">
-                        <div class="flex-1 flex">
-                            <form class="w-full flex md:ml-0" action="#" method="GET">
+                        <div class="flex-1 flex pt-3 justify-center">
+<!--                            <form class="w-full flex md:ml-0" action="#" method="GET">
                                 <label for="search-field" class="sr-only">Search all files</label>
                                 <div class="relative w-full text-gray-400 focus-within:text-gray-600">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center">
@@ -98,7 +99,12 @@
                                            class="h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400"
                                            placeholder="Search" type="search"/>
                                 </div>
-                            </form>
+                            </form>-->
+
+                            <div id="js-live-edit-align">
+                                <TextAlign />
+                            </div>
+
                         </div>
                         <div class="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                             <!-- Profile dropdown -->
@@ -158,11 +164,15 @@
                 <aside class="hidden w-60 bg-white border-l border-gray-200 overflow-y-auto lg:block">
                     <div class="p-6">
                     <div id="lastSelectedElement"></div>
+
+
                     </div>
                 </aside>
             </div>
         </div>
     </div>
+
+
 </template>
 
 <style>
@@ -176,6 +186,8 @@
 
 <script>
 import {ref} from 'vue'
+import TextAlign from './Text/TextAlign.vue'
+
 import {
     Dialog,
     DialogOverlay,
@@ -185,6 +197,7 @@ import {
     MenuItems,
     TransitionChild,
     TransitionRoot,
+    RadioGroup, RadioGroupLabel, RadioGroupOption
 } from '@headlessui/vue'
 import {
     CogIcon,
@@ -199,7 +212,10 @@ import {
     PuzzleIcon,
     InformationCircleIcon
 } from '@heroicons/vue/outline'
-import {SearchIcon, InboxIcon} from '@heroicons/vue/solid'
+import {
+    SearchIcon,
+    InboxIcon,
+} from '@heroicons/vue/solid'
 
 const sidebarNavigation = [
     {name: 'Modules', href: '#', icon: PuzzleIcon, current: false},
@@ -211,6 +227,16 @@ const userNavigation = [
     {name: 'Your Profile', href: '#'},
     {name: 'Sign out', href: '#'},
 ]
+
+const selectedElement = {
+  align: 'left',
+};
+
+const textAlignOptions = [
+    {name: 'Left', value: 'left'},
+    {name: 'Center', value: 'center'},
+    {name: 'Right', value: 'right'},
+];
 
 export default {
     components: {
@@ -226,20 +252,43 @@ export default {
         PlusSmIcon,
         SearchIcon,
         XIcon,
+        TextAlign
+    },
+    methods: {
+        elementChange: function (action, value) {
+            if (action === 'align') {
+                lastSelectedElement.classList.remove('text-right');
+                lastSelectedElement.classList.remove('text-left');
+                lastSelectedElement.classList.remove('text-center');
+                if (value === 'left') {
+                    lastSelectedElement.classList.add('text-left');
+                }
+                if (value === 'right') {
+                    lastSelectedElement.classList.add('text-right');
+                }
+                if (value === 'center') {
+                    lastSelectedElement.classList.add('text-center');
+                }
+            }
+        }
     },
     mounted() {
         runLiveEdit();
     },
     setup() {
         const mobileMenuOpen = ref(false)
+
         return {
             sidebarNavigation,
             userNavigation,
             mobileMenuOpen,
+            selectedElement,
+            textAlignOptions,
         }
     },
 }
 
+let lastSelectedElement = null;
 
 function runLiveEdit() {
 
@@ -272,13 +321,35 @@ function runLiveEdit() {
             'button',
         ];
 
+        let editableElementsClasses = [
+            'flex',
+        ];
 
-        let lastSelectedElement = null;
-        editorIframeBody.addEventListener('click', function( event ){
-            if(!lastSelectedElement.contains(event.target)) {
-                removeAllContentEditableElements();
+        for (var i = 0; i < editableElementsClasses.length; i++) {
+            let editorClass = editorIframeBody.getElementsByClassName(editableElementsClasses[i]);
+            for (var j = 0; j < editorClass.length; j++) {
+
+                editorClass[j].classList.add('js-live-edit-element');
+
+                editorClass[j].addEventListener('mouseover', function () {
+                    this.classList.add('js-live-edit-element-border');
+                });
+
+                editorClass[j].addEventListener('mouseleave', function () {
+                    this.classList.remove('js-live-edit-element-border');
+                    this.classList.remove('js-live-edit-element-background');
+                });
+
             }
-        });
+        }
+
+        // editorIframeBody.addEventListener('click', function( event ){
+        //     if (!lastSelectedElement.contains(event.target)) {
+        //         if (event.hasAttribute('contenteditable')) {
+        //             removeAllContentEditableElements();
+        //         }
+        //     }
+        // });
 
         for (var i = 0; i < contentEditableElementsTags.length; i++) {
             let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
@@ -291,11 +362,10 @@ function runLiveEdit() {
             }
         }
 
-        function removeAllContentEditableElements() {
+        function removeAllColoredActivelements() {
             for (var i = 0; i < contentEditableElementsTags.length; i++) {
                 let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
                 for (var j = 0; j < editorTag.length; j++) {
-                    editorTag[j].removeAttribute('contenteditable', 'true');
                     editorTag[j].classList.remove('js-live-edit-element-border');
                     editorTag[j].classList.remove('js-live-edit-element-background');
                 }
@@ -306,48 +376,36 @@ function runLiveEdit() {
             let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
             for (var j = 0; j < editorTag.length; j++) {
 
+                editorTag[j].setAttribute('contenteditable', 'true');
                 editorTag[j].classList.add('js-live-edit-element');
 
                 editorTag[j].addEventListener('keydown', function () {
 
                 });
 
-                editorTag[j].addEventListener('click', function () {
-                    if (!this.hasAttribute('contenteditable')) {
-                        removeAllContentEditableElements();
-                        this.classList.add('js-live-edit-element-border');
-                        this.classList.add('js-live-edit-element-background');
-                    }
-                });
-
                 editorTag[j].addEventListener('mouseover', function () {
-                    if (!this.hasAttribute('contenteditable')) {
-                        this.classList.add('js-live-edit-element-border');
-                    }
+                    // if (!this.hasAttribute('contenteditable')) {
+                    //     this.classList.add('js-live-edit-element-border');
+                    //     this.setAttribute('contenteditable', 'true');
+                    // }
                 });
 
-                editorTag[j].addEventListener('dblclick', function () {
-                    removeAllContentEditableElements();
-                    this.setAttribute('contenteditable', 'true');
-                    lastSelectedElement = this;
-                    console.log(this);
+                editorTag[j].addEventListener('click', function (event) {
+
+                    removeAllColoredActivelements();
+
+                    this.classList.add('js-live-edit-element-border');
+                    this.classList.add('js-live-edit-element-background');
                     document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
+
+                    lastSelectedElement = this;
+
                 });
 
                 editorTag[j].addEventListener('mouseenter', function () {
 
                 });
 
-                editorTag[j].addEventListener('mouseleave', function () {
-                    let removeClasses = true;
-                    if (this.hasAttribute('contenteditable')) {
-                        removeClasses = false;
-                    }
-                    if (removeClasses) {
-                        this.classList.remove('js-live-edit-element-border');
-                        this.classList.remove('js-live-edit-element-background');
-                    }
-                });
 
             }
         }
