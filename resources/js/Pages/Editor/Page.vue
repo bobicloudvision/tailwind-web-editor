@@ -344,17 +344,6 @@ function runLiveEdit() {
         //     }
         // });
 
-        for (var i = 0; i < contentEditableElementsTags.length; i++) {
-            let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
-            for (var j = 0; j < editorTag.length; j++) {
-                if (editorTag[j].hasAttribute('href')) {
-                    editorTag[j].addEventListener('click', function (event) {
-                        event.preventDefault();
-                    });
-                }
-            }
-        }
-
         function removeAllColoredActivelements() {
             for (var i = 0; i < contentEditableElementsTags.length; i++) {
                 let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
@@ -370,8 +359,26 @@ function runLiveEdit() {
             let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
             for (var j = 0; j < editorTag.length; j++) {
 
+                // let canIAddContentEditable = true;
+                // if (contentEditableElementsTags[i] == 'h1') {
+                //     if (editorTag[j].children[0].classList.contains('block')) {
+                //         canIAddContentEditable = false;
+                //     }
+                // }
+                //
+                // if (!canIAddContentEditable) {
+                //    continue;
+                // }
+
                 editorTag[j].setAttribute('contenteditable', 'true');
                 editorTag[j].classList.add('js-live-edit-element');
+
+                /// stop href clicking
+                if (editorTag[j].hasAttribute('href')) {
+                    editorTag[j].addEventListener('click', function (event) {
+                        event.preventDefault();
+                    });
+                }
 
                 editorTag[j].addEventListener('keydown', function () {
 
@@ -390,9 +397,12 @@ function runLiveEdit() {
 
                     removeAllColoredActivelements();
 
-                    this.classList.add('js-live-edit-element-border');
-                    this.classList.add('js-live-edit-element-background');
-                    this.classList.add('js-live-edit-element-editing');
+                    let instanceElement = event.target;
+
+                    instanceElement.classList.add('js-live-edit-element-border');
+                    instanceElement.classList.add('js-live-edit-element-background');
+                    instanceElement.classList.add('js-live-edit-element-editing');
+
                     //document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
 
                     //lastSelectedElement = this;
@@ -400,7 +410,7 @@ function runLiveEdit() {
                     let elementType = 'text';
                     let elementClasses = [];
 
-                    this.classList.forEach(function (item) {
+                    instanceElement.classList.forEach(function (item) {
                         if (!item.includes('js-live-edit')) {
                             elementClasses.push(item);
                         }
@@ -408,7 +418,7 @@ function runLiveEdit() {
 
                     let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChange', {
                         detail: {
-                            element: this,
+                            element: instanceElement,
                             elementType: elementType,
                             classList: elementClasses,
                         }

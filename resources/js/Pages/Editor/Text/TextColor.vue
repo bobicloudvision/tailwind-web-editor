@@ -1,6 +1,6 @@
 <template>
     <div>
-    <RadioGroup v-model="selectedColor">
+    <RadioGroup v-model="selectedColor" v-on:update:modelValue="changeColor">
         <RadioGroupLabel class="block text-sm font-medium text-gray-700">
             Text Color
         </RadioGroupLabel>
@@ -38,16 +38,36 @@ export default {
         RadioGroupLabel,
         RadioGroupOption,
     },
+    methods: {
+        changeColor: function () {
+            colorClasses.forEach((color) => {
+                this.currentElement.classList.remove(color);
+            });
+            this.currentElement.classList.add('text-' + this.selectedColor.name);
+        }
+    },
     mounted() {
         document.addEventListener("JsLiveEdit::ElementChange", (event) => {
             if (event.detail.elementType == 'text') {
                 this.currentElement = event.detail.element;
+                colorClasses.forEach((color) => {
+                    if (event.detail.element.classList.contains(color)) {
+                        let bgColor = color.replace('text-', '');
+                        this.selectedColor = ref({
+                            name: bgColor,
+                            bgColor: 'bg-' + bgColor,
+                            selectedColor: 'ring-' + bgColor,
+                        });
+                    }
+                });
             }
         });
     },
     setup() {
+        let currentElement = false;
         const selectedColor = ref()
         return {
+            currentElement: currentElement,
             colors,
             selectedColor,
         }
