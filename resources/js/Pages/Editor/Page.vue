@@ -1,24 +1,25 @@
 <template>
 
-    <Layout>
+<Layout>
 
-        <template v-slot:main-content>
-          <div style="height: 100%;">
-              <iframe id="js-tailwind-editor-iframe" src="/live-edit-page/1"></iframe>
-          </div>
-        </template>
+    d: {{ deviceName }}
+    
+    <template v-slot:main-content>
+      <div style="height: 100%;">
+          <iframe id="js-tailwind-editor-iframe" src="/live-edit-page/1"></iframe>
+      </div>
+    </template>
 
+    <template v-slot:topbar-content>
+        <BrowserSwitch />
+    </template>
 
-        <template v-slot:topbar-content>
-            <BrowserSwitch />
-        </template>
-
-        <template v-slot:sidebar-content>
-            <Tags class="mt-2" />
-            <TextAlign class="mt-2" />
-            <TextColor class="mt-2" />
-            <BackgroundColor class="mt-2" />
-        </template>
+    <template v-slot:sidebar-content>
+        <Tags class="mt-2" />
+        <TextAlign class="mt-2" />
+        <TextColor class="mt-2" />
+        <BackgroundColor class="mt-2" />
+    </template>
 
 </Layout>
 
@@ -42,6 +43,7 @@ import TextColor from './Text/TextColor.vue'
 import BackgroundColor from './Text/BackgroundColor.vue'
 import BrowserSwitch from './Responsive/BrowserSwitch.vue'
 
+let deviceName;
 let lastSelectedElement = [];
 
 export default {
@@ -54,16 +56,24 @@ export default {
         BackgroundColor,
     },
     mounted() {
-        runLiveEdit();
+
+        document.addEventListener("JsLiveEdit::SwitchDevice", (event) => {
+            this.deviceName = event.detail.device.name;
+            this.$forceUpdate();
+        });
 
         document.addEventListener("JsLiveEdit::ElementChange", (event) => {
             this.lastSelectedElement = event.detail;
             this.$forceUpdate();
         });
 
+
+        runLiveEdit();
+
     },
     setup() {
         return {
+            deviceName,
             lastSelectedElement,
         }
     },

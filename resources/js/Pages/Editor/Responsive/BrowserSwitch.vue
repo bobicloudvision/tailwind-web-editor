@@ -35,17 +35,17 @@ export default {
         RadioGroupOption,
     },
     methods: {
-        switchDevice: function (device) {
+        switchDevice: function () {
             let liveEditEvent = new CustomEvent('JsLiveEdit::SwitchDevice', {
                 detail: {
-                    device: device
+                    device: this.currentDevice
                 }
             })
             document.dispatchEvent(liveEditEvent);
         }
     },
     data() {
-        let currentDevice = ref();
+        let currentDevice = ref(deviceSwitchOptions[0]);
         return {
             deviceSwitchOptions:deviceSwitchOptions,
             currentDevice: currentDevice
