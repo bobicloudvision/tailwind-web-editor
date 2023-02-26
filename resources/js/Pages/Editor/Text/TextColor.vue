@@ -1,4 +1,5 @@
 <template>
+    <div>
     <RadioGroup v-model="selectedColor">
         <RadioGroupLabel class="block text-sm font-medium text-gray-700">
             Text Color
@@ -12,7 +13,7 @@
             </RadioGroupOption>
         </div>
     </RadioGroup>
-
+</div>
 </template>
 
 <script>
@@ -37,9 +38,15 @@ export default {
         RadioGroupLabel,
         RadioGroupOption,
     },
+    mounted() {
+        document.addEventListener("JsLiveEdit::ElementChange", (event) => {
+            if (event.detail.elementType == 'text') {
+                this.currentElement = event.detail.element;
+            }
+        });
+    },
     setup() {
         const selectedColor = ref()
-
         return {
             colors,
             selectedColor,
