@@ -1,250 +1,57 @@
 <template>
 
-    <div class="h-full flex">
+    <Layout>
+
+        <template v-slot:main-content>
+          <div style="height: 100%;">
+              <iframe id="js-tailwind-editor-iframe" src="/live-edit-page/1"></iframe>
+          </div>
+        </template>
 
 
-        <!-- Mobile menu -->
-        <TransitionRoot as="template" :show="mobileMenuOpen">
-            <Dialog as="div" class="md:hidden" @close="mobileMenuOpen = false">
-                <div class="fixed inset-0 z-40 flex">
-                    <TransitionChild as="template" enter="transition-opacity ease-linear duration-300"
-                                     enter-from="opacity-0" enter-to="opacity-100"
-                                     leave="transition-opacity ease-linear duration-300" leave-from="opacity-100"
-                                     leave-to="opacity-0">
-                        <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75"/>
-                    </TransitionChild>
-                    <TransitionChild as="template" enter="transition ease-in-out duration-300 transform"
-                                     enter-from="-translate-x-full" enter-to="translate-x-0"
-                                     leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0"
-                                     leave-to="-translate-x-full">
-                        <div class="relative max-w-xs w-full bg-indigo-700 pt-5 pb-4 flex-1 flex flex-col">
-                            <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0"
-                                             enter-to="opacity-100" leave="ease-in-out duration-300"
-                                             leave-from="opacity-100" leave-to="opacity-0">
-                                <div class="absolute top-1 right-0 -mr-14 p-1">
-                                    <button type="button"
-                                            class="h-12 w-12 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white"
-                                            @click="mobileMenuOpen = false">
-                                        <XIcon class="h-6 w-6 text-white" aria-hidden="true"/>
-                                        <span class="sr-only">Close sidebar</span>
-                                    </button>
-                                </div>
-                            </TransitionChild>
-                            <div class="flex-shrink-0 px-4 flex items-center">
-                                <img class="h-8 w-auto"
-                                     src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
-                                     alt="Workflow"/>
-                            </div>
-                            <div class="mt-5 flex-1 h-0 px-2 overflow-y-auto">
-                                <nav class="h-full flex flex-col">
-                                    <div class="space-y-1">
-                                        <a v-for="item in sidebarNavigation" :key="item.name" :href="item.href"
-                                           :class="[item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-800 hover:text-white', 'group py-2 px-3 rounded-md flex items-center text-sm font-medium']"
-                                           :aria-current="item.current ? 'page' : undefined">
-                                            <component :is="item.icon"
-                                                       :class="[item.current ? 'text-white' : 'text-indigo-300 group-hover:text-white', 'mr-3 h-6 w-6']"
-                                                       aria-hidden="true"/>
-                                            <span>{{ item.name }}</span>
-                                        </a>
-                                    </div>
-                                </nav>
-                            </div>
-                        </div>
-                    </TransitionChild>
-                    <div class="flex-shrink-0 w-14" aria-hidden="true">
-                        <!-- Dummy element to force sidebar to shrink to fit close icon -->
-                    </div>
-                </div>
-            </Dialog>
-        </TransitionRoot>
+        <template v-slot:topbar-content>
+            <BrowserSwitch />
+        </template>
 
-        <!-- Content area -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="w-full">
-                <div class="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
-                    <button type="button"
-                            class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
-                            @click="mobileMenuOpen = true">
-                        <span class="sr-only">Open sidebar</span>
-                        <MenuAlt2Icon class="h-6 w-6" aria-hidden="true"/>
-                    </button>
-                    <div class="flex-1 flex justify-between px-4 sm:px-6">
-                        <div class="flex-1 flex pt-3 justify-center">
-<!--                            <form class="w-full flex md:ml-0" action="#" method="GET">
-                                <label for="search-field" class="sr-only">Search all files</label>
-                                <div class="relative w-full text-gray-400 focus-within:text-gray-600">
-                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                                        <SearchIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true"/>
-                                    </div>
-                                    <input name="search-field" id="search-field"
-                                           class="h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400"
-                                           placeholder="Search" type="search"/>
-                                </div>
-                            </form>-->
-                        </div>
-                        <div class="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
-                            <!-- Profile dropdown -->
-                            <Menu as="div" class="relative flex-shrink-0">
-                                <div>
-                                    <MenuButton
-                                        class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        <span class="sr-only">Open user menu</span>
-                                        <img class="h-8 w-8 rounded-full"
-                                             src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
-                                             alt=""/>
-                                    </MenuButton>
-                                </div>
-                                <transition enter-active-class="transition ease-out duration-100"
-                                            enter-from-class="transform opacity-0 scale-95"
-                                            enter-to-class="transform opacity-100 scale-100"
-                                            leave-active-class="transition ease-in duration-75"
-                                            leave-from-class="transform opacity-100 scale-100"
-                                            leave-to-class="transform opacity-0 scale-95">
-                                    <MenuItems
-                                        class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                                            <a :href="item.href"
-                                               :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{
-                                                    item.name
-                                                }}</a>
-                                        </MenuItem>
-                                    </MenuItems>
-                                </transition>
-                            </Menu>
+        <template v-slot:sidebar-content>
+            <Tags class="mt-2" />
+            <TextAlign class="mt-2" />
+            <TextColor class="mt-2" />
+            <BackgroundColor class="mt-2" />
+        </template>
 
-                            <button type="button"
-                                    class="flex bg-indigo-600 p-1 rounded-full items-center justify-center text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                <PlusSmIcon class="h-6 w-6" aria-hidden="true"/>
-                                <span class="sr-only">Add file</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Main content -->
-            <div class="flex-1 flex items-stretch overflow-hidden">
-                <main class="flex-1 overflow-y-auto">
-                    <!-- Primary column -->
-                    <section aria-labelledby="primary-heading"
-                             class="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-
-                        <div class="bg-gray-50 p-5">
-                            <iframe id="js-tailwind-editor-iframe" src="/live-edit-page/1"></iframe>
-                        </div>
-
-                    </section>
-                </main>
-
-                <!-- Secondary column (hidden on smaller screens) -->
-                <aside class="hidden w-60 bg-white border-l border-gray-200 overflow-y-auto lg:block">
-                    <div class="p-6">
-
-                        <span v-for="className in lastSelectedElement.classList" class="inline-flex items-center py-0.5 pl-2 pr-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700">
-                          {{ className }}
-                          <button type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
-                            <span class="sr-only">Remove small option</span>
-                            <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-                              <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
-                            </svg>
-                          </button>
-                        </span>
-
-                        <div id="js-live-edit-align">
-                            <TextAlign class="mt-2" />
-                            <TextColor class="mt-2" />
-                            <BackgroundColor class="mt-2" />
-                        </div>
-
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </div>
-
+</Layout>
 
 </template>
 
 <style>
 #js-tailwind-editor-iframe {
     width: 100%;
-    height: 80vh;
+    height: 100%;
     overflow: hidden;
 }
 </style>
 
 
 <script>
-import {ref} from 'vue'
+
+import Layout from './Layout.vue'
+import Tags from './Text/Tags.vue'
 import TextAlign from './Text/TextAlign.vue'
 import TextColor from './Text/TextColor.vue'
 import BackgroundColor from './Text/BackgroundColor.vue'
-
-import {
-    Dialog,
-    DialogOverlay,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    TransitionChild,
-    TransitionRoot,
-    RadioGroup, RadioGroupLabel, RadioGroupOption
-} from '@headlessui/vue'
-import {
-    CogIcon,
-    CollectionIcon,
-    HomeIcon,
-    MenuAlt2Icon,
-    PhotographIcon,
-    PlusSmIcon,
-    UserGroupIcon,
-    ViewGridIcon,
-    XIcon,
-    PuzzleIcon,
-    InformationCircleIcon
-} from '@heroicons/vue/outline'
-import {
-    SearchIcon,
-    InboxIcon,
-} from '@heroicons/vue/solid'
-
-const sidebarNavigation = [
-    {name: 'Modules', href: '#', icon: PuzzleIcon, current: false},
-    {name: 'Layouts', href: '#', icon: InboxIcon, current: false},
-    {name: 'Elements', href: '#', icon: ViewGridIcon, current: false},
-    {name: 'Forms', href: '#', icon: InformationCircleIcon, current: false},
-]
-const userNavigation = [
-    {name: 'Your Profile', href: '#'},
-    {name: 'Sign out', href: '#'},
-]
-
-const textAlignOptions = [
-    {name: 'Left', value: 'left'},
-    {name: 'Center', value: 'center'},
-    {name: 'Right', value: 'right'},
-];
+import BrowserSwitch from './Responsive/BrowserSwitch.vue'
 
 let lastSelectedElement = [];
 
 export default {
     components: {
-        Dialog,
-        DialogOverlay,
-        Menu,
-        MenuButton,
-        MenuItem,
-        MenuItems,
-        TransitionChild,
-        TransitionRoot,
-        MenuAlt2Icon,
-        PlusSmIcon,
-        SearchIcon,
-        XIcon,
+        BrowserSwitch,
+        Tags,
+        Layout,
         TextAlign,
         TextColor,
-        BackgroundColor
+        BackgroundColor,
     },
     mounted() {
         runLiveEdit();
@@ -256,12 +63,7 @@ export default {
 
     },
     setup() {
-        const mobileMenuOpen = ref(false)
-
         return {
-            sidebarNavigation,
-            userNavigation,
-            mobileMenuOpen,
             lastSelectedElement,
         }
     },
@@ -410,11 +212,6 @@ function runLiveEdit() {
                     document.dispatchEvent(liveEditEvent);
 
                 });
-
-                editorTag[j].addEventListener('mouseenter', function () {
-
-                });
-
 
             }
         }

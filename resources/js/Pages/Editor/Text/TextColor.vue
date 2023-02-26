@@ -6,9 +6,9 @@
     <RadioGroup v-model="selectedColor" v-on:update:modelValue="changeColor">
         <div class="mt-1 flex flex-wrap space-y-1 items-center">
             <RadioGroupOption as="template" v-for="color in colors" :key="color.name" :value="color" v-slot="{ active, checked }">
-                <div :class="[color.selectedColor, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none']">
+                <div :class="[color.selectedColor, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', '-m-0.5 relative p-0.5 flex items-center justify-center cursor-pointer focus:outline-none']">
                     <RadioGroupLabel as="p" class="sr-only">{{ color.name }}</RadioGroupLabel>
-                    <span aria-hidden="true" :class="[color.bgColor, 'h-8 w-8 border border-black border-opacity-10 rounded-full']" />
+                    <span aria-hidden="true" :class="[color.bgColor, 'h-3 w-3 border border-black border-opacity-10']" />
                 </div>
             </RadioGroupOption>
         </div>
@@ -44,6 +44,9 @@ export default {
                 this.currentElement.classList.remove(color);
             });
             this.currentElement.classList.add('text-' + this.selectedColor.name);
+
+            let liveEditEvent = new CustomEvent('click', {})
+            this.currentElement.dispatchEvent(liveEditEvent);
         }
     },
     mounted() {

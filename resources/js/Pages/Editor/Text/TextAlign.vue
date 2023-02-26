@@ -27,7 +27,7 @@ const textAlignOptions = [
 
 export default {
     props: [],
-    emits: ['enlarge-text'],
+    emits: [],
     components: {
         RadioGroup,
         RadioGroupLabel,
@@ -49,6 +49,9 @@ export default {
             if (this.currentAlign.name === 'center') {
                 this.currentElement.classList.add('text-center');
             }
+
+            let liveEditEvent = new CustomEvent('click', {})
+            this.currentElement.dispatchEvent(liveEditEvent);
         }
     },
     mounted() {
