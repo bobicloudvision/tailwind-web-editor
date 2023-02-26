@@ -100,11 +100,6 @@
                                            placeholder="Search" type="search"/>
                                 </div>
                             </form>-->
-
-                            <div id="js-live-edit-align">
-                                <TextAlign />
-                            </div>
-
                         </div>
                         <div class="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                             <!-- Profile dropdown -->
@@ -154,7 +149,7 @@
                              class="min-w-0 flex-1 h-full flex flex-col lg:order-last">
 
                         <div class="bg-gray-50 p-5">
-                            <iframe id="js-tailwind-editor-iframe" src="/"></iframe>
+                            <iframe id="js-tailwind-editor-iframe" src="/live-edit-page/1"></iframe>
                         </div>
 
                     </section>
@@ -163,8 +158,16 @@
                 <!-- Secondary column (hidden on smaller screens) -->
                 <aside class="hidden w-60 bg-white border-l border-gray-200 overflow-y-auto lg:block">
                     <div class="p-6">
-                    <div id="lastSelectedElement"></div>
 
+                        <div class="">
+                            <span class="p-1 text-sm mr-1 mt-5 text-sm text-white bg-blue-500" v-for="className in lastSelectedElement.classList">
+                                {{ className }}
+                            </span>
+                        </div>
+
+                        <div id="js-live-edit-align">
+                            <TextAlign />
+                        </div>
 
                     </div>
                 </aside>
@@ -228,15 +231,13 @@ const userNavigation = [
     {name: 'Sign out', href: '#'},
 ]
 
-const selectedElement = {
-  align: 'left',
-};
-
 const textAlignOptions = [
     {name: 'Left', value: 'left'},
     {name: 'Center', value: 'center'},
     {name: 'Right', value: 'right'},
 ];
+
+let lastSelectedElement = [];
 
 export default {
     components: {
@@ -258,7 +259,8 @@ export default {
         runLiveEdit();
 
         document.addEventListener("JsLiveEdit::ElementChange", (event) => {
-            lastSelectedElement = event.detail.element;
+            this.lastSelectedElement = event.detail;
+            this.$forceUpdate();
         });
 
     },
@@ -270,12 +272,9 @@ export default {
             userNavigation,
             mobileMenuOpen,
             lastSelectedElement,
-            textAlignOptions,
         }
     },
 }
-
-let lastSelectedElement = null;
 
 function runLiveEdit() {
 
@@ -290,7 +289,7 @@ function runLiveEdit() {
         link.id = 'js-tailwind-editor-iframe-stylesheet';
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'live-edit/elements.css';
+        link.href = '/live-edit/elements.css';
         link.media = 'all';
         head.appendChild(link);
 
@@ -355,6 +354,7 @@ function runLiveEdit() {
                 for (var j = 0; j < editorTag.length; j++) {
                     editorTag[j].classList.remove('js-live-edit-element-border');
                     editorTag[j].classList.remove('js-live-edit-element-background');
+                    editorTag[j].classList.remove('js-live-edit-element-editing');
                 }
             }
         }
@@ -371,10 +371,12 @@ function runLiveEdit() {
                 });
 
                 editorTag[j].addEventListener('mouseover', function () {
-                    // if (!this.hasAttribute('contenteditable')) {
-                    //     this.classList.add('js-live-edit-element-border');
-                    //     this.setAttribute('contenteditable', 'true');
-                    // }
+                    this.classList.add('js-live-edit-element-border');
+                });
+                editorTag[j].addEventListener('mouseleave', function () {
+                    if (!this.classList.contains('js-live-edit-element-editing')) {
+                        this.classList.remove('js-live-edit-element-border');
+                    }
                 });
 
                 editorTag[j].addEventListener('click', function (event) {
@@ -383,16 +385,25 @@ function runLiveEdit() {
 
                     this.classList.add('js-live-edit-element-border');
                     this.classList.add('js-live-edit-element-background');
-                    document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
+                    this.classList.add('js-live-edit-element-editing');
+                    //document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
 
-                    lastSelectedElement = this;
+                    //lastSelectedElement = this;
 
                     let elementType = 'text';
+                    let elementClasses = [];
+
+                    this.classList.forEach(function (item) {
+                        if (!item.includes('js-live-edit')) {
+                            elementClasses.push(item);
+                        }
+                    });
 
                     let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChange', {
                         detail: {
                             element: this,
                             elementType: elementType,
+                            classList: elementClasses,
                         }
                     })
                     document.dispatchEvent(liveEditEvent);

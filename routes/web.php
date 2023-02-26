@@ -30,6 +30,10 @@ Route::get('/editor', function () {
     ]);
 });
 
+Route::get('/live-edit-page/{id}', function ($id) {
+    return view('live-edit-page');
+})->name('live-edit-page');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -11,5 +11,5 @@
     border: 2px dashed rgba(53, 146, 245, 0.42);
 }
 .js-live-edit-element-background {
-    background: #eef3fa;
+    background: transparent;
 }
