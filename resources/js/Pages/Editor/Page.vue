@@ -159,14 +159,19 @@
                 <aside class="hidden w-60 bg-white border-l border-gray-200 overflow-y-auto lg:block">
                     <div class="p-6">
 
-                        <div class="">
-                            <span class="p-1 text-sm mr-1 mt-5 text-sm text-white bg-blue-500" v-for="className in lastSelectedElement.classList">
-                                {{ className }}
-                            </span>
-                        </div>
+                        <span v-for="className in lastSelectedElement.classList" class="inline-flex items-center py-0.5 pl-2 pr-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700">
+                          {{ className }}
+                          <button type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
+                            <span class="sr-only">Remove small option</span>
+                            <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                              <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
+                            </svg>
+                          </button>
+                        </span>
 
                         <div id="js-live-edit-align">
-                            <TextAlign />
+                            <TextAlign class="mt-2" />
+                            <TextColor class="mt-2" />
                         </div>
 
                     </div>
@@ -190,6 +195,7 @@
 <script>
 import {ref} from 'vue'
 import TextAlign from './Text/TextAlign.vue'
+import TextColor from './Text/TextColor.vue'
 
 import {
     Dialog,
@@ -253,7 +259,8 @@ export default {
         PlusSmIcon,
         SearchIcon,
         XIcon,
-        TextAlign
+        TextAlign,
+        TextColor
     },
     mounted() {
         runLiveEdit();

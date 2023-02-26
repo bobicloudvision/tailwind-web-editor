@@ -1,7 +1,7 @@
 <template>
     <div>
         <RadioGroup v-model="currentAlign" v-on:update:modelValue="changeAlign">
-            <RadioGroupLabel class="sr-only"> Choose a currentAlignory option </RadioGroupLabel>
+            <RadioGroupLabel class="sr-only"> Choose a current option </RadioGroupLabel>
             <div class="relative z-0 inline-flex shadow-sm rounded-md">
                 <RadioGroupOption as="template" v-for="option in textAlignOptions" :key="option.name" :value="option" :disabled="!option.isActive" v-slot="{ active, checked }">
                     <div :class="[option.isActive ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border py-1 px-1 items-center justify-center text-sm font-medium uppercase']">
