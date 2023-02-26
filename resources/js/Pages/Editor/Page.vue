@@ -2,25 +2,6 @@
 
     <div class="h-full flex">
 
-        <!-- Narrow sidebar -->
-        <div class="hidden w-20 bg-indigo-700 overflow-y-auto md:block">
-            <div class="w-full py-6 flex flex-col items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
-                         alt="Workflow"/>
-                </div>
-                <div class="flex-1 mt-6 w-full px-2 space-y-1">
-                    <a v-for="item in sidebarNavigation" :key="item.name" :href="item.href"
-                       :class="[item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-800 hover:text-white', 'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium']"
-                       :aria-current="item.current ? 'page' : undefined">
-                        <component :is="item.icon"
-                                   :class="[item.current ? 'text-white' : 'text-indigo-300 group-hover:text-white', 'h-6 w-6']"
-                                   aria-hidden="true"/>
-                        <span class="mt-2">{{ item.name }}</span>
-                    </a>
-                </div>
-            </div>
-        </div>
 
         <!-- Mobile menu -->
         <TransitionRoot as="template" :show="mobileMenuOpen">
@@ -172,6 +153,7 @@
                         <div id="js-live-edit-align">
                             <TextAlign class="mt-2" />
                             <TextColor class="mt-2" />
+                            <BackgroundColor class="mt-2" />
                         </div>
 
                     </div>
@@ -196,6 +178,7 @@
 import {ref} from 'vue'
 import TextAlign from './Text/TextAlign.vue'
 import TextColor from './Text/TextColor.vue'
+import BackgroundColor from './Text/BackgroundColor.vue'
 
 import {
     Dialog,
@@ -260,7 +243,8 @@ export default {
         SearchIcon,
         XIcon,
         TextAlign,
-        TextColor
+        TextColor,
+        BackgroundColor
     },
     mounted() {
         runLiveEdit();

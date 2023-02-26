@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="block text-sm font-medium text-gray-700">
+        Text Color
+    </div>
+    <div style="height: 200px;overflow-y: scroll">
     <RadioGroup v-model="selectedColor" v-on:update:modelValue="changeColor">
-        <RadioGroupLabel class="block text-sm font-medium text-gray-700">
-            Text Color
-        </RadioGroupLabel>
         <div class="mt-1 flex flex-wrap space-y-1 items-center">
             <RadioGroupOption as="template" v-for="color in colors" :key="color.name" :value="color" v-slot="{ active, checked }">
                 <div :class="[color.selectedColor, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none']">
