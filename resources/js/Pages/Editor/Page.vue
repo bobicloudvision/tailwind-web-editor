@@ -3,7 +3,7 @@
 <Layout>
 
     d: {{ deviceName }}
-    
+
     <template v-slot:main-content>
       <div style="height: 100%;">
           <iframe id="js-tailwind-editor-iframe" src="/live-edit-page/1"></iframe>
@@ -12,6 +12,7 @@
 
     <template v-slot:topbar-content>
         <BrowserSwitch />
+        <Tags class="mt-2" />
     </template>
 
     <template v-slot:sidebar-content>
