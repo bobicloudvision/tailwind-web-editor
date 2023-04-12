@@ -1,9 +1,9 @@
 <template>
     <div>
         <RadioGroup v-model="currentDevice" v-on:update:modelValue="switchDevice">
-            <RadioGroupLabel class="sr-only"> Choose a browser ption </RadioGroupLabel>
+            <RadioGroupLabel class="sr-only"> Choose a browser option </RadioGroupLabel>
             <div class="relative z-0 inline-flex shadow-sm rounded-md">
-                <RadioGroupOption as="template" v-for="option in deviceSwitchOptions" :key="option.name" :value="option" :disabled="!option.isActive" v-slot="{ active, checked }">
+                <RadioGroupOption as="template" v-for="option in deviceSwitchOptions" :key="option.name" :value="option.name" :disabled="!option.isActive" v-slot="{ active, checked }">
                     <div :class="[option.isActive ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border py-1 px-1 items-center justify-center text-sm font-medium uppercase']">
                         <RadioGroupLabel as="p">
                             {{ option.name }}
@@ -21,7 +21,6 @@ import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 
 const deviceSwitchOptions = [
     { name: 'Desktop', isActive: true },
-    { name: 'Laptop', isActive: true },
     { name: 'Tablet', isActive: true },
     { name: 'Phone', isActive: true },
 ];
@@ -36,6 +35,7 @@ export default {
     },
     methods: {
         switchDevice: function () {
+
             let liveEditEvent = new CustomEvent('JsLiveEdit::SwitchDevice', {
                 detail: {
                     device: this.currentDevice
@@ -45,7 +45,7 @@ export default {
         }
     },
     data() {
-        let currentDevice = ref(deviceSwitchOptions[0]);
+        let currentDevice = ref(deviceSwitchOptions[0].name);
         return {
             deviceSwitchOptions:deviceSwitchOptions,
             currentDevice: currentDevice

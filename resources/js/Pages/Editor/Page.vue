@@ -2,11 +2,17 @@
 
 <Layout>
 
-    d: {{ deviceName }}
-
     <template v-slot:main-content>
-      <div style="height: 100%;">
-          <iframe id="js-tailwind-editor-iframe" src="/live-edit-page/1"></iframe>
+      <div class="p-5 bg-gray-100 w-full h-full flex justify-center items-center">
+          <iframe id="js-tailwind-editor-iframe"
+
+                  :style="[
+               deviceName == 'Desktop' ? 'width:100%' : '',
+                deviceName == 'Tablet' ? 'width:600px' : '',
+                deviceName == 'Phone' ? 'width:450px' : ''
+            ]"
+
+                  class="rounded-xl" src="/live-edit-page/1"></iframe>
       </div>
     </template>
 
@@ -59,7 +65,7 @@ export default {
     mounted() {
 
         document.addEventListener("JsLiveEdit::SwitchDevice", (event) => {
-            this.deviceName = event.detail.device.name;
+            this.deviceName = event.detail.device;
             this.$forceUpdate();
         });
 
@@ -68,11 +74,10 @@ export default {
             this.$forceUpdate();
         });
 
-
         runLiveEdit();
 
     },
-    setup() {
+    data() {
         return {
             deviceName,
             lastSelectedElement,
