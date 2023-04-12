@@ -2,11 +2,11 @@
     <div>
         <RadioGroup v-model="currentDevice" v-on:update:modelValue="switchDevice">
             <RadioGroupLabel class="sr-only"> Choose a browser option </RadioGroupLabel>
-            <div class="relative z-0 inline-flex shadow-sm rounded-md">
+            <div class="relative z-0 inline-flex">
                 <RadioGroupOption as="template" v-for="option in deviceSwitchOptions" :key="option.name" :value="option.name" :disabled="!option.isActive" v-slot="{ active, checked }">
-                    <div :class="[option.isActive ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border py-1 px-1 items-center justify-center text-sm font-medium uppercase']">
+                    <div :class="[option.isActive ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? '' : '', checked ? 'bg-gray-100 text-blue-500' : 'bg-white text-blue-600 hover:bg-gray-50', 'rounded py-1.5 px-1.5 items-center justify-center text-sm font-medium uppercase']">
                         <RadioGroupLabel as="p">
-                            {{ option.name }}
+                            <component :is="option.icon"  :class="[checked ? 'text-blue-400':'text-gray-300', 'flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                         </RadioGroupLabel>
                     </div>
                 </RadioGroupOption>
@@ -19,10 +19,13 @@
 import { ref } from 'vue'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 
+
+import { DesktopComputerIcon, DeviceTabletIcon, DeviceMobileIcon } from '@heroicons/vue/outline'
+
 const deviceSwitchOptions = [
-    { name: 'Desktop', isActive: true },
-    { name: 'Tablet', isActive: true },
-    { name: 'Phone', isActive: true },
+    { name: 'Desktop', icon: 'DesktopComputerIcon', isActive: true },
+    { name: 'Tablet', icon: 'DeviceTabletIcon', isActive: true },
+    { name: 'Phone', icon: 'DeviceMobileIcon', isActive: true },
 ];
 
 export default {
@@ -32,6 +35,7 @@ export default {
         RadioGroup,
         RadioGroupLabel,
         RadioGroupOption,
+        DesktopComputerIcon, DeviceTabletIcon, DeviceMobileIcon
     },
     methods: {
         switchDevice: function () {
