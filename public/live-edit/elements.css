@@ -36,3 +36,28 @@
     max-width: 75px;
     margin-left: -3px;
 }
+
+
+
+#js-live-edit-element-handle-active {
+    border: 3px solid #7633db;
+    position: absolute;
+    top: 20px;
+    z-index: 1000000;
+    user-select: none;
+    pointer-events: none;
+    width: 150px;
+    height: 60px;
+}
+#js-live-edit-element-handle-active-name {
+    background: #7633db;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-top: -20px;
+    max-width: 75px;
+    margin-left: -3px;
+}

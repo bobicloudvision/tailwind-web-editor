@@ -139,6 +139,46 @@ export default {
     },
 }
 
+function getElementFriendlyName(tagName)
+{
+    let elementFriendlyName = tagName;
+    if (tagName == 'DIV') {
+        elementFriendlyName = 'Block';
+    }
+    if (tagName == 'IMG') {
+        elementFriendlyName = 'Image';
+    }
+    if (tagName == 'P') {
+        elementFriendlyName = 'Paragraph';
+    }
+    if (tagName == 'A') {
+        elementFriendlyName = 'Link';
+    }
+    if (tagName == 'H1') {
+        elementFriendlyName = 'Title 1';
+    }
+    if (tagName == 'H1') {
+        elementFriendlyName = 'Title 1';
+    }
+    if (tagName == 'H2') {
+        elementFriendlyName = 'Title 2';
+    }
+    if (tagName == 'H3') {
+        elementFriendlyName = 'Title 3';
+    }
+    if (tagName == 'H4') {
+        elementFriendlyName = 'Title 4';
+    }
+    if (tagName == 'H5') {
+        elementFriendlyName = 'Title 5';
+    }
+    if (tagName == 'H6') {
+        elementFriendlyName = 'Title 6';
+    }
+
+    return elementFriendlyName;
+}
+
 function runLiveEdit() {
 
     document.addEventListener("JsLiveEdit::ElementMouseOver", (event) => {
@@ -154,13 +194,24 @@ function runLiveEdit() {
         let editorIframeBody = editorIframeDocument.body;
         let editorIframeWindow = editorIframe.contentWindow;
 
+
+        // Element Hover
         const createElementHandle = editorIframeDocument.createElement("div");
         createElementHandle.id = 'js-live-edit-element-handle';
         createElementHandle.innerHTML = '<div id="js-live-edit-element-handle-name">Image</div>';
         editorIframeBody.appendChild(createElementHandle);
-
         let elementHandle = editorIframeDocument.getElementById('js-live-edit-element-handle');
         let elementHandleName = editorIframeDocument.getElementById('js-live-edit-element-handle-name');
+
+        // Element Active
+        const createElementActiveHandle = editorIframeDocument.createElement("div");
+        createElementActiveHandle.id = 'js-live-edit-element-handle-active';
+        createElementActiveHandle.innerHTML = '<div id="js-live-edit-element-handle-active-name">Image</div>';
+        editorIframeBody.appendChild(createElementActiveHandle);
+
+        let elementHandleActive = editorIframeDocument.getElementById('js-live-edit-element-handle-active');
+        let elementHandleActiveName = editorIframeDocument.getElementById('js-live-edit-element-handle-active-name');
+
 
         editorIframeDocument.addEventListener('mouseover', e => {
             let editorElements = editorIframeBody.getElementsByTagName('*');
@@ -177,7 +228,6 @@ function runLiveEdit() {
                     return;
                 }
 
-
                 elementHandle.style.width = mouseOverElement.clientWidth + 'px';
                 elementHandle.style.height = mouseOverElement.clientHeight + 'px';
 
@@ -187,42 +237,7 @@ function runLiveEdit() {
 
                 // console.log(editorIframeDocument);
 
-                let elementFriendlyName = mouseOverElement.tagName;
-                if (mouseOverElement.tagName == 'DIV') {
-                    elementFriendlyName = 'Block';
-                }
-                if (mouseOverElement.tagName == 'IMG') {
-                    elementFriendlyName = 'Image';
-                }
-                if (mouseOverElement.tagName == 'P') {
-                    elementFriendlyName = 'Paragraph';
-                }
-                if (mouseOverElement.tagName == 'A') {
-                    elementFriendlyName = 'Link';
-                }
-                if (mouseOverElement.tagName == 'H1') {
-                    elementFriendlyName = 'Title 1';
-                }
-                if (mouseOverElement.tagName == 'H1') {
-                    elementFriendlyName = 'Title 1';
-                }
-                if (mouseOverElement.tagName == 'H2') {
-                    elementFriendlyName = 'Title 2';
-                }
-                if (mouseOverElement.tagName == 'H3') {
-                    elementFriendlyName = 'Title 3';
-                }
-                if (mouseOverElement.tagName == 'H4') {
-                    elementFriendlyName = 'Title 4';
-                }
-                if (mouseOverElement.tagName == 'H5') {
-                    elementFriendlyName = 'Title 5';
-                }
-                if (mouseOverElement.tagName == 'H6') {
-                    elementFriendlyName = 'Title 6';
-                }
-
-                elementHandleName.innerText = elementFriendlyName;
+                elementHandleName.innerText = getElementFriendlyName(mouseOverElement.tagName);
                 elementHandle.style.display = 'block';
 
                 console.log(mouseOverElement);
@@ -333,6 +348,19 @@ function runLiveEdit() {
                 removeAllColoredActivelements();
 
                 let instanceElement = event.target;
+
+
+                elementHandleActive.style.width = instanceElement.clientWidth + 'px';
+                elementHandleActive.style.height = instanceElement.clientHeight + 'px';
+
+                let instanceElementBounding = instanceElement.getBoundingClientRect();
+                elementHandleActive.style.top = (instanceElementBounding.top + editorIframeWindow.scrollY) + 'px';
+                elementHandleActive.style.left = (instanceElementBounding.left + editorIframeWindow.scrollX) + 'px';
+
+                elementHandleActiveName.innerText = getElementFriendlyName(instanceElement.tagName);
+                elementHandleActive.style.display = 'block';
+                
+
 
                 // instanceElement.classList.add('js-live-edit-element-border');
                 // instanceElement.classList.add('js-live-edit-element-background');
