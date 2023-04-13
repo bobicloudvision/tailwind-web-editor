@@ -1,14 +1,16 @@
 .js-live-edit-element {
-    border:2px solid transparent;
+    border: 0px solid transparent;
 }
 
 .js-live-edit-element[contenteditable='true'] {
     caret-color: #3592f5;
     outline: 0px;
 }
-
+.js-live-edit-element-hover {
+    border: 2px dashed rgba(53, 245, 130, 0.56);
+}
 .js-live-edit-element-border {
-    border: 2px dashed rgba(53, 146, 245, 0.42);
+    border: 2px solid rgba(53, 146, 245, 0.42);
 }
 .js-live-edit-element-background {
 

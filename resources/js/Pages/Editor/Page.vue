@@ -128,7 +128,6 @@ export default {
             this.lastSelectedElement = event.detail;
             this.$forceUpdate();
         });
-
         runLiveEdit();
 
     },
@@ -142,11 +141,32 @@ export default {
 
 function runLiveEdit() {
 
+    document.addEventListener("JsLiveEdit::ElementMouseOver", (event) => {
+
+        let mouseOverElement = event.detail;
+
+    });
+
     let editorIframe = document.getElementById('js-tailwind-editor-iframe');
     editorIframe.onload = function () {
 
         let editorIframeDocument = editorIframe.contentDocument;
         let editorIframeBody = editorIframeDocument.body;
+
+        editorIframeDocument.addEventListener('mouseover', e => {
+            let editorElements = editorIframeBody.getElementsByTagName('*');
+            for (var j = 0; j < editorElements.length; j++) {
+                editorElements[j].classList.remove('js-live-edit-element-hover');
+            }
+            let mouseOverElement = editorIframeDocument.elementFromPoint(e.clientX, e.clientY);
+            if (mouseOverElement) {
+                if (mouseOverElement.tagName == 'HTML') {
+                    return;
+                }
+                mouseOverElement.classList.add('js-live-edit-element-hover');
+            }
+
+        }, {passive: true});
 
         var head = editorIframeDocument.getElementsByTagName('head')[0];
         var link = editorIframeDocument.createElement('link');
@@ -171,27 +191,27 @@ function runLiveEdit() {
             'button',
         ];
 
-        let editableElementsClasses = [
-            'flex',
-        ];
-
-        for (var i = 0; i < editableElementsClasses.length; i++) {
-            let editorClass = editorIframeBody.getElementsByClassName(editableElementsClasses[i]);
-            for (var j = 0; j < editorClass.length; j++) {
-
-                editorClass[j].classList.add('js-live-edit-element');
-
-                editorClass[j].addEventListener('mouseover', function () {
-                    this.classList.add('js-live-edit-element-border');
-                });
-
-                editorClass[j].addEventListener('mouseleave', function () {
-                    this.classList.remove('js-live-edit-element-border');
-                    this.classList.remove('js-live-edit-element-background');
-                });
-
-            }
-        }
+        // let editableElementsClasses = [
+        //     'flex',
+        // ];
+        //
+        // for (var i = 0; i < editableElementsClasses.length; i++) {
+        //     let editorClass = editorIframeBody.getElementsByClassName(editableElementsClasses[i]);
+        //     for (var j = 0; j < editorClass.length; j++) {
+        //
+        //         editorClass[j].classList.add('js-live-edit-element');
+        //
+        //         editorClass[j].addEventListener('mouseover', function () {
+        //             this.classList.add('js-live-edit-element-border');
+        //         });
+        //
+        //         editorClass[j].addEventListener('mouseleave', function () {
+        //             this.classList.remove('js-live-edit-element-border');
+        //             this.classList.remove('js-live-edit-element-background');
+        //         });
+        //
+        //     }
+        // }
 
         // editorIframeBody.addEventListener('click', function( event ){
         //     if (!lastSelectedElement.contains(event.target)) {
@@ -202,89 +222,83 @@ function runLiveEdit() {
         // });
 
         function removeAllColoredActivelements() {
-            for (var i = 0; i < contentEditableElementsTags.length; i++) {
-                let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
-                for (var j = 0; j < editorTag.length; j++) {
-                    editorTag[j].classList.remove('js-live-edit-element-border');
-                    editorTag[j].classList.remove('js-live-edit-element-background');
-                    editorTag[j].classList.remove('js-live-edit-element-editing');
-                }
+            let editorTag = editorIframeBody.getElementsByTagName('*');
+            for (var j = 0; j < editorTag.length; j++) {
+                editorTag[j].classList.remove('js-live-edit-element-border');
+                editorTag[j].classList.remove('js-live-edit-element-background');
+                editorTag[j].classList.remove('js-live-edit-element-editing');
             }
         }
 
-        for (var i = 0; i < contentEditableElementsTags.length; i++) {
-            let editorTag = editorIframeBody.getElementsByTagName(contentEditableElementsTags[i]);
-            for (var j = 0; j < editorTag.length; j++) {
+        // let canIAddContentEditable = true;
+        // // if (contentEditableElementsTags[i] == 'h1') {
+        // //     if (editorTag[j].children[0].classList.contains('block')) {
+        // //         canIAddContentEditable = false;
+        // //     }
+        // // }
+        // //
+        // if (!canIAddContentEditable) {
+        //    continue;
+        // }
+        //
+        // editorTag[j].setAttribute('contenteditable', 'true');
 
-                // let canIAddContentEditable = true;
-                // if (contentEditableElementsTags[i] == 'h1') {
-                //     if (editorTag[j].children[0].classList.contains('block')) {
-                //         canIAddContentEditable = false;
-                //     }
-                // }
-                //
-                // if (!canIAddContentEditable) {
-                //    continue;
-                // }
+        let editorTag = editorIframeBody.getElementsByTagName('*');
+        for (var j = 0; j < editorTag.length; j++) {
 
-                editorTag[j].setAttribute('contenteditable', 'true');
-                editorTag[j].classList.add('js-live-edit-element');
+            editorTag[j].classList.add('js-live-edit-element');
 
-                /// stop href clicking
-                if (editorTag[j].hasAttribute('href')) {
-                    editorTag[j].addEventListener('click', function (event) {
-                        event.preventDefault();
-                    });
+            /// stop href clicking
+            if (editorTag[j].hasAttribute('href')) {
+                editorTag[j].addEventListener('click', function (event) {
+                    event.preventDefault();
+                });
+            }
+
+            editorTag[j].addEventListener('keydown', function () {
+
+            });
+
+            editorTag[j].addEventListener('mouseleave', function () {
+                if (!this.classList.contains('js-live-edit-element-editing')) {
+                    this.classList.remove('js-live-edit-element-border');
                 }
+            });
 
-                editorTag[j].addEventListener('keydown', function () {
+            editorTag[j].addEventListener('click', function (event) {
 
-                });
+                removeAllColoredActivelements();
 
-                editorTag[j].addEventListener('mouseover', function () {
-                    this.classList.add('js-live-edit-element-border');
-                });
-                editorTag[j].addEventListener('mouseleave', function () {
-                    if (!this.classList.contains('js-live-edit-element-editing')) {
-                        this.classList.remove('js-live-edit-element-border');
+                let instanceElement = event.target;
+
+                instanceElement.classList.add('js-live-edit-element-border');
+                instanceElement.classList.add('js-live-edit-element-background');
+                instanceElement.classList.add('js-live-edit-element-editing');
+
+                //document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
+
+                //lastSelectedElement = this;
+
+                let elementType = 'text';
+                let elementClasses = [];
+
+                instanceElement.classList.forEach(function (item) {
+                    if (!item.includes('js-live-edit')) {
+                        elementClasses.push(item);
                     }
                 });
 
-                editorTag[j].addEventListener('click', function (event) {
+                let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChange', {
+                    detail: {
+                        element: instanceElement,
+                        elementType: elementType,
+                        classList: elementClasses,
+                    }
+                })
+                document.dispatchEvent(liveEditEvent);
 
-                    removeAllColoredActivelements();
+            });
 
-                    let instanceElement = event.target;
-
-                    instanceElement.classList.add('js-live-edit-element-border');
-                    instanceElement.classList.add('js-live-edit-element-background');
-                    instanceElement.classList.add('js-live-edit-element-editing');
-
-                    //document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
-
-                    //lastSelectedElement = this;
-
-                    let elementType = 'text';
-                    let elementClasses = [];
-
-                    instanceElement.classList.forEach(function (item) {
-                        if (!item.includes('js-live-edit')) {
-                            elementClasses.push(item);
-                        }
-                    });
-
-                    let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChange', {
-                        detail: {
-                            element: instanceElement,
-                            elementType: elementType,
-                            classList: elementClasses,
-                        }
-                    })
-                    document.dispatchEvent(liveEditEvent);
-
-                });
-
-            }
         }
 
     };
