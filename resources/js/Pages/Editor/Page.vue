@@ -153,19 +153,54 @@ function runLiveEdit() {
         let editorIframeDocument = editorIframe.contentDocument;
         let editorIframeBody = editorIframeDocument.body;
 
+        const createElementHandle = editorIframeDocument.createElement("div");
+        createElementHandle.id = 'js-live-edit-element-handle';
+        createElementHandle.innerHTML = '<div id="js-live-edit-element-handle-name">Image</div>';
+        editorIframeBody.appendChild(createElementHandle);
+
+        let elementHandle = editorIframeDocument.getElementById('js-live-edit-element-handle');
+        let elementHandleName = editorIframeDocument.getElementById('js-live-edit-element-handle-name');
+
         editorIframeDocument.addEventListener('mouseover', e => {
             let editorElements = editorIframeBody.getElementsByTagName('*');
             for (var j = 0; j < editorElements.length; j++) {
-                editorElements[j].classList.remove('js-live-edit-element-hover');
+            //    editorElements[j].classList.remove('js-live-edit-element-hover');
+                elementHandle.style.display = 'none';
             }
             let mouseOverElement = editorIframeDocument.elementFromPoint(e.clientX, e.clientY);
             if (mouseOverElement) {
                 if (mouseOverElement.tagName == 'HTML') {
                     return;
                 }
-                mouseOverElement.classList.add('js-live-edit-element-hover');
-            }
+                if (mouseOverElement.id == 'js-live-edit-element-handle') {
+                    return;
+                }
 
+                elementHandle.style.width = mouseOverElement.clientWidth + 'px';
+                elementHandle.style.height = mouseOverElement.clientHeight + 'px';
+
+                let mouseOverElementBounding = mouseOverElement.getBoundingClientRect();
+                elementHandle.style.top = mouseOverElementBounding.top + 'px';
+                elementHandle.style.left = mouseOverElementBounding.left + 'px';
+
+                let elementFriendlyName = mouseOverElement.tagName;
+                if (mouseOverElement.tagName == 'IMG') {
+                    elementFriendlyName = 'IMAGE';
+                }
+                if (mouseOverElement.tagName == 'P') {
+                    elementFriendlyName = 'PARAGRAPH';
+                }
+                if (mouseOverElement.tagName == 'A') {
+                    elementFriendlyName = 'LINK';
+                }
+
+                elementHandleName.innerText = elementFriendlyName;
+                elementHandle.style.display = 'block';
+
+                console.log(mouseOverElement);
+
+              //  mouseOverElement.classList.add('js-live-edit-element-hover');
+            }
         }, {passive: true});
 
         var head = editorIframeDocument.getElementsByTagName('head')[0];
@@ -224,9 +259,9 @@ function runLiveEdit() {
         function removeAllColoredActivelements() {
             let editorTag = editorIframeBody.getElementsByTagName('*');
             for (var j = 0; j < editorTag.length; j++) {
-                editorTag[j].classList.remove('js-live-edit-element-border');
-                editorTag[j].classList.remove('js-live-edit-element-background');
-                editorTag[j].classList.remove('js-live-edit-element-editing');
+                // editorTag[j].classList.remove('js-live-edit-element-border');
+                // editorTag[j].classList.remove('js-live-edit-element-background');
+                // editorTag[j].classList.remove('js-live-edit-element-editing');
             }
         }
 
@@ -246,7 +281,7 @@ function runLiveEdit() {
         let editorTag = editorIframeBody.getElementsByTagName('*');
         for (var j = 0; j < editorTag.length; j++) {
 
-            editorTag[j].classList.add('js-live-edit-element');
+        //    editorTag[j].classList.add('js-live-edit-element');
 
             /// stop href clicking
             if (editorTag[j].hasAttribute('href')) {
@@ -259,11 +294,11 @@ function runLiveEdit() {
 
             });
 
-            editorTag[j].addEventListener('mouseleave', function () {
-                if (!this.classList.contains('js-live-edit-element-editing')) {
-                    this.classList.remove('js-live-edit-element-border');
-                }
-            });
+            // editorTag[j].addEventListener('mouseleave', function () {
+            //     if (!this.classList.contains('js-live-edit-element-editing')) {
+            //         this.classList.remove('js-live-edit-element-border');
+            //     }
+            // });
 
             editorTag[j].addEventListener('click', function (event) {
 
@@ -271,9 +306,9 @@ function runLiveEdit() {
 
                 let instanceElement = event.target;
 
-                instanceElement.classList.add('js-live-edit-element-border');
-                instanceElement.classList.add('js-live-edit-element-background');
-                instanceElement.classList.add('js-live-edit-element-editing');
+                // instanceElement.classList.add('js-live-edit-element-border');
+                // instanceElement.classList.add('js-live-edit-element-background');
+                // instanceElement.classList.add('js-live-edit-element-editing');
 
                 //document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
 
