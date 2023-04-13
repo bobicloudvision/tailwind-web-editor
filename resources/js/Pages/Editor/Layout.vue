@@ -123,7 +123,10 @@
                     <MenuAlt2Icon class="h-6 w-6" aria-hidden="true" />
                 </button>
                 <div class="flex-1 px-4 flex justify-between">
-                    <div class="flex-1 flex">
+
+                    <slot name="topbar-content"></slot>
+
+<!--                    <div class="flex-1 flex">
                         <form class="w-full flex md:ml-0" action="#" method="GET">
                             <label for="search-field" class="sr-only">Search</label>
                             <div class="relative w-full text-gray-400 focus-within:text-gray-600">
@@ -133,14 +136,14 @@
                                 <input id="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm" placeholder="Search" type="search" name="search" />
                             </div>
                         </form>
-                    </div>
-                    <div class="ml-4 flex items-center md:ml-6">
+                    </div>-->
+<!--                    <div class="ml-4 flex items-center md:ml-6">
                         <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             <span class="sr-only">View notifications</span>
                             <BellIcon class="h-6 w-6" aria-hidden="true" />
                         </button>
 
-                        <!-- Profile dropdown -->
+                        &lt;!&ndash; Profile dropdown &ndash;&gt;
                         <Menu as="div" class="ml-3 relative">
                             <div>
                                 <MenuButton class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -156,7 +159,7 @@
                                 </MenuItems>
                             </transition>
                         </Menu>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
