@@ -1,82 +1,158 @@
+<!--
+  This example requires Tailwind CSS v2.0+
+
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
 <template>
     <!--
       This example requires updating your template:
 
       ```
       <html class="h-full bg-gray-100">
-      <body class="h-full overflow-hidden">
+      <body class="h-full">
       ```
     -->
-    <div class="h-full flex flex-col">
-        <!-- Top nav-->
-        <header class="flex-shrink-0 relative h-16 flex items-center">
-
-            <!-- Logo area -->
-            <div class="absolute inset-y-0 left-0 md:static md:flex-shrink-0  border-r border-gray-100 ">
-                <a href="#" class="flex items-center pl-4 h-16 w-16 md:w-60">
-                  <PencilIcon class="w-8 fill-white p-0.5 mr-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%" />  <b class="text-xl">TailwindX</b>
-                </a>
-            </div>
-
-            <!-- Picker area -->
-            <div class="mx-auto md:hidden">
-                <div class="relative">
-                    <label for="inbox-select" class="sr-only">Choose inbox</label>
-                    <select id="inbox-select" class="rounded-md border-0 bg-none pl-3 pr-8 text-base font-medium text-gray-900 focus:ring-2 focus:ring-indigo-600">
-                        <option v-for="item in sidebarNavigation" :key="item.name" :selected="item.current">{{ item.name }}</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-2">
-                        <ChevronDownIcon class="h-5 w-5 text-gray-500" aria-hidden="true" />
+    <div>
+        <TransitionRoot as="template" :show="sidebarOpen">
+            <Dialog as="div" class="fixed inset-0 flex z-40 md:hidden" @close="sidebarOpen = false">
+                <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
+                    <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75" />
+                </TransitionChild>
+                <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
+                    <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
+                        <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
+                            <div class="absolute top-0 right-0 -mr-12 pt-2">
+                                <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" @click="sidebarOpen = false">
+                                    <span class="sr-only">Close sidebar</span>
+                                    <XIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                                </button>
+                            </div>
+                        </TransitionChild>
+                        <div class="flex-shrink-0 flex items-center px-4">
+                            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="Workflow" />
+                        </div>
+                        <div class="mt-5 flex-1 h-0 overflow-y-auto">
+                            <nav class="px-2 space-y-1">
+                                <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                                    <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
+                                    {{ item.name }}
+                                </a>
+                            </nav>
+                        </div>
                     </div>
+                </TransitionChild>
+                <div class="flex-shrink-0 w-14" aria-hidden="true">
+                    <!-- Dummy element to force sidebar to shrink to fit close icon -->
                 </div>
-            </div>
+            </Dialog>
+        </TransitionRoot>
 
-            <!-- Menu button area -->
-            <div class="absolute inset-y-0 right-0 pr-4 flex items-center sm:pr-6 md:hidden">
-                <!-- Mobile menu button -->
-                <button type="button" class="-mr-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600" @click="mobileMenuOpen = true">
-                    <span class="sr-only">Open main menu</span>
-                    <MenuIcon class="block h-6 w-6" aria-hidden="true" />
+        <!-- Static sidebar for desktop -->
+        <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+            <!-- Sidebar component, swap this element with another sidebar if you like -->
+            <div class="flex flex-col flex-grow border-r border-gray-200 bg-white overflow-y-auto">
+                <div class="flex items-center flex-shrink-0 px-4">
+                    <a href="#" class="flex items-center h-16 w-16 md:w-60">
+                        <PencilIcon class="w-8 rounded fill-white p-0.5 mr-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%" />  <b class="text-xl">TailwindX</b>
+                    </a>
+                </div>
+                <div class="flex-grow flex flex-col mt-3">
+                    <div class="relative flex flex-col px-4 space-y-4">
+
+                        <div class="bg-gray-100 py-1 rounded-md">
+                            <div class="flex py-0.5 px-2 space-x-2 text-sm font-bold">
+                                <button type="button" class="flex items-center justify-center sp-2 w-full text-gray-500">
+                                    <SearchIcon class="w-5" /> Navigator
+                                </button>
+                                <button type="button" class="flex items-center justify-center p-2 w-full rounded-md shadow bg-white text-blue-500">
+                                    <PencilIcon class="w-5" /> Elements
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <SearchIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                            </div>
+                            <input type="text" name="search"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Search..." />
+                        </div>
+
+                        <dl class="space-y-1 divide-y divide-gray-100">
+                            <Disclosure as="div" v-for="faq in faqs" :key="faq.question" class="pt-3" v-slot="{ open }">
+                                <dt>
+                                    <DisclosureButton class="text-left w-full flex justify-between items-start text-gray-400">
+                                <span :class="[open ? 'text-blue-600' : 'text-gray-900', 'font-medium']">
+                                  {{ faq.question }}
+                                </span>
+                                        <span class="ml-6 h-7 flex items-center text-gray-300">
+                                  <ChevronDownIcon :class="[open ? '-rotate-180' : 'rotate-0', 'h-6 w-6 transform']" aria-hidden="true" />
+                                </span>
+                                    </DisclosureButton>
+                                </dt>
+                                <DisclosurePanel as="dd" class="mt-2 pr-12">
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                </DisclosurePanel>
+                            </Disclosure>
+                        </dl>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="md:pl-64 flex flex-col flex-1">
+            <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
+                <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden" @click="sidebarOpen = true">
+                    <span class="sr-only">Open sidebar</span>
+                    <MenuAlt2Icon class="h-6 w-6" aria-hidden="true" />
                 </button>
-            </div>
+                <div class="flex-1 px-4 flex justify-between">
+                    <div class="flex-1 flex">
+                        <form class="w-full flex md:ml-0" action="#" method="GET">
+                            <label for="search-field" class="sr-only">Search</label>
+                            <div class="relative w-full text-gray-400 focus-within:text-gray-600">
+                                <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                                    <SearchIcon class="h-5 w-5" aria-hidden="true" />
+                                </div>
+                                <input id="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm" placeholder="Search" type="search" name="search" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <span class="sr-only">View notifications</span>
+                            <BellIcon class="h-6 w-6" aria-hidden="true" />
+                        </button>
 
-            <!-- Desktop nav area -->
-            <div class="hidden md:min-w-0 md:flex-1 md:flex md:items-center md:justify-center">
-                <div class="flex-1 min-w-0 flex justify-center">
-
-                    <slot name="topbar-content"></slot>
-
-                </div>
-                <div class="ml-10 pr-4 flex-shrink-0 flex items-center space-x-10">
-
-<!--                    <nav aria-label="Global" class="flex space-x-10">
-                        <a href="#" class="py-3 px-4 shadow bg-indigo-500 text-white font-medium hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900">Save Page</a>
-                    </nav>-->
-
-                    <div class="flex items-center space-x-8">
-                    <span class="inline-flex">
-                      <a href="#" class="-mx-1 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500">
-                        <span class="sr-only">View notifications</span>
-                        <BellIcon class="h-6 w-6" aria-hidden="true" />
-                      </a>
-                    </span>
-
-                        <Menu as="div" class="relative inline-block text-left">
-                            <MenuButton class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
-                            </MenuButton>
-
+                        <!-- Profile dropdown -->
+                        <Menu as="div" class="ml-3 relative">
+                            <div>
+                                <MenuButton class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <span class="sr-only">Open user menu</span>
+                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                </MenuButton>
+                            </div>
                             <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                                <MenuItems class="origin-top-right absolute z-30 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                    <div class="py-1">
-                                        <MenuItem v-slot="{ active }">
-                                            <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"> Your Profile </a>
-                                        </MenuItem>
-                                        <MenuItem v-slot="{ active }">
-                                            <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"> Sign Out </a>
-                                        </MenuItem>
-                                    </div>
+                                <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                                        <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
+                                    </MenuItem>
                                 </MenuItems>
                             </transition>
                         </Menu>
@@ -84,133 +160,8 @@
                 </div>
             </div>
 
-            <!-- Mobile menu, show/hide this `div` based on menu open/closed state -->
-            <TransitionRoot as="template" :show="mobileMenuOpen">
-                <Dialog as="div" class="fixed inset-0 z-40 md:hidden" @close="mobileMenuOpen = false">
-                    <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
-                        <DialogOverlay class="hidden sm:block sm:fixed sm:inset-0 sm:bg-gray-600 sm:bg-opacity-75" />
-                    </TransitionChild>
-
-                    <TransitionChild as="template" enter="transition ease-out duration-150 sm:ease-in-out sm:duration-300" enter-from="transform opacity-0 scale-110 sm:translate-x-full sm:scale-100 sm:opacity-100" enter-to="transform opacity-100 scale-100  sm:translate-x-0 sm:scale-100 sm:opacity-100" leave="transition ease-in duration-150 sm:ease-in-out sm:duration-300" leave-from="transform opacity-100 scale-100 sm:translate-x-0 sm:scale-100 sm:opacity-100" leave-to="transform opacity-0 scale-110  sm:translate-x-full sm:scale-100 sm:opacity-100">
-                        <nav class="fixed z-40 inset-0 h-full w-full bg-white sm:inset-y-0 sm:left-auto sm:right-0 sm:max-w-sm sm:w-full sm:shadow-lg" aria-label="Global">
-                            <div class="h-16 flex items-center justify-between px-4 sm:px-6">
-                                <a href="#">
-                                    <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500" alt="Workflow" />
-                                </a>
-                                <button type="button" class="-mr-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600" @click="mobileMenuOpen = false">
-                                    <span class="sr-only">Close main menu</span>
-                                    <XIcon class="block h-6 w-6" aria-hidden="true" />
-                                </button>
-                            </div>
-                            <div class="mt-2 max-w-8xl mx-auto px-4 sm:px-6">
-                                <div class="relative text-gray-400 focus-within:text-gray-500">
-                                    <label for="mobile-search" class="sr-only">Search all inboxes</label>
-                                    <input id="mobile-search" type="search" placeholder="Search all inboxes" class="block w-full border-gray-300 rounded-md pl-10 placeholder-gray-500 focus:border-indigo-600 focus:ring-indigo-600" />
-                                    <div class="absolute inset-y-0 left-0 flex items-center justify-center pl-3">
-                                        <SearchIcon class="h-5 w-5" aria-hidden="true" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="max-w-8xl mx-auto py-3 px-2 sm:px-4">
-                                <template v-for="item in navigation" :key="item.name">
-                                    <a :href="item.href" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">{{ item.name }}</a>
-                                    <a v-for="child in item.children" :key="child.name" :href="child.href" class="block rounded-md py-2 pl-5 pr-3 text-base font-medium text-gray-500 hover:bg-gray-100">{{ child.name }}</a>
-                                </template>
-                            </div>
-                            <div class="border-t border-gray-200 pt-4 pb-3">
-                                <div class="max-w-8xl mx-auto px-4 flex items-center sm:px-6">
-                                    <div class="flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
-                                    </div>
-                                    <div class="ml-3 min-w-0 flex-1">
-                                        <div class="text-base font-medium text-gray-800 truncate">{{ user.name }}</div>
-                                        <div class="text-sm font-medium text-gray-500 truncate">{{ user.email }}</div>
-                                    </div>
-                                    <a href="#" class="ml-auto flex-shrink-0 bg-white p-2 text-gray-400 hover:text-gray-500">
-                                        <span class="sr-only">View notifications</span>
-                                        <BellIcon class="h-6 w-6" aria-hidden="true" />
-                                    </a>
-                                </div>
-                                <div class="mt-3 max-w-8xl mx-auto px-2 space-y-1 sm:px-4">
-                                    <a v-for="item in userNavigation" :key="item.name" :href="item.href" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50">{{ item.name }}</a>
-                                </div>
-                            </div>
-                        </nav>
-                    </TransitionChild>
-                </Dialog>
-            </TransitionRoot>
-        </header>
-
-        <!-- Bottom section -->
-        <div class="min-h-0 flex-1 flex overflow-hidden">
-            <!-- Narrow sidebar-->
-            <nav aria-label="Sidebar" class="hidden md:block md:flex-shrink-0 md:overflow-y-auto border-r border-gray-100 shadow-2xl">
-
-                <div class="relative w-60 flex flex-col px-3 mt-5 space-y-3">
-                    <div class="bg-gray-100 py-1 rounded-md">
-                        <div class="flex py-0.5 px-2 space-x-2 text-sm font-bold">
-                            <button type="button" class="flex items-center justify-center sp-2 w-full text-gray-500">
-                                <SearchIcon class="w-5" /> Navigator
-                            </button>
-                            <button type="button" class="flex items-center justify-center p-2 w-full rounded-md shadow bg-white text-blue-500">
-                                <PencilIcon class="w-5" /> Elements
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative w-60 flex flex-col p-3 space-y-3">
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <SearchIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                        </div>
-                        <input type="text" name="search"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Search..." />
-                    </div>
-                </div>
-
-                <div class="relative w-60 flex flex-col p-3 space-y-3">
-                    <dl class="space-y-1 divide-y divide-gray-100">
-                        <Disclosure as="div" v-for="faq in faqs" :key="faq.question" class="pt-3" v-slot="{ open }">
-                            <dt>
-                                <DisclosureButton class="text-left w-full flex justify-between items-start text-gray-400">
-                                <span :class="[open ? 'text-blue-600' : 'text-gray-900', 'font-medium']">
-                                  {{ faq.question }}
-                                </span>
-                                <span class="ml-6 h-7 flex items-center text-gray-300">
-                                  <ChevronDownIcon :class="[open ? '-rotate-180' : 'rotate-0', 'h-6 w-6 transform']" aria-hidden="true" />
-                                </span>
-                                </DisclosureButton>
-                            </dt>
-                            <DisclosurePanel as="dd" class="mt-2 pr-12">
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                            </DisclosurePanel>
-                        </Disclosure>
-                    </dl>
-                </div>
-            </nav>
-
-            <!-- Main area -->
-            <main class="min-w-0 flex-1 lg:flex">
-                <!-- Primary column -->
-                <section aria-labelledby="primary-heading" class="min-w-0 flex-1 h-full flex flex-col overflow-y-auto lg:order-last">
-                    <h1 id="primary-heading" class="sr-only">Home</h1>
-                    <!-- Your content -->
-                    <slot name="main-content"></slot>
-                </section>
-
-<!--                &lt;!&ndash; Secondary column (hidden on smaller screens) &ndash;&gt;
-                <aside class="hidden lg:block lg:flex-shrink-0 lg:order-last">
-                    <div class="h-full relative flex flex-col w-60 border-r border-gray-200 bg-gray-100 overflow-y-auto">
-                        &lt;!&ndash; Your content &ndash;&gt;
-                        <slot name="sidebar-content"></slot>
-                    </div>
-                </aside>-->
-
+            <main style="height: 800px">
+                <slot name="main-content"></slot>
             </main>
         </div>
     </div>
@@ -227,52 +178,33 @@ import {
     MenuItems,
     TransitionChild,
     TransitionRoot,
-
     Disclosure, DisclosureButton, DisclosurePanel
-
 } from '@headlessui/vue'
-import { ChevronDownIcon, SearchIcon, ShoppingCartIcon,PencilIcon } from '@heroicons/vue/solid'
 import {
-    ArchiveIcon,
-    BanIcon,
     BellIcon,
-    FlagIcon,
+    CalendarIcon,
+    ChartBarIcon,
+    FolderIcon,
+    HomeIcon,
     InboxIcon,
-    MenuIcon,
-    PencilAltIcon,
-    UserCircleIcon,
-    XIcon
-} from '@heroicons/vue/outline'
+    MenuAlt2Icon,
+    UsersIcon,
+    XIcon,
 
-const user = {
-    name: 'Whitney Francis',
-    email: 'whitney.francis@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+} from '@heroicons/vue/outline'
+import { SearchIcon,ChevronDownIcon,PencilIcon } from '@heroicons/vue/solid'
+
 const navigation = [
-    {
-        name: 'Inboxes',
-        href: '#',
-        children: [
-            { name: 'Technical Support', href: '#' },
-            { name: 'Sales', href: '#' },
-            { name: 'General', href: '#' },
-        ],
-    },
-    { name: 'Reporting', href: '#', children: [] },
-    { name: 'Settings', href: '#', children: [] },
-]
-const sidebarNavigation = [
-    { name: 'Open', href: '#', icon: InboxIcon, current: true },
-    { name: 'Archive', href: '#', icon: ArchiveIcon, current: false },
-    { name: 'Customers', href: '#', icon: UserCircleIcon, current: false },
-    { name: 'Flagged', href: '#', icon: FlagIcon, current: false },
-    { name: 'Spam', href: '#', icon: BanIcon, current: false },
-    { name: 'Drafts', href: '#', icon: PencilAltIcon, current: false },
+    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
+    { name: 'Team', href: '#', icon: UsersIcon, current: false },
+    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
+    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+    { name: 'Documents', href: '#', icon: InboxIcon, current: false },
+    { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
+    { name: 'Settings', href: '#' },
     { name: 'Sign out', href: '#' },
 ]
 
@@ -314,25 +246,21 @@ export default {
         TransitionChild,
         TransitionRoot,
         BellIcon,
-        ChevronDownIcon,
-        MenuIcon,
+        MenuAlt2Icon,
         SearchIcon,
         XIcon,
-        ShoppingCartIcon,
+        ChevronDownIcon,
         PencilIcon,
-
-        Disclosure, DisclosureButton, DisclosurePanel
+        Disclosure, DisclosureButton, DisclosurePanel,
     },
-    setup() {
-        const mobileMenuOpen = ref(false)
+    data() {
+        const sidebarOpen = ref(false)
 
         return {
-            faqs,
-            user,
             navigation,
-            sidebarNavigation,
             userNavigation,
-            mobileMenuOpen,
+            sidebarOpen,
+            faqs
         }
     },
 }
