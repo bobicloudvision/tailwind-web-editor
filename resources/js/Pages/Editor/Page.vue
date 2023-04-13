@@ -42,10 +42,13 @@
     </template>
 
     <template v-slot:sidebar-content>
-<!--        <Tags class="mt-2" />-->
         <TextAlign class="mt-2" />
         <TextColor class="mt-2" />
         <BackgroundColor class="mt-2" />
+    </template>
+
+    <template v-slot:bottom-bar-content>
+        <Tags class="mt-2" />
     </template>
 
 </Layout>

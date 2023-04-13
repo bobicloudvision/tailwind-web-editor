@@ -163,9 +163,12 @@
                 </div>
             </div>
 
-            <main style="height: 800px">
+            <main class="h-[calc(100vh-110px)]">
                 <slot name="main-content"></slot>
             </main>
+            <div class="pl-3">
+                <slot name="bottom-bar-content"></slot>
+            </div>
         </div>
     </div>
 </template>
