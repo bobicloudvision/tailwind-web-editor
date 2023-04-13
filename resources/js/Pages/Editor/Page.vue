@@ -152,6 +152,7 @@ function runLiveEdit() {
 
         let editorIframeDocument = editorIframe.contentDocument;
         let editorIframeBody = editorIframeDocument.body;
+        let editorIframeWindow = editorIframe.contentWindow;
 
         const createElementHandle = editorIframeDocument.createElement("div");
         createElementHandle.id = 'js-live-edit-element-handle';
@@ -176,22 +177,49 @@ function runLiveEdit() {
                     return;
                 }
 
+
                 elementHandle.style.width = mouseOverElement.clientWidth + 'px';
                 elementHandle.style.height = mouseOverElement.clientHeight + 'px';
 
                 let mouseOverElementBounding = mouseOverElement.getBoundingClientRect();
-                elementHandle.style.top = mouseOverElementBounding.top + 'px';
-                elementHandle.style.left = mouseOverElementBounding.left + 'px';
+                elementHandle.style.top = (mouseOverElementBounding.top + editorIframeWindow.scrollY) + 'px';
+                elementHandle.style.left = (mouseOverElementBounding.left + editorIframeWindow.scrollX) + 'px';
+
+                // console.log(editorIframeDocument);
 
                 let elementFriendlyName = mouseOverElement.tagName;
+                if (mouseOverElement.tagName == 'DIV') {
+                    elementFriendlyName = 'Block';
+                }
                 if (mouseOverElement.tagName == 'IMG') {
-                    elementFriendlyName = 'IMAGE';
+                    elementFriendlyName = 'Image';
                 }
                 if (mouseOverElement.tagName == 'P') {
-                    elementFriendlyName = 'PARAGRAPH';
+                    elementFriendlyName = 'Paragraph';
                 }
                 if (mouseOverElement.tagName == 'A') {
-                    elementFriendlyName = 'LINK';
+                    elementFriendlyName = 'Link';
+                }
+                if (mouseOverElement.tagName == 'H1') {
+                    elementFriendlyName = 'Title 1';
+                }
+                if (mouseOverElement.tagName == 'H1') {
+                    elementFriendlyName = 'Title 1';
+                }
+                if (mouseOverElement.tagName == 'H2') {
+                    elementFriendlyName = 'Title 2';
+                }
+                if (mouseOverElement.tagName == 'H3') {
+                    elementFriendlyName = 'Title 3';
+                }
+                if (mouseOverElement.tagName == 'H4') {
+                    elementFriendlyName = 'Title 4';
+                }
+                if (mouseOverElement.tagName == 'H5') {
+                    elementFriendlyName = 'Title 5';
+                }
+                if (mouseOverElement.tagName == 'H6') {
+                    elementFriendlyName = 'Title 6';
                 }
 
                 elementHandleName.innerText = elementFriendlyName;
