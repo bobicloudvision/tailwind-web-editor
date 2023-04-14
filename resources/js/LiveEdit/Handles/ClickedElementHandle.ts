@@ -5,6 +5,7 @@ export class ClickedElementHandle extends ElementHandle {
 
     public name;
     public element;
+    public settings;
 
 
     constructor(public liveEdit) {
@@ -22,15 +23,47 @@ export class ClickedElementHandle extends ElementHandle {
         createElementHandle.innerHTML = '<div id="js-live-edit-element-handle-active-name">Image</div>' +
             '<div id="js-live-edit-element-handle-active-settings">' +
             '<button type="button">Settings</button>' +
-            '<button type="button">View</button>' +
-            '<button type="button">Skins</button>' +
             '</div>';
 
         this.iframeManager.body.appendChild(createElementHandle);
 
         this.element = this.iframeManager.document.getElementById('js-live-edit-element-handle-active');
         this.name = this.iframeManager.document.getElementById('js-live-edit-element-handle-active-name');
+        this.settings = this.iframeManager.document.getElementById('js-live-edit-element-handle-active-settings');
+    }
 
+    public enableSettingsDelete()
+    {
+        let app = this;
+        let createDeleteElementHandle = this.iframeManager.document.createElement('button');
+        createDeleteElementHandle.innerText = 'Delete';
+        createDeleteElementHandle.addEventListener('click', function (e) {
+            e.preventDefault();
+            app.liveEdit.clickedElement.remove();
+        });
+
+        this.settings.append(createDeleteElementHandle);
+    }
+
+    public enableSettingsDuplicate()
+    {
+        let app = this;
+        let createCloneElementHandle = this.iframeManager.document.createElement('button');
+        createCloneElementHandle.innerText = 'Clone';
+        createCloneElementHandle.addEventListener('click', function (e) {
+            e.preventDefault();
+            app.liveEdit.clickedElement.outerHTML += app.liveEdit.clickedElement.outerHTML;
+
+            // find new duplicable elements
+            app.liveEdit.findDuplicableElements();
+        });
+
+        this.settings.append(createCloneElementHandle);
+    }
+
+    public resetSettings()
+    {
+        this.settings.innerHTML = '';
     }
 
     public addListener() {
@@ -40,6 +73,7 @@ export class ClickedElementHandle extends ElementHandle {
             let editorElements = app.iframeManager.body.getElementsByTagName('*');
             for (var j = 0; j < editorElements.length; j++) {
                 app.element.style.display = 'none';
+                app.resetSettings();
             }
             let clickedElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
             if (clickedElement) {
@@ -48,8 +82,21 @@ export class ClickedElementHandle extends ElementHandle {
                     return;
                 }
 
+                this.enableSettingsDelete();
+
                 this.liveEdit.clickedElement = clickedElement;
                 this.liveEdit.handles.mouseOverElementHandle.hide();
+
+                let canIDuplicateElement = false;
+                this.liveEdit.duplicableElements.forEach(function (item) {
+                   if (item == clickedElement) {
+                       canIDuplicateElement = true;
+                   }
+                });
+
+                if (canIDuplicateElement) {
+                    this.enableSettingsDuplicate();
+                }
 
                 app.element.style.width = (clickedElement.clientWidth + 5) + 'px';
                 app.element.style.height = (clickedElement.clientHeight + 5) + 'px';
