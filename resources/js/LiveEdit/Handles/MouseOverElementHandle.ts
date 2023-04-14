@@ -49,6 +49,17 @@ export class MouseOverElementHandle extends ElementHandle {
                     return;
                 }
 
+                let canIAddContentEditable = true;
+                // if (contentEditableElementsTags[i] == 'h1') {
+                //     if (editorTag[j].children[0].classList.contains('block')) {
+                //         canIAddContentEditable = false;
+                //     }
+                // }
+                //
+                if (canIAddContentEditable) {
+                    mouseOverElement.setAttribute('contenteditable', 'true');
+                }
+
                 app.element.style.width = (mouseOverElement.clientWidth + 2.5) + 'px';
                 app.element.style.height = (mouseOverElement.clientHeight + 2.5) + 'px';
 
