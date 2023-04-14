@@ -63,8 +63,8 @@
 }
 </style>
 
-
 <script>
+import {LiveEdit} from "../../LiveEdit/LiveEdit";
 
 import {
     BackspaceIcon,
@@ -95,7 +95,6 @@ let lastSelectedElement = [];
 
 export default {
     components: {
-
         BackspaceIcon,
         FastForwardIcon,
         EyeIcon,
@@ -108,7 +107,6 @@ export default {
         AdjustmentsIcon,
         ArrowSmLeftIcon,
         ArrowSmRightIcon,
-
         Button,
         BrowserSwitch,
         Tags,
@@ -128,7 +126,9 @@ export default {
             this.lastSelectedElement = event.detail;
             this.$forceUpdate();
         });
-        runLiveEdit();
+
+        const liveEdit = new LiveEdit('js-tailwind-editor-iframe');
+        liveEdit.fire();
 
     },
     data() {
@@ -137,290 +137,5 @@ export default {
             lastSelectedElement,
         }
     },
-}
-
-function getElementFriendlyName(tagName)
-{
-    let elementFriendlyName = tagName;
-    if (tagName == 'DIV') {
-        elementFriendlyName = 'Block';
-    }
-    if (tagName == 'IMG') {
-        elementFriendlyName = 'Image';
-    }
-    if (tagName == 'P') {
-        elementFriendlyName = 'Paragraph';
-    }
-    if (tagName == 'A') {
-        elementFriendlyName = 'Link';
-    }
-    if (tagName == 'H1') {
-        elementFriendlyName = 'Title 1';
-    }
-    if (tagName == 'H1') {
-        elementFriendlyName = 'Title 1';
-    }
-    if (tagName == 'H2') {
-        elementFriendlyName = 'Title 2';
-    }
-    if (tagName == 'H3') {
-        elementFriendlyName = 'Title 3';
-    }
-    if (tagName == 'H4') {
-        elementFriendlyName = 'Title 4';
-    }
-    if (tagName == 'H5') {
-        elementFriendlyName = 'Title 5';
-    }
-    if (tagName == 'H6') {
-        elementFriendlyName = 'Title 6';
-    }
-
-    return elementFriendlyName;
-}
-
-function hasId(element, id) {
-    do {
-        if (element.id && element.id == id) {
-            return true;
-        }
-        element = element.parentNode;
-    } while (element);
-    return false;
-}
-
-function runLiveEdit() {
-
-    let activeElement = false;
-
-    document.addEventListener("JsLiveEdit::ElementMouseOver", (event) => {
-
-        let mouseOverElement = event.detail;
-
-    });
-
-    let editorIframe = document.getElementById('js-tailwind-editor-iframe');
-    editorIframe.onload = function () {
-
-        let editorIframeDocument = editorIframe.contentDocument;
-        let editorIframeBody = editorIframeDocument.body;
-        let editorIframeWindow = editorIframe.contentWindow;
-
-
-        // Element Hover
-        const createElementHandle = editorIframeDocument.createElement("div");
-        createElementHandle.id = 'js-live-edit-element-handle';
-        createElementHandle.innerHTML = '<div id="js-live-edit-element-handle-name">Image</div>';
-        editorIframeBody.appendChild(createElementHandle);
-        let elementHandle = editorIframeDocument.getElementById('js-live-edit-element-handle');
-        let elementHandleName = editorIframeDocument.getElementById('js-live-edit-element-handle-name');
-
-        // Element Active
-        const createElementActiveHandle = editorIframeDocument.createElement("div");
-        createElementActiveHandle.id = 'js-live-edit-element-handle-active';
-        createElementActiveHandle.innerHTML = '<div id="js-live-edit-element-handle-active-name">Image</div>' +
-            '<div id="js-live-edit-element-handle-active-settings">' +
-            '<button type="button">Settings</button>' +
-            '<button type="button">View</button>' +
-            '<button type="button">Skins</button>' +
-            '</div>';
-        editorIframeBody.appendChild(createElementActiveHandle);
-
-        let elementHandleActive = editorIframeDocument.getElementById('js-live-edit-element-handle-active');
-        let elementHandleActiveName = editorIframeDocument.getElementById('js-live-edit-element-handle-active-name');
-
-
-        editorIframeDocument.addEventListener('mouseover', e => {
-            let editorElements = editorIframeBody.getElementsByTagName('*');
-            for (var j = 0; j < editorElements.length; j++) {
-            //    editorElements[j].classList.remove('js-live-edit-element-hover');
-                elementHandle.style.display = 'none';
-            }
-
-            let mouseOverElement = editorIframeDocument.elementFromPoint(e.clientX, e.clientY);
-            if (mouseOverElement) {
-
-                if (mouseOverElement == activeElement) {
-                    return;
-                }
-
-                if (mouseOverElement.tagName == 'HTML') {
-                    return;
-                }
-
-                if (hasId(mouseOverElement,'js-live-edit-element-handle')) {
-                    return;
-                }
-
-                if (hasId(mouseOverElement,'js-live-edit-element-handle-active')) {
-                    return;
-                }
-
-                elementHandle.style.width = mouseOverElement.clientWidth + 'px';
-                elementHandle.style.height = mouseOverElement.clientHeight + 'px';
-
-                let mouseOverElementBounding = mouseOverElement.getBoundingClientRect();
-                elementHandle.style.top = (mouseOverElementBounding.top + editorIframeWindow.scrollY) + 'px';
-                elementHandle.style.left = (mouseOverElementBounding.left + editorIframeWindow.scrollX) + 'px';
-
-                // console.log(editorIframeDocument);
-
-                elementHandleName.innerText = getElementFriendlyName(mouseOverElement.tagName);
-                elementHandle.style.display = 'block';
-
-                console.log(mouseOverElement);
-
-              //  mouseOverElement.classList.add('js-live-edit-element-hover');
-            }
-        }, {passive: true});
-
-        var head = editorIframeDocument.getElementsByTagName('head')[0];
-        var link = editorIframeDocument.createElement('link');
-        link.id = 'js-tailwind-editor-iframe-stylesheet';
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '/live-edit/elements.css';
-        link.media = 'all';
-        head.appendChild(link);
-
-        let contentEditableElementsTags = [
-            'h1',
-            'h2',
-            'h3',
-            'h4',
-            'h5',
-            'h6',
-            'a',
-            'p',
-            'span',
-            'b',
-            'button',
-        ];
-
-        // let editableElementsClasses = [
-        //     'flex',
-        // ];
-        //
-        // for (var i = 0; i < editableElementsClasses.length; i++) {
-        //     let editorClass = editorIframeBody.getElementsByClassName(editableElementsClasses[i]);
-        //     for (var j = 0; j < editorClass.length; j++) {
-        //
-        //         editorClass[j].classList.add('js-live-edit-element');
-        //
-        //         editorClass[j].addEventListener('mouseover', function () {
-        //             this.classList.add('js-live-edit-element-border');
-        //         });
-        //
-        //         editorClass[j].addEventListener('mouseleave', function () {
-        //             this.classList.remove('js-live-edit-element-border');
-        //             this.classList.remove('js-live-edit-element-background');
-        //         });
-        //
-        //     }
-        // }
-
-        // editorIframeBody.addEventListener('click', function( event ){
-        //     if (!lastSelectedElement.contains(event.target)) {
-        //         if (event.hasAttribute('contenteditable')) {
-        //             removeAllContentEditableElements();
-        //         }
-        //     }
-        // });
-
-        function removeAllColoredActivelements() {
-            let editorTag = editorIframeBody.getElementsByTagName('*');
-            for (var j = 0; j < editorTag.length; j++) {
-                // editorTag[j].classList.remove('js-live-edit-element-border');
-                // editorTag[j].classList.remove('js-live-edit-element-background');
-                // editorTag[j].classList.remove('js-live-edit-element-editing');
-            }
-        }
-
-        // let canIAddContentEditable = true;
-        // // if (contentEditableElementsTags[i] == 'h1') {
-        // //     if (editorTag[j].children[0].classList.contains('block')) {
-        // //         canIAddContentEditable = false;
-        // //     }
-        // // }
-        // //
-        // if (!canIAddContentEditable) {
-        //    continue;
-        // }
-        //
-        // editorTag[j].setAttribute('contenteditable', 'true');
-
-        let editorTag = editorIframeBody.getElementsByTagName('*');
-        for (var j = 0; j < editorTag.length; j++) {
-
-        //    editorTag[j].classList.add('js-live-edit-element');
-
-            /// stop href clicking
-            if (editorTag[j].hasAttribute('href')) {
-                editorTag[j].addEventListener('click', function (event) {
-                    event.preventDefault();
-                });
-            }
-
-            editorTag[j].addEventListener('keydown', function () {
-
-            });
-
-            // editorTag[j].addEventListener('mouseleave', function () {
-            //     if (!this.classList.contains('js-live-edit-element-editing')) {
-            //         this.classList.remove('js-live-edit-element-border');
-            //     }
-            // });
-
-            editorTag[j].addEventListener('click', function (event) {
-
-                activeElement = event.target;
-
-                let instanceElement = event.target;
-
-
-                elementHandleActive.style.width = instanceElement.clientWidth + 'px';
-                elementHandleActive.style.height = instanceElement.clientHeight + 'px';
-
-                let instanceElementBounding = instanceElement.getBoundingClientRect();
-                elementHandleActive.style.top = (instanceElementBounding.top + editorIframeWindow.scrollY) + 'px';
-                elementHandleActive.style.left = (instanceElementBounding.left + editorIframeWindow.scrollX) + 'px';
-
-                elementHandleActiveName.innerText = getElementFriendlyName(instanceElement.tagName);
-                elementHandleActive.style.display = 'block';
-
-                elementHandle.style.display = 'none';
-
-
-                // instanceElement.classList.add('js-live-edit-element-border');
-                // instanceElement.classList.add('js-live-edit-element-background');
-                // instanceElement.classList.add('js-live-edit-element-editing');
-
-                //document.getElementById('lastSelectedElement').innerHTML = this.innerHTML;
-
-                //lastSelectedElement = this;
-
-                let elementType = 'text';
-                let elementClasses = [];
-
-                instanceElement.classList.forEach(function (item) {
-                    if (!item.includes('js-live-edit')) {
-                        elementClasses.push(item);
-                    }
-                });
-
-                let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChange', {
-                    detail: {
-                        element: instanceElement,
-                        elementType: elementType,
-                        classList: elementClasses,
-                    }
-                })
-                document.dispatchEvent(liveEditEvent);
-
-            });
-
-        }
-
-    };
 }
 </script>
