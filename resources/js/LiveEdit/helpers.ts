@@ -11,7 +11,7 @@ export function allowedEditElementsList()
         'SPAN',
         'B',
         'BUTTON',
-    //    'IMG',
+        'IMG',
         'DIV',
         'DL',
     ];
