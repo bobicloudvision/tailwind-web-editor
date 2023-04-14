@@ -15,49 +15,88 @@
 .js-live-edit-element-background {
 
 }
+
+
 #js-live-edit-element-handle {
-    border: 3px solid #33d3db;
+    border: 2px solid #0d9cf1;
+    border-radius: 2px;
     position: absolute;
     top: 20px;
+    display: none;
     z-index: 1000000;
     user-select: none;
     pointer-events: none;
-    display: none;
 }
+
 #js-live-edit-element-handle-name {
-    background: #33d3db;
+    background: #0d9cf1;
     color: #fff;
     font-size: 12px;
     text-align: center;
     display: block;
     padding-left: 4px;
     padding-right: 4px;
-    margin-top: -20px;
+    margin-top: -18px;
     max-width: 75px;
-    margin-left: -3px;
+    margin-left: 6px;
+    user-select: none;
+    pointer-events: none;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 
 
 #js-live-edit-element-handle-active {
-    border: 3px solid #7633db;
+    border: 2px solid #4085f2;
     position: absolute;
     top: 20px;
-    z-index: 1000000;
     user-select: none;
     pointer-events: none;
-    width: 150px;
-    height: 60px;
+    border-radius: 3px;
 }
 #js-live-edit-element-handle-active-name {
-    background: #7633db;
-    color: #fff;
+    background: #33d3db;
+    color: #ffffff;
     font-size: 12px;
     text-align: center;
-    display: block;
+    display: none;
     padding-left: 4px;
     padding-right: 4px;
     margin-top: -20px;
     max-width: 75px;
     margin-left: -3px;
+    user-select: none;
+    pointer-events: none;
+}
+
+#js-live-edit-element-handle-active-settings {
+    font-size: 12px;
+    text-align: center;
+    margin-top: -38px;
+    margin-left: 10px;
+    display: flex;
+    width: 186px;
+}
+
+#js-live-edit-element-handle-active-settings button {
+    cursor: pointer;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 100%;
+    border-right: 1px solid rgba(231, 231, 231, 0.14);
+    user-select: contain;
+    pointer-events: visible;
+    background: #4085f2;
+}
+#js-live-edit-element-handle-active-settings button:first-child {
+    border-top-left-radius: 2px;
+}
+#js-live-edit-element-handle-active-settings button:last-child {
+    border:0px;
+    border-top-right-radius: 2px;
+}
+
+#js-live-edit-element-handle-active-settings button:hover {
+    background: #2976ef;
 }

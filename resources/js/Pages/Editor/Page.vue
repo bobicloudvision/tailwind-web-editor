@@ -179,7 +179,19 @@ function getElementFriendlyName(tagName)
     return elementFriendlyName;
 }
 
+function hasId(element, id) {
+    do {
+        if (element.id && element.id == id) {
+            return true;
+        }
+        element = element.parentNode;
+    } while (element);
+    return false;
+}
+
 function runLiveEdit() {
+
+    let activeElement = false;
 
     document.addEventListener("JsLiveEdit::ElementMouseOver", (event) => {
 
@@ -206,7 +218,12 @@ function runLiveEdit() {
         // Element Active
         const createElementActiveHandle = editorIframeDocument.createElement("div");
         createElementActiveHandle.id = 'js-live-edit-element-handle-active';
-        createElementActiveHandle.innerHTML = '<div id="js-live-edit-element-handle-active-name">Image</div>';
+        createElementActiveHandle.innerHTML = '<div id="js-live-edit-element-handle-active-name">Image</div>' +
+            '<div id="js-live-edit-element-handle-active-settings">' +
+            '<button type="button">Settings</button>' +
+            '<button type="button">View</button>' +
+            '<button type="button">Skins</button>' +
+            '</div>';
         editorIframeBody.appendChild(createElementActiveHandle);
 
         let elementHandleActive = editorIframeDocument.getElementById('js-live-edit-element-handle-active');
@@ -219,12 +236,23 @@ function runLiveEdit() {
             //    editorElements[j].classList.remove('js-live-edit-element-hover');
                 elementHandle.style.display = 'none';
             }
+
             let mouseOverElement = editorIframeDocument.elementFromPoint(e.clientX, e.clientY);
             if (mouseOverElement) {
+
+                if (mouseOverElement == activeElement) {
+                    return;
+                }
+
                 if (mouseOverElement.tagName == 'HTML') {
                     return;
                 }
-                if (mouseOverElement.id == 'js-live-edit-element-handle') {
+
+                if (hasId(mouseOverElement,'js-live-edit-element-handle')) {
+                    return;
+                }
+
+                if (hasId(mouseOverElement,'js-live-edit-element-handle-active')) {
                     return;
                 }
 
@@ -345,7 +373,7 @@ function runLiveEdit() {
 
             editorTag[j].addEventListener('click', function (event) {
 
-                removeAllColoredActivelements();
+                activeElement = event.target;
 
                 let instanceElement = event.target;
 
@@ -359,7 +387,8 @@ function runLiveEdit() {
 
                 elementHandleActiveName.innerText = getElementFriendlyName(instanceElement.tagName);
                 elementHandleActive.style.display = 'block';
-                
+
+                elementHandle.style.display = 'none';
 
 
                 // instanceElement.classList.add('js-live-edit-element-border');
