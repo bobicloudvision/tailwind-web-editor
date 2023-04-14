@@ -1,16 +1,17 @@
-import {hasId, getElementFriendlyName} from "./helpers";
+import {elementHasParentsWithId, getElementFriendlyName} from "./helpers";
 import {IframeManager} from "./IframeManager";
 import {ClickedElementHandle} from "./Handles/ClickedElementHandle";
-import {HoverElementHandle} from "./Handles/HoverElementHandle";
+import {MouseOverElementHandle} from "./Handles/MouseOverElementHandle";
 
 export class LiveEdit {
 
     public iframeManager;
     public clickedElement;
+    public mouseOverElement;
 
     public handles = {
         clickedElementHandle: {},
-        hoverElementHandle: {},
+        mouseOverElementHandle: {},
     };
 
     public constructor(public iframeId: string) {}
@@ -18,12 +19,12 @@ export class LiveEdit {
     public fire() {
 
        const app = this;
-        app.iframeManager = new IframeManager(this.iframeId);
 
+        app.iframeManager = new IframeManager(this.iframeId);
         app.iframeManager.onLoad(function() {
 
-           app.handles.clickedElementHandle = new ClickedElementHandle(app.iframeManager);
-           app.handles.hoverElementHandle = new HoverElementHandle(app.iframeManager);
+           app.handles.clickedElementHandle = new ClickedElementHandle(app);
+           app.handles.mouseOverElementHandle = new MouseOverElementHandle(app);
 
            app.appendStyles();
        });

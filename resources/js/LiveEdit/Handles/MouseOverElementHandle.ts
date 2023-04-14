@@ -1,11 +1,21 @@
-import {getElementFriendlyName, hasId, allowedEditElementsList} from "../helpers";
+import {getElementFriendlyName, elementHasParentsWithId, allowedEditElementsList} from "../helpers";
+import {ElementHandle} from "./ElementHandle";
 
-export class HoverElementHandle {
+export class MouseOverElementHandle extends ElementHandle {
 
     public name;
-    public element
+    public element;
 
-    public constructor(public iframeManager) {
+    constructor(public liveEdit) {
+
+        super(liveEdit);
+
+        this.createElementHandle();
+        this.addListener();
+
+    }
+
+    public createElementHandle() {
 
         const createElementHandle = this.iframeManager.document.createElement("div");
         createElementHandle.id = 'js-live-edit-element-handle';
@@ -15,11 +25,9 @@ export class HoverElementHandle {
 
         this.element = this.iframeManager.document.getElementById('js-live-edit-element-handle');
         this.name = this.iframeManager.document.getElementById('js-live-edit-element-handle-name');
-
-        this.runListener();
     }
 
-    public runListener()
+    public addListener()
     {
         const app = this;
         app.iframeManager.document.addEventListener('mouseover', e => {
@@ -32,35 +40,32 @@ export class HoverElementHandle {
             let mouseOverElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
             if (mouseOverElement) {
 
-                const allowedElementsList = allowedEditElementsList();
-                if (!allowedElementsList.includes(mouseOverElement.tagName)) {
+                this.liveEdit.mouseOverElement = mouseOverElement;
+                if (mouseOverElement == this.liveEdit.clickedElement) {
                     return;
                 }
 
-                // if (mouseOverElement == this.clickedElement) {
-                //     return;
-                // }
-
-                if (hasId(mouseOverElement, 'js-live-edit-element-handle')) {
+                if (!this.canIEditThisElement(mouseOverElement)) {
                     return;
                 }
 
-                if (hasId(mouseOverElement, 'js-live-edit-element-handle-active')) {
-                    return;
-                }
-
-                app.element.style.width = (mouseOverElement.clientWidth + 10) + 'px';
-                app.element.style.height = (mouseOverElement.clientHeight + 10) + 'px';
+                app.element.style.width = (mouseOverElement.clientWidth + 2.5) + 'px';
+                app.element.style.height = (mouseOverElement.clientHeight + 2.5) + 'px';
 
                 let mouseOverElementBounding = mouseOverElement.getBoundingClientRect();
-                app.element.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 5)) + 'px';
-                app.element.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 5)) + 'px';
+                app.element.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 2.5)) + 'px';
+                app.element.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 2.5)) + 'px';
 
                 app.name.innerText = getElementFriendlyName(mouseOverElement.tagName);
                 app.element.style.display = 'block';
 
             }
         }, {passive: true});
+    }
+
+    public hide()
+    {
+        this.element.style.display = 'none';
     }
 
 }

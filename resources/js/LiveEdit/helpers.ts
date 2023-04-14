@@ -11,7 +11,9 @@ export function allowedEditElementsList()
         'SPAN',
         'B',
         'BUTTON',
-        'IMG',
+    //    'IMG',
+        'DIV',
+        'DL',
     ];
 
     return list;
@@ -57,7 +59,7 @@ export function getElementFriendlyName(tagName)
     return elementFriendlyName;
 }
 
-export function hasId(element, id) {
+export function elementHasParentsWithId(element, id) {
     do {
         if (element.id && element.id == id) {
             return true;
