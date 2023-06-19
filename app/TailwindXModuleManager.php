@@ -4,18 +4,25 @@ namespace App;
 
 class TailwindXModuleManager
 {
-    public function mount($name, $params = [])
-    {
-        // This is if a user doesn't pass params, BUT passes key() as the second argument.
-        if (is_string($params)) $params = [];
+    public $id;
+    public $params;
 
-        $id = str()->random(20);
+    public function mount($params = [])
+    {
+        $this->id = str()->random(20);
+        $this->params = $params;
 
         return $this;
     }
 
     public function html()
     {
-        return time();
+        $view = time();
+
+        return '<div tail-x:id="'.$this->id.'" tail-x:module="'.$this->params['type'].'">
+
+        '.$view.'
+
+        </div>';
     }
 }

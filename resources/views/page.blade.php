@@ -7,4 +7,8 @@
     <div>
         <tail-x:component type="menu" name="footer" />
     </div>
+    mnogo dobre:
+    <div>
+        <tail-x:component type="menu" name="social-links" />
+    </div>
 </div>

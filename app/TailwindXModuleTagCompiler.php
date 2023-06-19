@@ -16,7 +16,7 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
         $pattern = "/
             <
                 \s*
-                live_edit\:([\w\-\:\.]*)
+                tail-x\:([\w\-\:\.]*)
                 \s*
                 (?<attributes>
                     (?:
