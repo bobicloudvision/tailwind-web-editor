@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Qirolab\Theme\Theme;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +17,11 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+
+    Theme::set('clean_portfolio', 'bootstrap_default');
+
+    return view('home');
+
 });
 
 Route::get('/editor', function () {
