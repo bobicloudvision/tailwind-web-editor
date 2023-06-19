@@ -8,9 +8,12 @@ class TailwindXModuleBladeDirectives
 {
     public static function liveEdit($expression)
     {
+
+        // <div tail-x:module="'.{$expression}['type'].'"></div>
+
         return <<<EOT
 <?php
-echo '<div tail-x:module="'.{$expression}['type'].'"></div>';
+   echo \App\TailwindXModule::mount({$expression})->html();
 ?>
 EOT;
     }

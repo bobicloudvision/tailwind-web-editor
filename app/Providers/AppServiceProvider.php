@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Website\Page;
 use App\TailwindXModuleBladeDirectives;
+use App\TailwindXModuleManager;
 use App\TailwindXModuleTagCompiler;
 use App\WebsiteHelper;
 use Filament\Forms\Components\Select;
@@ -11,8 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use Livewire\LivewireBladeDirectives;
-use Livewire\LivewireTagCompiler;
 use RyanChandler\FilamentNavigation\Facades\FilamentNavigation;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         include_once dirname(__DIR__,) . '/website_helpers.php';
+        $this->registerTailwindXSingleton();
     }
 
     /**
@@ -54,6 +54,12 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment('production')) {
             URL::forceScheme('https');
         }
+    }
+
+    protected function registerTailwindXSingleton()
+    {
+        $this->app->singleton(TailwindXModuleManager::class);
+        $this->app->alias(TailwindXModuleManager::class, 'tailwind-x-module');
     }
 
     protected function registerTagCompiler()

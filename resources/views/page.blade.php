@@ -1,10 +1,10 @@
 <div>
     qko:
     <div>
-        <live_edit:module type="menu" name="header" />
+        <tail-x:component type="menu" name="header" />
     </div>
     ebasi:
     <div>
-        <live_edit:module type="menu" name="footer" />
+        <tail-x:component type="menu" name="footer" />
     </div>
 </div>
