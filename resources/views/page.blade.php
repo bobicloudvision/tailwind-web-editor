@@ -1,14 +1,14 @@
 <div>
     qko:
     <div>
-        <tail-x:component type="menu" name="header" />
+        <tailwind-x:component type="menu" skin="skin1" name="header" />
     </div>
     ebasi:
     <div>
-        <tail-x:component type="menu" name="footer" />
+        <tailwind-x:component type="menu" skin="skin1" name="footer" />
     </div>
     mnogo dobre:
     <div>
-        <tail-x:component type="menu" name="social-links" />
+        <tailwind-x:component type="menu" skin="skin1" name="social-links" />
     </div>
 </div>

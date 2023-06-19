@@ -16,7 +16,7 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
         $pattern = "/
             <
                 \s*
-                tail-x\:([\w\-\:\.]*)
+                tailwind-x\:([\w\-\:\.]*)
                 \s*
                 (?<attributes>
                     (?:

@@ -17,11 +17,18 @@ class TailwindXModuleManager
 
     public function html()
     {
-        $view = time();
+        $type = $this->params['type'];
 
-        return '<div tail-x:id="'.$this->id.'" tail-x:module="'.$this->params['type'].'">
+        $bladeFile = $type . '/default';
+        if (isset($this->params['skin'])) {
+            $bladeFile = $type . '/' . $this->params['skin'];
+        }
 
-        '.$view.'
+        $viewHtml = view('tailwind-x-components.'.$bladeFile)->render();
+
+        return '<div tailwind-x:id="'.$this->id.'" tailwind-x:module="'.$type.'">
+
+        '.$viewHtml.'
 
         </div>';
     }
