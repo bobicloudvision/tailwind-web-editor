@@ -11,9 +11,19 @@ class TailwindXComponent extends Component
      */
     public $skin;
 
+    /**
+     * @var array
+     */
+    public $params;
+
     public function setSkin($skin)
     {
         $this->skin = $skin;
+    }
+
+    public function setParams($params)
+    {
+        $this->params = $params;
     }
 
     public function render()

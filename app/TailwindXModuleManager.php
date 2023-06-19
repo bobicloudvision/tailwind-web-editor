@@ -40,11 +40,22 @@ class TailwindXModuleManager
             $classInstance = new $this->classComponentAliases[$type];
         }
 
+        $params = [];
+        foreach ($this->params as $key => $value) {
+            if ($key == 'type' || $key == 'skin') {
+                continue;
+            }
+            $params[$key] = $value;
+        }
+
+        if (!empty($params)) {
+            $classInstance->setParams($params);
+        }
+
         $viewHtml = 'No module found';
 
         if ($classInstance) {
             $classInstance->setSkin($this->params['skin'] ?? 'default');
-
             $viewHtml = $classInstance->render();
         }
 
