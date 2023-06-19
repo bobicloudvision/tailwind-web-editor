@@ -4,7 +4,7 @@ namespace App\View\TailwindXComponents;
 
 use Illuminate\View\View;
 
-class Alert extends TailwindXComponent
+class Menu extends TailwindXComponent
 {
     /**
      * Create the component instance.
@@ -19,7 +19,7 @@ class Alert extends TailwindXComponent
      */
     public function render(): View
     {
-        return view('tailwind-x-components.alert', [
+        return view('tailwind-x-components.menu.' . $this->skin, [
             'type' => $this->type,
             'message' => $this->message,
         ]);

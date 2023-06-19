@@ -43,6 +43,8 @@ class TailwindXModuleManager
         $viewHtml = 'No module found';
 
         if ($classInstance) {
+            $classInstance->setSkin($this->params['skin'] ?? 'default');
+
             $viewHtml = $classInstance->render();
         }
 

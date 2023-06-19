@@ -8,6 +8,7 @@ use App\TailwindXModuleBladeDirectives;
 use App\TailwindXModuleManager;
 use App\TailwindXModuleTagCompiler;
 use App\View\TailwindXComponents\Alert;
+use App\View\TailwindXComponents\Menu;
 use App\WebsiteHelper;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerTagCompiler();
 
         TailwindXModule::component('alert', Alert::class);
+        TailwindXModule::component('menu', Menu::class);
 
         Blade::directive('live_edit', [TailwindXModuleBladeDirectives::class, 'liveEdit']);
 
