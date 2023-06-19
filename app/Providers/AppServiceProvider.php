@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         TailwindXModule::component('alert', Alert::class);
         TailwindXModule::component('menu', Menu::class);
 
-        Blade::directive('live_edit', [TailwindXModuleBladeDirectives::class, 'liveEdit']);
+        Blade::directive('tailwind_x_module', [TailwindXModuleBladeDirectives::class, 'module']);
 
         Model::unguard();
 

@@ -6,7 +6,7 @@ use Illuminate\View\Compilers\BladeCompiler;
 
 class TailwindXModuleBladeDirectives
 {
-    public static function liveEdit($expression)
+    public static function module($expression)
     {
         return <<<EOT
 <?php

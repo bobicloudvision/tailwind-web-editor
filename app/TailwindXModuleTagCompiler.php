@@ -14,9 +14,9 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
     protected function compileModuleSelfClosingTags($value)
     {
         $pattern = "/
-            <
+            <div
                 \s*
-                tailwind-x\:([\w\-\:\.]*)
+                tailwind-x:module=(['\"])([\w\-\:\.]*)(['\"])
                 \s*
                 (?<attributes>
                     (?:
@@ -41,7 +41,6 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
         return preg_replace_callback($pattern, function (array $matches) use ($value) {
 
             $attributes = $this->getAttributesFromAttributeString($matches['attributes']);
-
             $attributes = collect($attributes)->mapWithKeys(function ($value, $key) {
 
                 if (str($key)->contains('_')) return [$key => $value];
@@ -49,8 +48,12 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
                 return [(string) str($key)->trim() => $value];
             })->toArray();
 
-            $component = $matches[1];
-            $component = "'{$component}'";
+            preg_match("/tailwind-x:module=(['\"])([\w\-\:\.]*)(['\"]) /", $matches[0], $matchTypeOfModule);
+
+            $component = '';
+            if (isset($matchTypeOfModule[2])) {
+                $component = "'{$matchTypeOfModule[2]}'";;
+            }
 
             $output = $this->componentString($component, $attributes);
 
@@ -60,7 +63,7 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
 
     protected function componentString(string $component, array $attributes)
     {
-        return "@live_edit([".$this->attributesToString($attributes, $escapeBound = false).'])';
+        return "@tailwind_x_module({$component}, [".$this->attributesToString($attributes, $escapeBound = false).'])';
     }
 
     protected function attributesToString(array $attributes, $escapeBound = true)

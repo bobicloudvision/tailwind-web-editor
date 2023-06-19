@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Str;
+use function Termwind\render;
 
 class TailwindXModuleManager
 {
@@ -10,6 +11,11 @@ class TailwindXModuleManager
      * @var string
      */
     public $id;
+
+    /**
+     * @var string
+     */
+    public $componentName;
 
     /**
      * @var
@@ -23,8 +29,9 @@ class TailwindXModuleManager
      */
     protected $classComponentAliases = [];
 
-    public function mount($params = [])
+    public function mount($componentName, $params = [])
     {
+        $this->componentName = $componentName;
         $this->id = str()->random(20);
         $this->params = $params;
 
@@ -33,11 +40,9 @@ class TailwindXModuleManager
 
     public function html()
     {
-        $type = $this->params['type'];
-
         $classInstance = false;
-        if (isset($this->classComponentAliases[$type])) {
-            $classInstance = new $this->classComponentAliases[$type];
+        if (isset($this->classComponentAliases[$this->componentName])) {
+            $classInstance = new $this->classComponentAliases[$this->componentName];
         }
 
         $params = [];
@@ -59,7 +64,7 @@ class TailwindXModuleManager
             $viewHtml = $classInstance->render();
         }
 
-        return '<div tailwind-x:id="'.$this->id.'" tailwind-x:module="'.$type.'">
+        return '<div tailwind-x:id="'.$this->id.'" tailwind-x:module="'.$this->componentName.'">
 
         '.$viewHtml.'
 
