@@ -8,7 +8,9 @@ use App\TailwindXModuleBladeDirectives;
 use App\TailwindXModuleManager;
 use App\TailwindXModuleTagCompiler;
 use App\View\TailwindXComponents\Alert;
+use App\View\TailwindXComponents\Logo;
 use App\View\TailwindXComponents\Menu;
+use App\View\TailwindXComponents\Text;
 use App\WebsiteHelper;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
@@ -41,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
 
         TailwindXModule::component('alert', Alert::class);
         TailwindXModule::component('menu', Menu::class);
+        TailwindXModule::component('text', Text::class);
+        TailwindXModule::component('logo', Logo::class);
 
         Blade::directive('tailwind_x_module', [TailwindXModuleBladeDirectives::class, 'module']);
 

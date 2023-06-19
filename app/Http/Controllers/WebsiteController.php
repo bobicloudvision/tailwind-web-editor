@@ -9,7 +9,7 @@ class WebsiteController
 
     public function homepage()
     {
-       // Theme::set('clean_portfolio', 'bootstrap_default');
+        Theme::set('clean_portfolio', 'bootstrap_default');
 
         return view('home');
     }
