@@ -2,7 +2,8 @@
 
 @section('content')
 
-
-
+    <div>
+        Qkooooo
+    </div>
 
 @endsection

@@ -21,7 +21,7 @@ Route::get('page/{slug}', '\App\Http\Controllers\WebsiteController@page')->name(
 
 Route::get('/editor', function () {
     return Inertia::render('Editor/Page', [
-        'url' => asset('/'),
+        'url' => route('website.page', 'home'),
     ]);
 });
 

@@ -6,6 +6,7 @@ use App\Models\Website\Page;
 use App\WebsiteHelper;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use RyanChandler\FilamentNavigation\Facades\FilamentNavigation;
@@ -39,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
                     return Page::pluck('title', 'id');
                 })
         ]);
+
+       // Blade::componentNamespace('App\\Views\\Components', 'website');
 
         if (app()->environment('production')) {
             URL::forceScheme('https');
