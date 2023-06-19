@@ -48,14 +48,10 @@
         <div class="row align-items-center justify-content-between flex-column flex-sm-row">
             <div class="col-auto"><div class="small m-0">Copyright &copy; Your Website 2023</div></div>
             <div class="col-auto">
-                @if (!empty(get_theme_menu('footer')))
-                    @foreach(get_theme_menu('footer') as $menu)
-                        <a class="small" href="{{$menu['data']['url']}}">{{$menu['label']}}</a>
-                        @if(!$loop->last)
-                        <span class="mx-1">&middot;</span>
-                        @endif
-                    @endforeach
-                @endif
+
+                <a class="small" href="1">2</a>
+                <span class="mx-1">&middot;</span>
+
             </div>
         </div>
     </div>

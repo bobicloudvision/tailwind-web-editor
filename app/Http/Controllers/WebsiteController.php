@@ -16,7 +16,7 @@ class WebsiteController
 
     public function page($slug)
     {
-       // Theme::set('clean_portfolio', 'bootstrap_default');
+        Theme::set('clean_portfolio', 'bootstrap_default');
 
         return view('page');
     }
