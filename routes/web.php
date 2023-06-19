@@ -16,18 +16,14 @@ use Inertia\Inertia;
 
 
 Route::get('/', '\App\Http\Controllers\WebsiteController@homepage')->name('website.homepage');
-Route::get('{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');
+Route::get('page/{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');
 
 
 Route::get('/editor', function () {
     return Inertia::render('Editor/Page', [
-
+        'url' => asset('/'),
     ]);
 });
-
-Route::get('/live-edit-page/{id}', function ($id) {
-    return view('live-edit-page');
-})->name('live-edit-page');
 
 Route::middleware([
     'auth:sanctum',

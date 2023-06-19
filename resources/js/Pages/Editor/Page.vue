@@ -6,13 +6,14 @@
       <div class="p-5 bg-gray-100 w-full h-full flex justify-center items-center">
           <iframe id="js-tailwind-editor-iframe"
 
+                    :src="url"
                   :style="[
                deviceName == 'Desktop' ? 'width:100%' : '',
                 deviceName == 'Tablet' ? 'width:600px' : '',
                 deviceName == 'Phone' ? 'width:450px' : ''
             ]"
 
-                  class="rounded-xl" src="/templates/portfolio"></iframe>
+                  class="rounded-xl"></iframe>
       </div>
     </template>
 
@@ -64,6 +65,9 @@
 </style>
 
 <script>
+import { ref, reactive } from 'vue'
+import {usePage} from "@inertiajs/vue3";
+
 import {LiveEdit} from "../../LiveEdit/LiveEdit";
 
 import {
@@ -132,7 +136,10 @@ export default {
 
     },
     data() {
+
+        const url = usePage().props.url;
         return {
+            url:url,
             deviceName,
             lastSelectedElement,
         }
