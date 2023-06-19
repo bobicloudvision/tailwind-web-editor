@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\TailwindXComponents;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
@@ -20,6 +20,6 @@ class Alert extends Component
      */
     public function render(): View
     {
-        return view('components.alert');
+        return view('tailwind-x-components.alert');
     }
 }
