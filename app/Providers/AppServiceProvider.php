@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Website\Page;
+use App\WebsiteHelper;
+use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use RyanChandler\FilamentNavigation\Facades\FilamentNavigation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        include_once dirname(__DIR__,) . '/website_helpers.php';
     }
 
     /**
@@ -26,6 +30,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Model::unguard();
+
+        FilamentNavigation::addItemType('Page link', [
+            Select::make('page_id')
+                ->label('Select page')
+                ->searchable()
+                ->options(function () {
+                    return Page::pluck('title', 'id');
+                })
+        ]);
 
         if (app()->environment('production')) {
             URL::forceScheme('https');

@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Qirolab\Theme\Theme;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +14,10 @@ use Qirolab\Theme\Theme;
 |
 */
 
-Route::get('/', function () {
 
-    Theme::set('clean_portfolio', 'bootstrap_default');
+Route::get('/', '\App\Http\Controllers\WebsiteController@homepage')->name('website.homepage');
+Route::get('{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');
 
-    return view('home');
-
-});
 
 Route::get('/editor', function () {
     return Inertia::render('Editor/Page', [

@@ -26,5 +26,4 @@ class Page extends Model
     {
         return $this->belongsTo(Author::class, 'page_author_id');
     }
-
 }
