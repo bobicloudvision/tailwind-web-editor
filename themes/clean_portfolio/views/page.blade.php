@@ -5,11 +5,11 @@
     <div>
         qko:
        <div>
-           <tailwind-x:module type="menu" name="header" />
+           <live_edit:module type="menu" name="header" />
        </div>
         ebasi:
         <div>
-            <tailwind-x:module type="menu" name="footer" />
+            <live_edit:module type="menu" name="footer" />
         </div>
     </div>
 

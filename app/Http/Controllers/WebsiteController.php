@@ -9,14 +9,14 @@ class WebsiteController
 
     public function homepage()
     {
-        Theme::set('clean_portfolio', 'bootstrap_default');
+       // Theme::set('clean_portfolio', 'bootstrap_default');
 
         return view('home');
     }
 
     public function page($slug)
     {
-        Theme::set('clean_portfolio', 'bootstrap_default');
+       // Theme::set('clean_portfolio', 'bootstrap_default');
 
         return view('page');
     }
