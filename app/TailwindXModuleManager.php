@@ -45,6 +45,10 @@ class TailwindXModuleManager
             $classInstance = new $this->classComponentAliases[$this->componentName];
         }
 
+        if (!is_object($classInstance)) {
+            return 'Module ' . $this->componentName . ' not found';
+        }
+
         $params = [];
         foreach ($this->params as $key => $value) {
             if ($key == 'type' || $key == 'skin') {
@@ -54,7 +58,9 @@ class TailwindXModuleManager
         }
 
         if (!empty($params)) {
-            $classInstance->setParams($params);
+            if (method_exists($classInstance, 'setParams')) {
+                $classInstance->setParams($params);
+            }
         }
 
         $viewHtml = 'No module found';
