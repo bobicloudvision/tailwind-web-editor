@@ -49,8 +49,7 @@
             <div class="col-auto"><div class="small m-0">Copyright &copy; Your Website 2023</div></div>
             <div class="col-auto">
 
-                <a class="small" href="1">2</a>
-                <span class="mx-1">&middot;</span>
+                <div tailwind-x:module="menu" skin="footer" name="footer" />
 
             </div>
         </div>

@@ -44,7 +44,7 @@ class Menu extends TailwindXComponent
             $menus = $this->getMenu($this->params['name']);
         }
 
-        return view('tailwind-x-components.menu.' . $this->skin, [
+        return view('tailwind-x-components.menu.skins.' . $this->skin, [
             'menus' => $menus,
         ]);
     }
