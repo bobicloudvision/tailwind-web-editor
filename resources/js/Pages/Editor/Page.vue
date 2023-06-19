@@ -12,7 +12,7 @@
                 deviceName == 'Phone' ? 'width:450px' : ''
             ]"
 
-                  class="rounded-xl" src="/live-edit-page/1"></iframe>
+                  class="rounded-xl" src="/templates/portfolio"></iframe>
       </div>
     </template>
 
