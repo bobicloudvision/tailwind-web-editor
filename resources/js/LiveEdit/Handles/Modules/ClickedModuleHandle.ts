@@ -62,24 +62,24 @@ export class ClickedModuleHandle extends ElementHandle {
             app.handleMainElement.style.display = 'none';
             app.resetSettings();
 
-            let clickedModule = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
-            if (clickedModule) {
+            let clickedElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
+            if (clickedElement) {
 
-                let getElementParentModuleElement = elementHasParentsWithAttribute(clickedModule, 'tailwind-x:module');
+                let getElementParentModuleElement = elementHasParentsWithAttribute(clickedElement, 'tailwind-x:module');
                 if (!getElementParentModuleElement) {
                     return;
                 }
 
                 this.enableSettingsButton();
 
-                this.liveEdit.clickedModule = clickedModule;
+                this.liveEdit.clickedModule = getElementParentModuleElement;
                 this.liveEdit.handles.mouseOverModuleHandle.hide();
 
 
-                app.handleMainElement.style.width = (clickedModule.clientWidth + 5) + 'px';
-                app.handleMainElement.style.height = (clickedModule.clientHeight + 5) + 'px';
+                app.handleMainElement.style.width = (clickedElement.clientWidth + 5) + 'px';
+                app.handleMainElement.style.height = (clickedElement.clientHeight + 5) + 'px';
 
-                let clickedElementBounding = clickedModule.getBoundingClientRect();
+                let clickedElementBounding = clickedElement.getBoundingClientRect();
                 app.handleMainElement.style.top = (clickedElementBounding.top + (app.iframeManager.window.scrollY - 2.5)) + 'px';
                 app.handleMainElement.style.left = (clickedElementBounding.left + (app.iframeManager.window.scrollX - 2.5)) + 'px';
                 app.handleMainElement.style.display = 'block';

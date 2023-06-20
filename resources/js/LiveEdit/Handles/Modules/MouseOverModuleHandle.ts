@@ -40,18 +40,20 @@ export class MouseOverModuleHandle extends ElementHandle {
 
             app.handleMainElement.style.display = 'none';
 
-            let mouseOverModule = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
-            if (mouseOverModule) {
+            let mouseOverElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
+            if (mouseOverElement) {
 
-                this.liveEdit.mouseOverModule = mouseOverModule;
-                if (mouseOverModule == this.liveEdit.clickedModule) {
-                    return;
-                }
-
-                let getElementParentModuleElement = elementHasParentsWithAttribute(mouseOverModule, 'tailwind-x:module');
+                let getElementParentModuleElement = elementHasParentsWithAttribute(mouseOverElement, 'tailwind-x:module');
                 if (!getElementParentModuleElement) {
                     return;
                 }
+
+                this.liveEdit.mouseOverModule = getElementParentModuleElement;
+                if (getElementParentModuleElement == this.liveEdit.clickedModule) {
+                    return;
+                }
+
+                console.log(this.liveEdit.clickedModule);
 
                 app.handleMainElement.style.width = (getElementParentModuleElement.clientWidth + 2.5) + 'px';
                 app.handleMainElement.style.height = (getElementParentModuleElement.clientHeight + 2.5) + 'px';
