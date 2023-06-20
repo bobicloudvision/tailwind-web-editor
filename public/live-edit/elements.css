@@ -60,7 +60,7 @@
     color: #ffffff;
     font-size: 12px;
     text-align: center;
-    display: none;
+    display: block;
     padding-left: 4px;
     padding-right: 4px;
     margin-top: -20px;

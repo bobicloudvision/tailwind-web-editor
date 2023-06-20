@@ -3,9 +3,9 @@ import {
     allowedEditElementsList,
     elementHasParentsWithId,
     elementHasParentsWithAttribute
-} from "../helpers";
+} from "../../helpers";
 
-import {ElementHandle} from "./ElementHandle";
+import {ElementHandle} from "./../ElementHandle";
 
 export class MouseOverModuleHandle extends ElementHandle {
 
@@ -40,19 +40,15 @@ export class MouseOverModuleHandle extends ElementHandle {
 
             app.handleMainElement.style.display = 'none';
 
-            let mouseOverElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
-            if (mouseOverElement) {
+            let mouseOverModule = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
+            if (mouseOverModule) {
 
-                // this.liveEdit.mouseOverElement = mouseOverElement;
-                // if (mouseOverElement == this.liveEdit.clickedElement) {
-                //     return;
-                // }
-                //
-                // if (!this.canIEditThisElement(mouseOverElement)) {
-                //      return;
-                // }
+                this.liveEdit.mouseOverModule = mouseOverModule;
+                if (mouseOverModule == this.liveEdit.clickedModule) {
+                    return;
+                }
 
-                let getElementParentModuleElement = elementHasParentsWithAttribute(mouseOverElement, 'tailwind-x:module');
+                let getElementParentModuleElement = elementHasParentsWithAttribute(mouseOverModule, 'tailwind-x:module');
                 if (!getElementParentModuleElement) {
                     return;
                 }
@@ -63,14 +59,12 @@ export class MouseOverModuleHandle extends ElementHandle {
                 let mouseOverElementBounding = getElementParentModuleElement.getBoundingClientRect();
                 app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 2.5)) + 'px';
                 app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 2.5)) + 'px';
+                app.handleMainElement.style.display = 'block';
 
                 let moduleFriendlyName = getElementParentModuleElement.getAttribute('tailwind-x:module').toUpperCase();
-
                 if (app.handleNameElement) {
                     app.handleNameElement.innerText = moduleFriendlyName;
                 }
-
-                app.handleMainElement.style.display = 'block';
 
             }
         }, {passive: true});

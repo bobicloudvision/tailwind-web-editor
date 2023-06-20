@@ -1,18 +1,23 @@
 import {elementHasParentsWithId, getElementFriendlyName} from "./helpers";
 import {IframeManager} from "./IframeManager";
-import {ClickedElementHandle} from "./Handles/ClickedElementHandle";
-import {MouseOverElementHandle} from "./Handles/MouseOverElementHandle";
-import {MouseOverModuleHandle} from "./Handles/MouseOverModuleHandle";
+import {ClickedElementHandle} from "./Handles/Elements/ClickedElementHandle";
+import {MouseOverElementHandle} from "./Handles/Elements/MouseOverElementHandle";
+import {MouseOverModuleHandle} from "./Handles/Modules/MouseOverModuleHandle";
+import {ClickedModuleHandle} from "./Handles/Modules/ClickedModuleHandle";
 
 export class LiveEdit {
 
     public iframeManager;
+
     public clickedElement;
+    public clickedModule;
+
     public mouseOverElement;
-    public mouseOverModuleHandle;
+    public mouseOverModule;
 
     public handles = {
         clickedElementHandle: {},
+        clickedModuleHandle: {},
         mouseOverElementHandle: {},
         mouseOverModuleHandle: {},
     };
@@ -29,6 +34,8 @@ export class LiveEdit {
         app.iframeManager.onLoad(function() {
 
            app.handles.clickedElementHandle = new ClickedElementHandle(app);
+           app.handles.clickedModuleHandle = new ClickedModuleHandle(app);
+
            app.handles.mouseOverElementHandle = new MouseOverElementHandle(app);
            app.handles.mouseOverModuleHandle = new MouseOverModuleHandle(app);
 

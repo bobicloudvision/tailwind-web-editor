@@ -1,5 +1,5 @@
-import {allowedEditElementsList, getElementFriendlyName, elementHasParentsWithId} from "../helpers";
-import {ElementHandle} from "./ElementHandle";
+import {allowedEditElementsList, getElementFriendlyName, elementHasParentsWithId} from "../../helpers";
+import {ElementHandle} from "./../ElementHandle";
 
 export class ClickedElementHandle extends ElementHandle {
 
@@ -70,11 +70,10 @@ export class ClickedElementHandle extends ElementHandle {
 
         const app = this;
         app.iframeManager.document.addEventListener('click', e => {
-            let editorElements = app.iframeManager.body.getElementsByTagName('*');
-            for (var j = 0; j < editorElements.length; j++) {
-                app.element.style.display = 'none';
-                app.resetSettings();
-            }
+
+            app.element.style.display = 'none';
+            app.resetSettings();
+
             let clickedElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
             if (clickedElement) {
 

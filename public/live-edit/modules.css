@@ -59,24 +59,24 @@
 }
 #js-live-edit-module-handle-active-name {
     background: #0bc0c7;
-    color: #ffffff;
+    color: #FFFFFF;
     font-size: 12px;
     text-align: center;
-    display: none;
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-top: -20px;
-    max-width: 75px;
-    margin-left: -3px;
+    display: block;
+    padding: 6px;
+    margin-top: -30px;
+    max-width: 130px;
+    margin-left: -2px;
     user-select: none;
     pointer-events: none;
+    border-top-left-radius: 3px;
 }
 
 #js-live-edit-module-handle-active-settings {
     font-size: 12px;
     text-align: center;
-    margin-top: -38px;
-    margin-left: 10px;
+    margin-top: -30px;
+    margin-left: 128px;
     display: flex;
     width: 186px;
 }
@@ -84,7 +84,7 @@
 #js-live-edit-module-handle-active-settings button {
     cursor: pointer;
     color: #FFFFFF;
-    padding: 10px;
+    padding: 6px;
     width: 100%;
     border-right: 1px solid rgba(231, 231, 231, 0.14);
     user-select: contain;

@@ -1,5 +1,5 @@
-import {getElementFriendlyName, elementHasParentsWithId, allowedEditElementsList} from "../helpers";
-import {ElementHandle} from "./ElementHandle";
+import {getElementFriendlyName, elementHasParentsWithId, allowedEditElementsList} from "../../helpers";
+import {ElementHandle} from "./../ElementHandle";
 
 export class MouseOverElementHandle extends ElementHandle {
 
