@@ -18,12 +18,11 @@ use Inertia\Inertia;
 Route::get('/', '\App\Http\Controllers\WebsiteController@homepage')->name('website.homepage');
 Route::get('{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');
 
-//
-//Route::get('/editor', function () {
-//    return Inertia::render('Editor/Page', [
-//        'url' => route('website.page', 'home'),
-//    ]);
-//});
+Route::get('/editor', function () {
+    return Inertia::render('Editor/Page', [
+        'url' => route('website.page', 'home'),
+    ]);
+});
 
 Route::middleware([
     'auth:sanctum',
