@@ -15,6 +15,10 @@ export class ElementHandle {
             return false;
         }
 
+        if (!elementHasParentsWithAttribute(element, 'tailwind-x:editable')) {
+            return false;
+        }
+
         if (elementHasParentsWithAttribute(element, 'tailwind-x:module')) {
             return false;
         }

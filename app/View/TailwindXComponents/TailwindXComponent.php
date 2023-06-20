@@ -9,7 +9,7 @@ class TailwindXComponent extends Component
     /**
      * @var string
      */
-    public $skin;
+    public $skin = 'default';
 
     /**
      * @var array

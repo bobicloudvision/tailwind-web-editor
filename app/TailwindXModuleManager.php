@@ -46,7 +46,7 @@ class TailwindXModuleManager
         }
 
         if (!is_object($classInstance)) {
-            return 'Module ' . $this->componentName . ' not found';
+            return '<span class="js-live-edit-module-not-found-message">Module ' . $this->componentName . ' not found</span>';
         }
 
         $params = [];

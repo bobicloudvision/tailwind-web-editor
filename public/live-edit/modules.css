@@ -1,3 +1,9 @@
+.js-live-edit-module-not-found-message {
+    background: #f80e4d;
+    padding: 5px 7px;
+    color:#fff;
+}
+
 .js-live-edit-module {
     border: 0px solid transparent;
 }

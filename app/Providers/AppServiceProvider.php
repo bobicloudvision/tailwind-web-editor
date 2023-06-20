@@ -10,6 +10,7 @@ use App\TailwindXModuleTagCompiler;
 use App\View\TailwindXComponents\Alert;
 use App\View\TailwindXComponents\Logo;
 use App\View\TailwindXComponents\Menu;
+use App\View\TailwindXComponents\SocialLinks;
 use App\View\TailwindXComponents\Text;
 use App\WebsiteHelper;
 use Filament\Forms\Components\Select;
@@ -45,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         TailwindXModule::component('menu', Menu::class);
         TailwindXModule::component('text', Text::class);
         TailwindXModule::component('logo', Logo::class);
+        TailwindXModule::component('social-links', SocialLinks::class);
 
         Blade::directive('tailwind_x_module', [TailwindXModuleBladeDirectives::class, 'module']);
 
