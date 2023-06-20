@@ -16,7 +16,6 @@ use Inertia\Inertia;
 
 
 Route::get('/', '\App\Http\Controllers\WebsiteController@homepage')->name('website.homepage');
-Route::get('{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');
 
 Route::get('/editor', function () {
     return Inertia::render('Editor/Page', [
@@ -33,3 +32,6 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');

@@ -1,4 +1,4 @@
-import {allowedEditElementsList, elementHasParentsWithId} from "../helpers";
+import {allowedEditElementsList, elementHasParentsWithId, elementHasParentsWithAttribute} from "../helpers";
 
 export class ElementHandle {
 
@@ -12,6 +12,14 @@ export class ElementHandle {
     {
         const allowedElementsList = allowedEditElementsList();
         if (!allowedElementsList.includes(element.tagName)) {
+            return false;
+        }
+
+        if (elementHasParentsWithAttribute(element, 'tailwind-x:module')) {
+            return false;
+        }
+
+        if (element.hasAttribute('tailwind-x:module')) {
             return false;
         }
 

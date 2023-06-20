@@ -1,0 +1,98 @@
+.js-live-edit-module {
+    border: 0px solid transparent;
+}
+
+.js-live-edit-module-hover {
+    border: 2px dashed rgba(53, 245, 130, 0.56);
+}
+.js-live-edit-module-border {
+    border: 2px solid rgba(53, 146, 245, 0.42);
+}
+.js-live-edit-module-background {
+
+}
+
+
+#js-live-edit-module-handle {
+    border: 2px solid #009d58;
+    border-radius: 2px;
+    position: absolute;
+    top: 20px;
+    display: none;
+    z-index: 1000000;
+    user-select: none;
+    pointer-events: none;
+}
+
+#js-live-edit-module-handle-name {
+    background: #009d58;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-top: -18px;
+    max-width: 125px;
+    margin-left: 6px;
+    user-select: none;
+    pointer-events: none;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+
+
+#js-live-edit-module-handle-active {
+    border: 2px solid #0bc0c7;
+    position: absolute;
+    top: 20px;
+    user-select: none;
+    pointer-events: none;
+    border-radius: 3px;
+}
+#js-live-edit-module-handle-active-name {
+    background: #0bc0c7;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    display: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-top: -20px;
+    max-width: 75px;
+    margin-left: -3px;
+    user-select: none;
+    pointer-events: none;
+}
+
+#js-live-edit-module-handle-active-settings {
+    font-size: 12px;
+    text-align: center;
+    margin-top: -38px;
+    margin-left: 10px;
+    display: flex;
+    width: 186px;
+}
+
+#js-live-edit-module-handle-active-settings button {
+    cursor: pointer;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 100%;
+    border-right: 1px solid rgba(231, 231, 231, 0.14);
+    user-select: contain;
+    pointer-events: visible;
+    background: #4085f2;
+}
+#js-live-edit-module-handle-active-settings button:first-child {
+    border-top-left-radius: 2px;
+}
+#js-live-edit-module-handle-active-settings button:last-child {
+    border:0px;
+    border-top-right-radius: 2px;
+}
+
+#js-live-edit-module-handle-active-settings button:hover {
+    background: #2976ef;
+}

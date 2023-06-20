@@ -41,9 +41,7 @@
     <div class="container px-5">
         <div class="row align-items-center justify-content-between flex-column flex-sm-row">
             <div class="col-auto">
-                <div tailwind-x:module="text" skin="footer-text" name="footer">
-                    E mnogo dobre kvo!
-                </div>
+                <div tailwind-x:module="text" skin="footer-text" name="footer" />
             </div>
             <div class="col-auto">
                 <div tailwind-x:module="menu" skin="footer" name="footer" />

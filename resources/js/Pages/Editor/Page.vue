@@ -3,7 +3,7 @@
 <Layout>
 
     <template v-slot:main-content>
-      <div class="p-5 bg-gray-100 w-full h-full flex justify-center items-center">
+      <div class="p-5 mt-5 bg-gray-100 w-full h-full flex justify-center items-center">
           <iframe id="js-tailwind-editor-iframe"
 
                     :src="url"

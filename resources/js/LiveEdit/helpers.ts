@@ -87,3 +87,15 @@ export function elementHasParentsWithId(element, id) {
     } while (element);
     return false;
 }
+
+export function elementHasParentsWithAttribute(element, attributeKey) {
+    do {
+        if (element.attributes &&
+            element.attributes.length > 0
+            && element.hasAttribute(attributeKey)) {
+            return element;
+        }
+        element = element.parentNode;
+    } while (element);
+    return false;
+}

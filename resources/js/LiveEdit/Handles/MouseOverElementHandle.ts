@@ -3,8 +3,8 @@ import {ElementHandle} from "./ElementHandle";
 
 export class MouseOverElementHandle extends ElementHandle {
 
-    public name;
-    public element;
+    public handleNameElement;
+    public handleMainElement;
 
     constructor(public liveEdit) {
 
@@ -23,8 +23,8 @@ export class MouseOverElementHandle extends ElementHandle {
 
         this.iframeManager.body.appendChild(createElementHandle);
 
-        this.element = this.iframeManager.document.getElementById('js-live-edit-element-handle');
-        this.name = this.iframeManager.document.getElementById('js-live-edit-element-handle-name');
+        this.handleMainElement = this.iframeManager.document.getElementById('js-live-edit-element-handle');
+        this.handleNameElement = this.iframeManager.document.getElementById('js-live-edit-element-handle-name');
     }
 
     public addListener()
@@ -32,10 +32,7 @@ export class MouseOverElementHandle extends ElementHandle {
         const app = this;
         app.iframeManager.document.addEventListener('mouseover', e => {
 
-            let editorElements = app.iframeManager.body.getElementsByTagName('*');
-            for (var j = 0; j < editorElements.length; j++) {
-                app.element.style.display = 'none';
-            }
+            app.handleMainElement.style.display = 'none';
 
             let mouseOverElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
             if (mouseOverElement) {
@@ -57,18 +54,21 @@ export class MouseOverElementHandle extends ElementHandle {
                 // }
                 //
                 if (canIAddContentEditable) {
-                    mouseOverElement.setAttribute('contenteditable', 'true');
+                  //  mouseOverElement.setAttribute('contenteditable', 'true');
                 }
 
-                app.element.style.width = (mouseOverElement.clientWidth + 2.5) + 'px';
-                app.element.style.height = (mouseOverElement.clientHeight + 2.5) + 'px';
+                app.handleMainElement.style.width = (mouseOverElement.clientWidth + 2.5) + 'px';
+                app.handleMainElement.style.height = (mouseOverElement.clientHeight + 2.5) + 'px';
 
                 let mouseOverElementBounding = mouseOverElement.getBoundingClientRect();
-                app.element.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 2.5)) + 'px';
-                app.element.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 2.5)) + 'px';
+                app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 2.5)) + 'px';
+                app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 2.5)) + 'px';
 
-                app.name.innerText = getElementFriendlyName(mouseOverElement.tagName);
-                app.element.style.display = 'block';
+                if (app.handleNameElement) {
+                    app.handleNameElement.innerText = getElementFriendlyName(mouseOverElement.tagName);
+                }
+
+                app.handleMainElement.style.display = 'block';
 
             }
         }, {passive: true});
@@ -76,7 +76,7 @@ export class MouseOverElementHandle extends ElementHandle {
 
     public hide()
     {
-        this.element.style.display = 'none';
+        this.handleMainElement.style.display = 'none';
     }
 
 }
