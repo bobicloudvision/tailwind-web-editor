@@ -57,39 +57,39 @@
     pointer-events: none;
     border-radius: 3px;
 }
-#js-live-edit-module-handle-active-name {
-    background: #0bc0c7;
-    color: #FFFFFF;
-    font-size: 12px;
-    text-align: center;
-    display: block;
-    padding: 6px;
-    margin-top: -30px;
-    max-width: 130px;
-    margin-left: -2px;
-    user-select: none;
-    pointer-events: none;
-    border-top-left-radius: 3px;
-}
 
+#js-live-edit-module-handle-active-name {
+    user-select: contain;
+    pointer-events: visible;
+}
 #js-live-edit-module-handle-active-settings {
     font-size: 12px;
     text-align: center;
-    margin-top: -30px;
-    margin-left: 128px;
+    margin-top: -36px;
+    margin-left: -2px;
     display: flex;
     width: 186px;
+    background: #0bc0c7;
+    color: #fff;
+    padding: 0px 11px;
+    line-height: 18px;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+    gap: 12px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    user-select: contain;
+    pointer-events: visible;
 }
 
 #js-live-edit-module-handle-active-settings button {
     cursor: pointer;
     color: #FFFFFF;
     padding: 6px;
-    width: 100%;
-    border-right: 1px solid rgba(231, 231, 231, 0.14);
     user-select: contain;
     pointer-events: visible;
-    background: #4085f2;
+    background: none;
 }
 #js-live-edit-module-handle-active-settings button:first-child {
     border-top-left-radius: 2px;
