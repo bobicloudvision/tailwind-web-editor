@@ -54,15 +54,15 @@ export class MouseOverElementHandle extends ElementHandle {
                 // }
                 //
                 if (canIAddContentEditable) {
-                  //  mouseOverElement.setAttribute('contenteditable', 'true');
+                    mouseOverElement.setAttribute('contenteditable', 'true');
                 }
 
-                app.handleMainElement.style.width = (mouseOverElement.clientWidth + 2.5) + 'px';
-                app.handleMainElement.style.height = (mouseOverElement.clientHeight + 2.5) + 'px';
+                app.handleMainElement.style.width = (mouseOverElement.offsetWidth + 20) + 'px';
+                app.handleMainElement.style.height = (mouseOverElement.offsetHeight + 20) + 'px';
 
                 let mouseOverElementBounding = mouseOverElement.getBoundingClientRect();
-                app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 2.5)) + 'px';
-                app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 2.5)) + 'px';
+                app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 10)) + 'px';
+                app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 10)) + 'px';
 
                 if (app.handleNameElement) {
                     app.handleNameElement.innerText = getElementFriendlyName(mouseOverElement.tagName);

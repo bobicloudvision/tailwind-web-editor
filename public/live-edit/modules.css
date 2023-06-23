@@ -39,7 +39,6 @@
     padding-left: 4px;
     padding-right: 4px;
     margin-top: -18px;
-    max-width: 125px;
     margin-left: 6px;
     user-select: none;
     pointer-events: none;
@@ -50,12 +49,15 @@
 
 
 #js-live-edit-module-handle-active {
-    border: 2px solid #0bc0c7;
     position: absolute;
     top: 20px;
     user-select: none;
     pointer-events: none;
-    border-radius: 3px;
+
+    /*design*/
+    border-radius: 9px;
+    box-shadow: 0px 0px 7px #ddd;
+    border: 2px solid #fff;
 }
 
 #js-live-edit-module-handle-active-name {
@@ -65,40 +67,51 @@
 #js-live-edit-module-handle-active-settings {
     font-size: 12px;
     text-align: center;
-    margin-top: -36px;
+    margin-top: -58px;
     margin-left: -2px;
     display: flex;
-    width: 186px;
-    background: #0bc0c7;
-    color: #fff;
-    padding: 0px 11px;
+    width: max-content;
+    font-weight: bolder;
+    padding: 7px 11px;
     line-height: 18px;
     justify-content: center;
     align-content: center;
-    align-items: baseline;
+    align-items: center;
     gap: 12px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    user-select: contain;
+    border-radius: 9px;
     pointer-events: visible;
+    background: #fff;
+    color: #717171;
+    box-shadow: 0px 0px 7px #ddd;
 }
 
 #js-live-edit-module-handle-active-settings button {
     cursor: pointer;
-    color: #FFFFFF;
+    color: #000;
     padding: 6px;
     user-select: contain;
     pointer-events: visible;
-    background: none;
+    background: #e8e8e8;
+    border-radius: 8px;
+    border:none;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+}
+#js-live-edit-module-handle-active-settings button svg {
+    fill:#000;
 }
 #js-live-edit-module-handle-active-settings button:first-child {
-    border-top-left-radius: 2px;
+
 }
 #js-live-edit-module-handle-active-settings button:last-child {
-    border:0px;
-    border-top-right-radius: 2px;
+
 }
 
 #js-live-edit-module-handle-active-settings button:hover {
-    background: #07b4bb;
+    background: #505050;
+    color:#FFFFFF;
 }
+#js-live-edit-module-handle-active-settings button:hover svg {
+    fill:#FFFFFF !important;
+}
+

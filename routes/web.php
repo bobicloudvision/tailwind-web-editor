@@ -19,7 +19,7 @@ Route::get('/', '\App\Http\Controllers\WebsiteController@homepage')->name('websi
 
 Route::get('/editor', function () {
     return Inertia::render('Editor/Page', [
-        'url' => route('website.page', 'home'),
+        'url' => asset('/')
     ]);
 });
 

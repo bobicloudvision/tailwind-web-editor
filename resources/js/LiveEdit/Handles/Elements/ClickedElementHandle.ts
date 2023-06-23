@@ -97,12 +97,12 @@ export class ClickedElementHandle extends ElementHandle {
                     this.enableSettingsDuplicate();
                 }
 
-                app.element.style.width = (clickedElement.clientWidth + 5) + 'px';
-                app.element.style.height = (clickedElement.clientHeight + 5) + 'px';
+                app.element.style.width = (clickedElement.offsetWidth + 20) + 'px';
+                app.element.style.height = (clickedElement.offsetHeight + 20) + 'px';
 
                 let mouseOverElementBounding = clickedElement.getBoundingClientRect();
-                app.element.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 2.5)) + 'px';
-                app.element.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 2.5)) + 'px';
+                app.element.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 10)) + 'px';
+                app.element.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 10)) + 'px';
 
                 app.name.innerText = getElementFriendlyName(clickedElement.tagName);
                 app.element.style.display = 'block';
