@@ -99,3 +99,14 @@ export function elementHasParentsWithAttribute(element, attributeKey) {
     } while (element);
     return false;
 }
+export function elementHasParentsWithTagName(element, tagName) {
+    do {
+        if (element.tagName &&
+            element.tagName.length > 0
+            && element.tagName.toUpperCase() == tagName.toUpperCase()) {
+            return element;
+        }
+        element = element.parentNode;
+    } while (element);
+    return false;
+}

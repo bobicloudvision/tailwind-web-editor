@@ -1,7 +1,11 @@
 import {elementHasParentsWithId, getElementFriendlyName} from "./helpers";
 import {IframeManager} from "./IframeManager";
+
+import {MouseOverSectionHandle} from "./Handles/Sections/MouseOverSectionHandle";
+
 import {ClickedElementHandle} from "./Handles/Elements/ClickedElementHandle";
 import {MouseOverElementHandle} from "./Handles/Elements/MouseOverElementHandle";
+
 import {MouseOverModuleHandle} from "./Handles/Modules/MouseOverModuleHandle";
 import {ClickedModuleHandle} from "./Handles/Modules/ClickedModuleHandle";
 
@@ -16,6 +20,7 @@ export class LiveEdit {
     public mouseOverModule;
 
     public handles = {
+        mouseOverSectionHandle: {},
         clickedElementHandle: {},
         clickedModuleHandle: {},
         mouseOverElementHandle: {},
@@ -32,6 +37,8 @@ export class LiveEdit {
 
         app.iframeManager = new IframeManager(this.iframeId);
         app.iframeManager.onLoad(function() {
+
+            app.handles.mouseOverSectionHandle = new MouseOverSectionHandle(app);
 
            app.handles.clickedElementHandle = new ClickedElementHandle(app);
            app.handles.mouseOverElementHandle = new MouseOverElementHandle(app);
@@ -106,6 +113,17 @@ export class LiveEdit {
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = '/live-edit/modules.css';
+        link.media = 'all';
+
+        head.appendChild(link);
+
+
+        // Section styles
+        var link = this.iframeManager.document.createElement('link');
+        link.id = 'js-tailwind-editor-iframe-stylesheet-sections';
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '/live-edit/sections.css';
         link.media = 'all';
 
         head.appendChild(link);
