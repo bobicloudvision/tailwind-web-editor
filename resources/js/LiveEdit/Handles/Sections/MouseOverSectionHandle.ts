@@ -27,8 +27,9 @@ export class MouseOverSectionHandle extends ElementHandle {
         const createElementHandle = this.iframeManager.document.createElement("div");
         createElementHandle.id = 'js-live-edit-section-handle';
         createElementHandle.innerHTML = '' +
-            '<button class="js-live-edit-section-handle-action-add" id="js-live-edit-section-handle-action-add-top">Add section</button>' +
-            '<button class="js-live-edit-section-handle-action-add" id="js-live-edit-section-handle-action-add-bottom">Add section</button>';
+            '<button type="button" class="js-live-edit-section-handle-action-add" id="js-live-edit-section-handle-action-add-top">Add section</button>' +
+            '<button type="button" id="js-live-edit-section-handle-action-add-block"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"/></svg> Add Block</button>' +
+            '<button type="button" class="js-live-edit-section-handle-action-add" id="js-live-edit-section-handle-action-add-bottom">Add section</button>';
 
         this.iframeManager.body.appendChild(createElementHandle);
 
