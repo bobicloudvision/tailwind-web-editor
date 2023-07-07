@@ -34,10 +34,14 @@ export class LiveEdit {
         app.iframeManager.onLoad(function() {
 
            app.handles.clickedElementHandle = new ClickedElementHandle(app);
-           app.handles.clickedModuleHandle = new ClickedModuleHandle(app);
-
            app.handles.mouseOverElementHandle = new MouseOverElementHandle(app);
+
+           app.handles.clickedModuleHandle = new ClickedModuleHandle(app);
            app.handles.mouseOverModuleHandle = new MouseOverModuleHandle(app);
+
+            app.iframeManager.body.addEventListener("keyup", (event) => {
+                app.handles.clickedElementHandle.calculateHandlePosition();
+            });
 
            app.appendStyles();
            app.findDuplicableElements();

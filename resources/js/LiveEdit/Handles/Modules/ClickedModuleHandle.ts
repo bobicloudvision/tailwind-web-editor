@@ -89,17 +89,17 @@ export class ClickedModuleHandle extends ElementHandle {
 
                 let getElementParentModuleElement = elementHasParentsWithAttribute(clickedElement, 'tailwind-x:module');
                 if (!getElementParentModuleElement) {
+                    this.liveEdit.clickedModule = null;
                     return;
                 }
 
                 this.liveEdit.clickedModule = getElementParentModuleElement;
                 this.liveEdit.handles.mouseOverModuleHandle.hide();
 
+                app.handleMainElement.style.width = (getElementParentModuleElement.offsetWidth + 20) + 'px';
+                app.handleMainElement.style.height = (getElementParentModuleElement.offsetHeight + 20) + 'px';
 
-                app.handleMainElement.style.width = (clickedElement.offsetWidth + 20) + 'px';
-                app.handleMainElement.style.height = (clickedElement.offsetHeight + 20) + 'px';
-
-                let clickedElementBounding = clickedElement.getBoundingClientRect();
+                let clickedElementBounding = getElementParentModuleElement.getBoundingClientRect();
                 app.handleMainElement.style.top = (clickedElementBounding.top + (app.iframeManager.window.scrollY - 10)) + 'px';
                 app.handleMainElement.style.left = (clickedElementBounding.left + (app.iframeManager.window.scrollX - 10)) + 'px';
                 app.handleMainElement.style.display = 'block';

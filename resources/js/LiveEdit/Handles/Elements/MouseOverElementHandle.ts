@@ -46,16 +46,7 @@ export class MouseOverElementHandle extends ElementHandle {
                     return;
                 }
 
-                let canIAddContentEditable = true;
-                // if (contentEditableElementsTags[i] == 'h1') {
-                //     if (editorTag[j].children[0].classList.contains('block')) {
-                //         canIAddContentEditable = false;
-                //     }
-                // }
-                //
-                if (canIAddContentEditable) {
-                    mouseOverElement.setAttribute('contenteditable', 'true');
-                }
+                mouseOverElement.classList.add('js-live-edit-element');
 
                 app.handleMainElement.style.width = (mouseOverElement.offsetWidth + 20) + 'px';
                 app.handleMainElement.style.height = (mouseOverElement.offsetHeight + 20) + 'px';

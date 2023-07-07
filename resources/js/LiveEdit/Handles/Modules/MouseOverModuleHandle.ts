@@ -53,8 +53,6 @@ export class MouseOverModuleHandle extends ElementHandle {
                     return;
                 }
 
-                console.log(this.liveEdit.clickedModule);
-
                 app.handleMainElement.style.width = (getElementParentModuleElement.offsetWidth + 20) + 'px';
                 app.handleMainElement.style.height = (getElementParentModuleElement.offsetHeight + 20) + 'px';
 

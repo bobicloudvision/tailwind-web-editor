@@ -39,7 +39,6 @@
             <Button><vue-feather type="settings" class="w-4"></vue-feather></Button>
         </div>
 
-<!--        <Tags class="mt-2" />-->
     </template>
 
     <template v-slot:sidebar-content>

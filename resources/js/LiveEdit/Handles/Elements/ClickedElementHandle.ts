@@ -78,10 +78,19 @@ export class ClickedElementHandle extends ElementHandle {
             if (clickedElement) {
 
                 if (!this.canIEditThisElement(clickedElement)) {
+                    this.liveEdit.clickedElement = null;
                     return;
                 }
 
-                this.enableSettingsDelete();
+                // Remove old content editable elements
+                let editableElementsInPage = app.iframeManager.body.getElementsByTagName('*');
+                for (var j = 0; j < editableElementsInPage.length; j++) {
+                    if (editableElementsInPage[j].hasAttribute('contenteditable')) {
+                        editableElementsInPage[j].removeAttribute('contenteditable');
+                    }
+                }
+
+               // this.enableSettingsDelete();
 
                 this.liveEdit.clickedElement = clickedElement;
                 this.liveEdit.handles.mouseOverElementHandle.hide();
@@ -97,6 +106,30 @@ export class ClickedElementHandle extends ElementHandle {
                     this.enableSettingsDuplicate();
                 }
 
+                let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChanged', {
+                    detail: {
+                        element: clickedElement,
+                        elementType: clickedElement.tagName,
+                        classList: clickedElement.classList,
+                    }
+                })
+                document.dispatchEvent(liveEditEvent);
+
+
+                // Add editable element
+                let canIAddContentEditable = true;
+                // if (contentEditableElementsTags[i] == 'h1') {
+                //     if (editorTag[j].children[0].classList.contains('block')) {
+                //         canIAddContentEditable = false;
+                //     }
+                // }
+
+                if (canIAddContentEditable) {
+                    clickedElement.setAttribute('contenteditable', 'true');
+                }
+
+                clickedElement.classList.add('js-live-edit-element');
+
                 app.element.style.width = (clickedElement.offsetWidth + 20) + 'px';
                 app.element.style.height = (clickedElement.offsetHeight + 20) + 'px';
 
@@ -109,6 +142,15 @@ export class ClickedElementHandle extends ElementHandle {
 
             }
         }, {passive: true});
+    }
+
+    public calculateHandlePosition() {
+        let app = this;
+        let clickedElement = app.liveEdit.clickedElement;
+        if (app.element) {
+            app.element.style.width = (clickedElement.offsetWidth + 20) + 'px';
+            app.element.style.height = (clickedElement.offsetHeight + 20) + 'px';
+        }
     }
 
 }
