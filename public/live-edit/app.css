@@ -2,9 +2,13 @@
 #js-live-edit-header-handle {
   position: absolute;
   background: rgba(0, 0, 0, 0.4705882353);
+}
+
+#js-live-edit-header-handle div {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 #js-live-edit-header-handle button {
@@ -76,6 +80,7 @@
 }
 
 #js-live-edit-element-handle-active {
+  display: none;
   /*core*/
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -334,6 +339,7 @@
 }
 
 #js-live-edit-module-handle-active {
+  display: none;
   position: absolute;
   top: 20px;
   -webkit-user-select: none;

@@ -4,9 +4,12 @@
 #js-live-edit-header-handle {
     position: absolute;
     background: #00000078;
+}
+#js-live-edit-header-handle div {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center; 
+    height: 100%;
 }
 #js-live-edit-header-handle button {
     padding: 10px 20px;

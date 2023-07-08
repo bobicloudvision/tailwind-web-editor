@@ -26,7 +26,7 @@ export class MouseOverHeaderHandle extends ElementHandle {
         const createElementHandle = this.iframeManager.document.createElement("div");
         createElementHandle.id = 'js-live-edit-header-handle';
         createElementHandle.innerHTML = '' +
-            '<button type="button">EDIT SITE HEADER</button>' +
+            '<div><button type="button">EDIT SITE HEADER</button></div>' +
             '';
 
         this.iframeManager.body.appendChild(createElementHandle);
