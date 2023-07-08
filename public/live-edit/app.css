@@ -1,27 +1,4 @@
 @import url(https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;700&display=swap);
-#js-live-edit-header-handle {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.4705882353);
-}
-
-#js-live-edit-header-handle div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-#js-live-edit-header-handle button {
-  padding: 10px 20px;
-  background: #ffffff;
-  font-weight: 700;
-  font-family: "Raleway", sans-serif;
-  font-size: 12px;
-  text-transform: uppercase;
-  border: 0px;
-  border-radius: 0px;
-}
-
 :root {
   --live-edit-border-radius: 8px;
   --live-edit-shadow: 0px 0px 7px #ddd;
@@ -409,4 +386,54 @@
 
 #js-live-edit-module-handle-active-settings button:hover svg {
   fill: #FFFFFF !important;
+}
+
+#js-live-edit-header-handle {
+  display: none;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4705882353);
+  transition-duration: 0.2s;
+}
+
+#js-live-edit-header-handle div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#js-live-edit-header-handle button {
+  padding: 10px 20px;
+  background: #ffffff;
+  font-weight: 700;
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  border: 0px;
+  border-radius: 0px;
+}
+
+#js-live-edit-footer-handle {
+  display: none;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4705882353);
+  transition-duration: 0.2s;
+}
+
+#js-live-edit-footer-handle div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#js-live-edit-footer-handle button {
+  padding: 10px 20px;
+  background: #ffffff;
+  font-weight: 700;
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  border: 0px;
+  border-radius: 0px;
 }

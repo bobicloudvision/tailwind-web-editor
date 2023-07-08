@@ -50,7 +50,7 @@
         <div id="js-live-edit-module-handle-name">SOCIAL-LINKS - Hover Handle</div>
     </div>
 
-    <div id="js-live-edit-module-handle-active" style="width: 884px; height: 66px; top: 420px; left: 78px;">
+    <div id="js-live-edit-module-handle-active" style="display:block;width: 884px; height: 66px; top: 420px; left: 78px;">
         <div id="js-live-edit-module-handle-active-settings">
             <div>SOCIAL-LINKS - Clicked Handle</div>
             <div>
