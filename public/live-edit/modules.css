@@ -28,7 +28,7 @@
     pointer-events: none;
 
     /*design*/
-    border-radius: 9px;
+    border-radius: var(--live-edit-border-radius);
     box-shadow: 0px 0px 7px #ddd;
     border: 2px solid #fff;
 }
@@ -48,7 +48,7 @@
     line-height: 18px;
     margin-top: -38px;
     margin-left: -2px;
-    border-radius: 9px;
+    border-radius: var(--live-edit-border-radius);
     font-size: 12px;
     text-align: center;
     text-transform: uppercase;
@@ -68,7 +68,7 @@
     pointer-events: none;
 
     /*design*/
-    border-radius: 9px;
+    border-radius: var(--live-edit-border-radius);
     box-shadow: 0px 0px 7px #ddd;
     border: 2px solid #fff;
 }
@@ -88,7 +88,7 @@
     align-content: center;
     align-items: center;
     gap: 12px;
-    border-radius: 9px;
+    border-radius: var(--live-edit-border-radius);
     pointer-events: visible;
 
     /*design*/
@@ -109,7 +109,7 @@
     user-select: contain;
     pointer-events: visible;
     background: #e8e8e8;
-    border-radius: 8px;
+    border-radius: var(--live-edit-border-radius);
     border:none;
     -webkit-transition-duration: 0.2s; /* Safari */
     transition-duration: 0.2s;
