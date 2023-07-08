@@ -2,13 +2,13 @@
 
 @section('content')
 
-    <!-- Header-->
-    <header class="py-5">
+    <!-- Home Section-->
+    <section class="py-5">
         <div class="container px-5 pb-5">
             <div class="row gx-5 align-items-center">
                 <div class="col-xxl-5">
                     <!-- Header text content-->
-                    <div class="text-center text-xxl-start">
+                    <div class="text-center text-xxl-start" tailwind-x:editable="true">
                         <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Design &middot; Development &middot; Marketing</div></div>
                         <div class="fs-3 fw-light text-muted">I can help your business to</div>
                         <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Get online and grow fast</span></h1>
@@ -142,7 +142,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- About Section-->
     <section class="bg-light py-5">
@@ -164,5 +164,7 @@
             </div>
         </div>
     </section>
+
+
 
 @endsection
