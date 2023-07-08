@@ -130,12 +130,12 @@ export class ClickedElementHandle extends ElementHandle {
 
                 clickedElement.classList.add('js-live-edit-element');
 
-                app.element.style.width = (clickedElement.offsetWidth + 20) + 'px';
-                app.element.style.height = (clickedElement.offsetHeight + 20) + 'px';
+                app.element.style.width = (clickedElement.offsetWidth + 10) + 'px';
+                app.element.style.height = (clickedElement.offsetHeight + 10) + 'px';
 
                 let mouseOverElementBounding = clickedElement.getBoundingClientRect();
-                app.element.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 10)) + 'px';
-                app.element.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 10)) + 'px';
+                app.element.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 5)) + 'px';
+                app.element.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 5)) + 'px';
 
                 app.name.innerText = getElementFriendlyName(clickedElement.tagName);
                 app.element.style.display = 'block';

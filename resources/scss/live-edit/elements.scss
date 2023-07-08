@@ -28,13 +28,13 @@
     /*design*/
     display: flex;
     width: max-content;
-    padding: 1px 7px;
     justify-content: center;
     align-content: center;
     align-items: center;
     gap: 12px;
     line-height: 18px;
     margin-top: -25px;
+    padding: 1px 7px;
     margin-left: -2px;
     border-radius: var(--live-edit-border-radius);
     font-size: 12px;
@@ -58,9 +58,9 @@
 
     /*design*/
     border-radius: var(--live-edit-border-radius);
-    box-shadow: 0px 0px 7px #ddd;
-    border: 2px solid #fff;
+    border: 2px solid #027aff;
     transition: 0.2s ease height;
+    box-shadow: 0px 0px 10px #8a8a8a70;
 }
 #js-live-edit-element-handle-active-name {
 
@@ -71,23 +71,22 @@
     /*design*/
     display: flex;
     width: max-content;
-    padding: 7px 11px;
     justify-content: center;
     align-content: center;
     align-items: center;
     gap: 12px;
     line-height: 18px;
-    margin-top: -38px;
+    margin-top: -25px;
+    padding: 1px 7px;
     margin-left: -2px;
     border-radius: var(--live-edit-border-radius);
     font-size: 12px;
     text-align: center;
     font-family: var(--live-edit-font-family);
     font-weight: 700;
-    background: #fff;
-    color: #717171;
-    box-shadow: 0px 0px 7px #ddd;
     text-transform: uppercase;
+    background: #027aff;
+    color: #fff;
 }
 
 #js-live-edit-element-handle-active-settings {

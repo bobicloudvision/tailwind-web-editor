@@ -1,24 +1,6 @@
 <template>
-
-<Layout>
-
-    <template v-slot:main-content>
-      <div class="p-5 mt-5 bg-gray-100 w-full h-full flex justify-center items-center">
-          <iframe id="js-tailwind-editor-iframe"
-
-                    :src="url"
-                  :style="[
-               deviceName == 'Desktop' ? 'width:100%' : '',
-                deviceName == 'Tablet' ? 'width:600px' : '',
-                deviceName == 'Phone' ? 'width:450px' : ''
-            ]"
-
-                  class="rounded-xl"></iframe>
-      </div>
-    </template>
-
-    <template v-slot:topbar-content>
-
+<!--
+ <div>
         <div class="flex-1 flex items-center space-x-2">
             <Button><ViewGridIcon class="w-4" /> Library</Button>
             <Button><PuzzleIcon class="w-4" /> Extensions</Button>
@@ -39,19 +21,31 @@
             <Button><vue-feather type="settings" class="w-4"></vue-feather></Button>
         </div>
 
-    </template>
+ </div>-->
 
-    <template v-slot:sidebar-content>
-        <TextAlign class="mt-2" />
-        <TextColor class="mt-2" />
-        <BackgroundColor class="mt-2" />
-    </template>
 
-    <template v-slot:bottom-bar-content>
-        <Tags class="mt-2" />
-    </template>
+<!--    <div>-->
+<!--        <TextAlign class="mt-2" />-->
+<!--        <TextColor class="mt-2" />-->
+<!--        <BackgroundColor class="mt-2" />-->
+<!--    </div>-->
 
-</Layout>
+
+    <div class="w-full h-full flex justify-center items-center">
+        <iframe id="js-tailwind-editor-iframe"
+
+                :src="url"
+                :style="[
+               deviceName == 'Desktop' ? 'width:100%' : '',
+                deviceName == 'Tablet' ? 'width:600px' : '',
+                deviceName == 'Phone' ? 'width:450px' : ''
+            ]"></iframe>
+    </div>
+
+   <div>
+       <Tags class="mt-2" />
+   </div>
+
 
 </template>
 

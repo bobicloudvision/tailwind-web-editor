@@ -93,41 +93,14 @@ export class LiveEdit {
 
     private appendStyles()
     {
-
         var head = this.iframeManager.document.getElementsByTagName('head')[0];
 
-
-        // Element styles
         var link = this.iframeManager.document.createElement('link');
-        link.id = 'js-tailwind-editor-iframe-stylesheet-elements';
+        link.id = 'js-tailwind-editor-iframe-styles';
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = '/live-edit/elements.css';
+        link.href = '/live-edit/app.css';
         link.media = 'all';
-
         head.appendChild(link);
-
-        // Module styles
-        var link = this.iframeManager.document.createElement('link');
-        link.id = 'js-tailwind-editor-iframe-stylesheet-modules';
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '/live-edit/modules.css';
-        link.media = 'all';
-
-        head.appendChild(link);
-
-
-        // Section styles
-        var link = this.iframeManager.document.createElement('link');
-        link.id = 'js-tailwind-editor-iframe-stylesheet-sections';
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '/live-edit/sections.css';
-        link.media = 'all';
-
-        head.appendChild(link);
-
-
     }
 }

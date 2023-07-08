@@ -1,6 +1,6 @@
 <template>
 
-    <link rel="stylesheet" type="text/css" href="/live-edit/live-edit.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/live-edit/app.css" media="all">
 
     <div id="js-live-edit-section-handle"
          style="display:block;width: 1040px; height: 700px; top: 20px; left: 20px;">

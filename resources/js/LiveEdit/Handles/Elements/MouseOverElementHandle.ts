@@ -48,12 +48,12 @@ export class MouseOverElementHandle extends ElementHandle {
 
                 mouseOverElement.classList.add('js-live-edit-element');
 
-                app.handleMainElement.style.width = (mouseOverElement.offsetWidth + 20) + 'px';
-                app.handleMainElement.style.height = (mouseOverElement.offsetHeight + 20) + 'px';
+                app.handleMainElement.style.width = (mouseOverElement.offsetWidth + 10) + 'px';
+                app.handleMainElement.style.height = (mouseOverElement.offsetHeight + 10) + 'px';
 
                 let mouseOverElementBounding = mouseOverElement.getBoundingClientRect();
-                app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 10)) + 'px';
-                app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 10)) + 'px';
+                app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY - 5)) + 'px';
+                app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 5)) + 'px';
 
                 if (app.handleNameElement) {
                     app.handleNameElement.innerText = getElementFriendlyName(mouseOverElement.tagName);
