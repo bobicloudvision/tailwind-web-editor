@@ -51,7 +51,9 @@
     border-radius: 9px;
     font-size: 12px;
     text-align: center;
-    font-weight: bolder;
+    text-transform: uppercase;
+    font-family: var(--live-edit-font-family);
+    font-weight: 700;
     background: #fff;
     color: #717171;
     box-shadow: 0px 0px 7px #ddd;
@@ -92,7 +94,9 @@
     /*design*/
     font-size: 12px;
     text-align: center;
-    font-weight: bolder;
+    text-transform: uppercase;
+    font-family: var(--live-edit-font-family);
+    font-weight: 700;
     background: #fff;
     color: #717171;
     box-shadow: 0px 0px 7px #ddd;

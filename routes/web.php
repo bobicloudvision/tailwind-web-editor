@@ -23,6 +23,12 @@ Route::get('/editor', function () {
     ]);
 });
 
+Route::get('/editor-ui', function () {
+    return Inertia::render('Editor/UiPreview', [
+        'url' => asset('/')
+    ]);
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
