@@ -1,6 +1,7 @@
 import {elementHasParentsWithId, getElementFriendlyName} from "./helpers";
 import {IframeManager} from "./IframeManager";
 
+import {MouseOverHeaderHandle} from "./Handles/Header/MouseOverHeaderHandle";
 import {MouseOverSectionHandle} from "./Handles/Sections/MouseOverSectionHandle";
 
 import {ClickedElementHandle} from "./Handles/Elements/ClickedElementHandle";
@@ -20,6 +21,7 @@ export class LiveEdit {
     public mouseOverModule;
 
     public handles = {
+        mouseOverHeaderHandle: {},
         mouseOverSectionHandle: {},
         clickedElementHandle: {},
         clickedModuleHandle: {},
@@ -37,6 +39,8 @@ export class LiveEdit {
 
         app.iframeManager = new IframeManager(this.iframeId);
         app.iframeManager.onLoad(function() {
+
+            app.handles.mouseOverHeaderHandle = new MouseOverHeaderHandle(app);
 
             app.handles.mouseOverSectionHandle = new MouseOverSectionHandle(app);
 

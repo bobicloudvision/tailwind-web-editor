@@ -22,14 +22,16 @@
 
 
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div class="container px-5">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container px-5">
 
-            <div tailwind-x:module="logo" skin="header" name="header" />
-            <div tailwind-x:module="menu" skin="header" name="header" />
+                <div tailwind-x:module="logo" skin="header" name="header" />
+                <div tailwind-x:module="menu" skin="header" name="header" />
 
-        </div>
-    </nav>
+            </div>
+        </nav>
+    </header>
 
     @yield('content')
 
