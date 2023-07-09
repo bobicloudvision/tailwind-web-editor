@@ -260,11 +260,11 @@
         <div class="row align-items-center">
             <div class="col-12 col-lg-6">
                 <!-- Section Heading -->
-                <div class="section-heading wow fadeInUp" data-wow-delay="100ms">
+                <div class="section-heading wow fadeInUp" data-wow-delay="100ms" tailwind-x:editable="true">
                     <h6>About Us</h6>
                     <h2>Welcome to <br>Roberto Hotel Luxury</h2>
                 </div>
-                <div class="about-us-content mb-100">
+                <div class="about-us-content mb-100" tailwind-x:editable="true">
                     <h5 class="wow fadeInUp" data-wow-delay="300ms">With over 340 hotels worldwide, NH Hotel Group offers a wide variety of hotels catering for a perfect stay no matter where your destination.</h5>
                     <p class="wow fadeInUp" data-wow-delay="400ms">Manager: <span>Michen Taylor</span></p>
                     <img src="{{asset('themes/hotel_roberto')}}/img/core-img/signature.png" alt="" class="wow fadeInUp" data-wow-delay="500ms">
@@ -296,11 +296,11 @@
 <!-- About Us Area End -->
 
 <!-- Service Area Start -->
-<div class="roberto-service-area">
+<section class="roberto-service-area">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="service-content d-flex align-items-center justify-content-between">
+                <div class="service-content d-flex align-items-center justify-content-between" tailwind-x:editable="true">
                     <!-- Single Service Area -->
                     <div class="single-service--area mb-100 wow fadeInUp" data-wow-delay="100ms">
                         <img src="{{asset('themes/hotel_roberto')}}/img/core-img/icon-1.png" alt="">
@@ -334,7 +334,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 <!-- Service Area End -->
 
 <!-- Our Room Area Start -->
@@ -648,7 +648,7 @@
         <div class="cta-content bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/1.jpg);">
             <div class="row align-items-center">
                 <div class="col-12 col-md-7">
-                    <div class="cta-text mb-50">
+                    <div class="cta-text mb-50" tailwind-x:editable="true">
                         <h2>Contact us now!</h2>
                         <h6>Contact (+12) 345-678-9999 to book directly or for advice</h6>
                     </div>
@@ -663,7 +663,7 @@
 <!-- Call To Action Area End -->
 
 <!-- Partner Area Start -->
-<div class="partner-area">
+<section class="partner-area">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -682,7 +682,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 <!-- Partner Area End -->
 
 <!-- Footer Area Start -->
@@ -693,7 +693,7 @@
             <div class="row align-items-baseline justify-content-between">
                 <!-- Single Footer Widget Area -->
                 <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-80">
+                    <div class="single-footer-widget mb-80" tailwind-x:editable="true">
                         <!-- Footer Logo -->
                         <a href="#" class="footer-logo"><img src="img/core-img/logo2.png" alt=""></a>
 
@@ -727,7 +727,7 @@
                 <div class="col-12 col-sm-4 col-lg-2">
                     <div class="single-footer-widget mb-80">
                         <!-- Widget Title -->
-                        <h5 class="widget-title">Links</h5>
+                        <h5 class="widget-title" tailwind-x:editable="true">Links</h5>
 
                         <!-- Footer Nav -->
                         <ul class="footer-nav">
@@ -743,8 +743,10 @@
                 <div class="col-12 col-sm-8 col-lg-4">
                     <div class="single-footer-widget mb-80">
                         <!-- Widget Title -->
+                        <div tailwind-x:editable="true">
                         <h5 class="widget-title">Subscribe Newsletter</h5>
                         <span>Subscribe our newsletter gor get notification about new updates.</span>
+                        </div>
 
                         <!-- Newsletter Form -->
                         <form action="index.html" class="nl-form">
