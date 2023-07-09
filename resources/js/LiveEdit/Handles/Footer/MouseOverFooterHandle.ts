@@ -9,7 +9,8 @@ import {ElementHandle} from "./../ElementHandle";
 
 export class MouseOverFooterHandle extends ElementHandle {
 
-    public handleActionAddElement;
+    public editFooter = false;
+    public handleActionEditElement;
     public handleMainElement;
 
     constructor(public liveEdit) {
@@ -26,11 +27,19 @@ export class MouseOverFooterHandle extends ElementHandle {
         const createElementHandle = this.iframeManager.document.createElement("div");
         createElementHandle.id = 'js-live-edit-footer-handle';
         createElementHandle.innerHTML = '' +
-            '<div><button type="button">EDIT SITE FOOTER</button></div>' +
+            '<div><button id="js-live-edit-footer-handle-action-edit" type="button">EDIT SITE FOOTER</button></div>' +
             '';
 
         this.iframeManager.body.appendChild(createElementHandle);
         this.handleMainElement = this.iframeManager.document.getElementById('js-live-edit-footer-handle');
+        this.handleActionEditElement = this.iframeManager.document.getElementById('js-live-edit-footer-handle-action-edit');
+
+        let app = this;
+        app.handleMainElement.addEventListener('click', function (e) {
+            e.stopPropagation();
+            app.editFooter = true;
+            app.handleMainElement.style.display = 'none';
+        });
     }
 
     public addListener()
@@ -43,18 +52,26 @@ export class MouseOverFooterHandle extends ElementHandle {
 
                 let getElementParentSectionElement = elementHasParentsWithTagName(mouseOverElement, 'footer');
                 if (!getElementParentSectionElement) {
+                    if (this.liveEdit.clickedModule) {
+                        return;
+                    }
+                    if (this.liveEdit.clickedElement) {
+                        return;
+                    }
+                    app.editFooter = false;
                     return;
                 }
 
-                app.handleMainElement.style.width = (getElementParentSectionElement.offsetWidth) + 'px';
-                app.handleMainElement.style.height = (getElementParentSectionElement.offsetHeight) + 'px';
+                if (!app.editFooter) {
+                    app.handleMainElement.style.width = (getElementParentSectionElement.offsetWidth) + 'px';
+                    app.handleMainElement.style.height = (getElementParentSectionElement.offsetHeight) + 'px';
 
-                let mouseOverElementBounding = getElementParentSectionElement.getBoundingClientRect();
-                app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY)) + 'px';
-                app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX)) + 'px';
+                    let mouseOverElementBounding = getElementParentSectionElement.getBoundingClientRect();
+                    app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY)) + 'px';
+                    app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX)) + 'px';
 
-                app.handleMainElement.style.display = 'block';
-
+                    app.handleMainElement.style.display = 'block';
+                }
 
             }
         }, {passive: true});

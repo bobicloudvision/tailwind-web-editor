@@ -147,7 +147,9 @@ export class ClickedElementHandle extends ElementHandle {
     public calculateHandlePosition() {
         let app = this;
         let clickedElement = app.liveEdit.clickedElement;
-        if (app.element) {
+
+        if (app.element && clickedElement) {
+
             app.element.style.width = (clickedElement.offsetWidth + 20) + 'px';
             app.element.style.height = (clickedElement.offsetHeight + 20) + 'px';
 

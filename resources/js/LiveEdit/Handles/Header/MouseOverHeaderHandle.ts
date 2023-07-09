@@ -9,7 +9,8 @@ import {ElementHandle} from "./../ElementHandle";
 
 export class MouseOverHeaderHandle extends ElementHandle {
 
-    public handleActionAddElement;
+    public editHeader = false;
+    public handleActionEditElement;
     public handleMainElement;
 
     constructor(public liveEdit) {
@@ -26,11 +27,19 @@ export class MouseOverHeaderHandle extends ElementHandle {
         const createElementHandle = this.iframeManager.document.createElement("div");
         createElementHandle.id = 'js-live-edit-header-handle';
         createElementHandle.innerHTML = '' +
-            '<div><button type="button">EDIT SITE HEADER</button></div>' +
+            '<div><button id="js-live-edit-header-handle-action-edit" type="button">EDIT SITE HEADER</button></div>' +
             '';
 
         this.iframeManager.body.appendChild(createElementHandle);
         this.handleMainElement = this.iframeManager.document.getElementById('js-live-edit-header-handle');
+        this.handleActionEditElement = this.iframeManager.document.getElementById('js-live-edit-header-handle-action-edit');
+
+        let app = this;
+        app.handleMainElement.addEventListener('click', function (e) {
+            e.stopPropagation();
+            app.editHeader = true;
+            app.handleMainElement.style.display = 'none';
+        });
     }
 
     public addListener()
@@ -43,18 +52,20 @@ export class MouseOverHeaderHandle extends ElementHandle {
 
                 let getElementParentSectionElement = elementHasParentsWithTagName(mouseOverElement, 'header');
                 if (!getElementParentSectionElement) {
+                    app.editHeader = false;
                     return;
                 }
 
-                app.handleMainElement.style.width = (getElementParentSectionElement.offsetWidth) + 'px';
-                app.handleMainElement.style.height = (getElementParentSectionElement.offsetHeight) + 'px';
+                if (!app.editHeader) {
+                    app.handleMainElement.style.width = (getElementParentSectionElement.offsetWidth) + 'px';
+                    app.handleMainElement.style.height = (getElementParentSectionElement.offsetHeight) + 'px';
 
-                let mouseOverElementBounding = getElementParentSectionElement.getBoundingClientRect();
-                app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY)) + 'px';
-                app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX)) + 'px';
+                    let mouseOverElementBounding = getElementParentSectionElement.getBoundingClientRect();
+                    app.handleMainElement.style.top = (mouseOverElementBounding.top + (app.iframeManager.window.scrollY)) + 'px';
+                    app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX)) + 'px';
 
-                app.handleMainElement.style.display = 'block';
-
+                    app.handleMainElement.style.display = 'block';
+                }
 
             }
         }, {passive: true});
