@@ -1,0 +1,2 @@
+  "dev:hotel_roberto": "vite --config themes/hotel_roberto/vite.config.js",
+    "build:hotel_roberto": "vite build --config themes/hotel_roberto/vite.config.js"

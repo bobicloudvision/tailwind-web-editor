@@ -2,7 +2,9 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "dev:hotel_roberto": "vite --config themes/hotel_roberto/vite.config.js",
+        "build:hotel_roberto": "vite build --config themes/hotel_roberto/vite.config.js"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
@@ -33,6 +35,7 @@
         "@headlessui/vue": "^1.7.11",
         "@heroicons/vue": "^1.0.6",
         "feather-icons": "^4.29.0",
+        "vite-plugin-static-copy": "^0.16.0",
         "vue-feather": "^2.0.0"
     }
 }

@@ -1,0 +1,59 @@
+{
+  "themes/hotel_roberto/css/fonts/ElegantIcons.eot": {
+    "file": "assets/ElegantIcons-912b4fcc.eot",
+    "src": "themes/hotel_roberto/css/fonts/ElegantIcons.eot"
+  },
+  "themes/hotel_roberto/css/fonts/ElegantIcons.svg": {
+    "file": "assets/ElegantIcons-91f068a0.svg",
+    "src": "themes/hotel_roberto/css/fonts/ElegantIcons.svg"
+  },
+  "themes/hotel_roberto/css/fonts/ElegantIcons.ttf": {
+    "file": "assets/ElegantIcons-7be552fc.ttf",
+    "src": "themes/hotel_roberto/css/fonts/ElegantIcons.ttf"
+  },
+  "themes/hotel_roberto/css/fonts/ElegantIcons.woff": {
+    "file": "assets/ElegantIcons-be1825e5.woff",
+    "src": "themes/hotel_roberto/css/fonts/ElegantIcons.woff"
+  },
+  "themes/hotel_roberto/fonts/classy-fonts.eot": {
+    "file": "assets/classy-fonts-cbf90273.eot",
+    "src": "themes/hotel_roberto/fonts/classy-fonts.eot"
+  },
+  "themes/hotel_roberto/fonts/classy-fonts.svg": {
+    "file": "assets/classy-fonts-cfdc481f.svg",
+    "src": "themes/hotel_roberto/fonts/classy-fonts.svg"
+  },
+  "themes/hotel_roberto/fonts/classy-fonts.ttf": {
+    "file": "assets/classy-fonts-16baf0ad.ttf",
+    "src": "themes/hotel_roberto/fonts/classy-fonts.ttf"
+  },
+  "themes/hotel_roberto/fonts/classy-fonts.woff": {
+    "file": "assets/classy-fonts-1ea0c556.woff",
+    "src": "themes/hotel_roberto/fonts/classy-fonts.woff"
+  },
+  "themes/hotel_roberto/fonts/fontawesome-webfont.eot": {
+    "file": "assets/fontawesome-webfont-7bfcab6d.eot",
+    "src": "themes/hotel_roberto/fonts/fontawesome-webfont.eot"
+  },
+  "themes/hotel_roberto/fonts/fontawesome-webfont.svg": {
+    "file": "assets/fontawesome-webfont-ad615792.svg",
+    "src": "themes/hotel_roberto/fonts/fontawesome-webfont.svg"
+  },
+  "themes/hotel_roberto/fonts/fontawesome-webfont.ttf": {
+    "file": "assets/fontawesome-webfont-aa58f33f.ttf",
+    "src": "themes/hotel_roberto/fonts/fontawesome-webfont.ttf"
+  },
+  "themes/hotel_roberto/fonts/fontawesome-webfont.woff": {
+    "file": "assets/fontawesome-webfont-ba0c59de.woff",
+    "src": "themes/hotel_roberto/fonts/fontawesome-webfont.woff"
+  },
+  "themes/hotel_roberto/fonts/fontawesome-webfont.woff2": {
+    "file": "assets/fontawesome-webfont-2adefcbc.woff2",
+    "src": "themes/hotel_roberto/fonts/fontawesome-webfont.woff2"
+  },
+  "themes/hotel_roberto/scss/style.scss": {
+    "file": "assets/style-68b7bf4e.css",
+    "isEntry": true,
+    "src": "themes/hotel_roberto/scss/style.scss"
+  }
+}
