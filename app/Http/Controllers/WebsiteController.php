@@ -9,9 +9,11 @@ class WebsiteController
 
     public function homepage()
     {
-        Theme::set('hotel_roberto', 'bootstrap_default');
-
-        return view('home');
+        return view('wow');
+//
+//        Theme::set('hotel_roberto', 'bootstrap_default');
+//
+//        return view('home');
     }
 
     public function page($slug)
@@ -19,6 +21,11 @@ class WebsiteController
         Theme::set('hotel_roberto', 'bootstrap_default');
 
         return view('page');
+    }
+
+    public function wow()
+    {
+        return view('wow');
     }
 
 }

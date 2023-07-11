@@ -106,7 +106,7 @@ export class ClickedElementHandle extends ElementHandle {
                     this.enableSettingsDuplicate();
                 }
 
-                let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChanged', {
+                let liveEditEvent = new CustomEvent('JsLiveEdit::ElementChange', {
                     detail: {
                         element: clickedElement,
                         elementType: clickedElement.tagName,

@@ -73,8 +73,7 @@
                 <!-- Classy Menu -->
                 <nav class="classy-navbar justify-content-between" id="robertoNav">
 
-                    <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="{{asset('themes/hotel_roberto')}}/img/core-img/logo.png" alt=""></a>
+                    <div tailwind-x:module="logo" skin="header" name="header" />
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -89,32 +88,8 @@
                         </div>
                         <!-- Nav Start -->
                         <div class="classynav">
-                            <ul id="nav">
-                                <li class="active"><a href="./index.html">Home</a></li>
-                                <li><a href="./room.html">Rooms</a></li>
-                                <li><a href="./about.html">About Us</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./index.html">- Home</a></li>
-                                        <li><a href="./room.html">- Rooms</a></li>
-                                        <li><a href="./single-room.html">- Single Rooms</a></li>
-                                        <li><a href="./about.html">- About Us</a></li>
-                                        <li><a href="./blog.html">- Blog</a></li>
-                                        <li><a href="./single-blog.html">- Single Blog</a></li>
-                                        <li><a href="./contact.html">- Contact</a></li>
-                                        <li><a href="#">- Dropdown</a>
-                                            <ul class="dropdown">
-                                                <li><a href="#">- Dropdown Item</a></li>
-                                                <li><a href="#">- Dropdown Item</a></li>
-                                                <li><a href="#">- Dropdown Item</a></li>
-                                                <li><a href="#">- Dropdown Item</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html">News</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
-                            </ul>
+
+                            <div tailwind-x:module="menu" skin="header" name="header" />
 
                             <!-- Search -->
                             <div class="search-btn ml-4">

@@ -1,4 +1,96 @@
 @import url(https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;700&display=swap);
+#js-live-edit-element-handle-flex-grid-resizer {
+  /*core*/
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  position: absolute;
+  top: 20px;
+  z-index: 1000000000;
+  display: none;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-north {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  top: -30px;
+  position: absolute;
+  right: 50%;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-north-west {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  top: -30px;
+  position: absolute;
+  left: -80px;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-south {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  bottom: -30px;
+  position: absolute;
+  right: 50%;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-south-west {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  bottom: -30px;
+  position: absolute;
+  left: -84px;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-east {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  position: absolute;
+  right: -50px;
+  top: 50%;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-north-east {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  top: -30px;
+  position: absolute;
+  right: -80px;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-south-east {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  bottom: -30px;
+  position: absolute;
+  right: -84px;
+}
+
+#js-live-edit-element-handle-flex-grid-resizer-west {
+  -webkit-user-select: contain;
+     -moz-user-select: contain;
+          user-select: contain;
+  pointer-events: all;
+  position: absolute;
+  left: -50px;
+  top: 50%;
+}
+
 :root {
   --live-edit-border-radius: 8px;
   --live-edit-shadow: 0px 0px 7px #ddd;

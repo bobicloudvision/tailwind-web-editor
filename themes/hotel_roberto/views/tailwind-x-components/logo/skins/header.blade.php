@@ -1,3 +1,4 @@
-<a class="navbar-brand" href="/">
-    <span class="fw-bolder text-primary">ArtLab.BG</span>
+<!-- Logo -->
+<a class="nav-brand" href="index.html">
+    <img src="{{asset('themes/hotel_roberto')}}/img/core-img/logo.png" alt="">
 </a>
