@@ -14,21 +14,14 @@ $gridColumns = 18;
 @endphp
 
 <style>
-    body {
-        font-family: "Raleway", sans-serif;
-    }
-    h1 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 0.75rem;
-    }
-    button {
-        border-radius: 3px;
-        border: 1px solid #e2e8f0;
-        padding:6px 10px;
-    }
     .js-tailwind-x-grid {
+
+        margin-top:50px;
+        margin-left:100px;
+        background: #f5f5f5;
+
+        width: 900px;
+        height: 600px;
 
         display: grid;
         gap: 5px;
@@ -55,7 +48,6 @@ $gridColumns = 18;
 
 <script>
 
-    import Button from "../js/Pages/Editor/Button";
     window.onload = function() {
         let grids = document.getElementsByClassName('js-tailwind-x-grid');
         for (let i = 0; i < grids.length; i++) {
@@ -85,9 +77,6 @@ $gridColumns = 18;
 
         }
     };
-    export default {
-        components: {Button}
-    }
 </script>
 
 <div>

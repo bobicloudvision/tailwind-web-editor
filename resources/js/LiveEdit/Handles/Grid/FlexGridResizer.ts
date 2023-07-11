@@ -191,7 +191,7 @@ export class FlexGridResizer extends ElementHandle {
        if (instance.resizeEastNow) {
            let boundingClientRect = this.resizeEast.getBoundingClientRect();
            let diffBetween = Math.abs((boundingClientRect.x - e.clientX) / e.clientX * 100);
-           if (diffBetween > 6) {
+           if (diffBetween > 10) {
                if (boundingClientRect.x > e.clientX) {
                    console.log('drag left' + boundingClientRect.x);
                    this.liveEdit.clickedElement.style['grid-column-end'] = (parseInt(this.liveEdit.clickedElement.style['grid-column-end']) - 1);
@@ -201,6 +201,20 @@ export class FlexGridResizer extends ElementHandle {
                }
            }
        }
+
+        if (instance.resizeWestNow) {
+            let boundingClientRect = this.resizeWest.getBoundingClientRect();
+            let diffBetween = Math.abs((boundingClientRect.x - e.clientX) / e.clientX * 100);
+            if (diffBetween > 10) {
+                if (boundingClientRect.x > e.clientX) {
+                    console.log('drag left' + boundingClientRect.x);
+                    this.liveEdit.clickedElement.style['grid-column-start'] = (parseInt(this.liveEdit.clickedElement.style['grid-column-start']) - 1);
+                } else {
+                    console.log('drag right' + boundingClientRect.x);
+                    this.liveEdit.clickedElement.style['grid-column-start'] = (parseInt(this.liveEdit.clickedElement.style['grid-column-start']) + 1);
+                }
+            }
+        }
 
         if (instance.resizeSouthNow) {
             let boundingClientRectSouth = this.resizeSouth.getBoundingClientRect();
