@@ -97,6 +97,14 @@ export class FlexGridResizer extends ElementHandle {
             clickEvent.preventDefault();
             clickEvent.stopPropagation();
         });
+        this.resizeNorth.addEventListener('click', (clickEvent) => {
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+        });
+        this.resizeWest.addEventListener('click', (clickEvent) => {
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+        });
 
         this.resizeEast.addEventListener('mousedown', (clickEvent) => {
 
@@ -122,6 +130,30 @@ export class FlexGridResizer extends ElementHandle {
             instance.initDrag(clickEvent);
         });
 
+        this.resizeNorth.addEventListener('mousedown', (clickEvent) => {
+
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+            if (!this.liveEdit.clickedElement) {
+                return false;
+            }
+            instance.resetAllResizers();
+            instance.resizeNorthNow = true;
+            instance.initDrag(clickEvent);
+        });
+
+        this.resizeWest.addEventListener('mousedown', (clickEvent) => {
+
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+            if (!this.liveEdit.clickedElement) {
+                return false;
+            }
+            instance.resetAllResizers();
+            instance.resizeWestNow = true;
+            instance.initDrag(clickEvent);
+        });
+
     }
 
     public resetAllResizers() {
@@ -141,6 +173,15 @@ export class FlexGridResizer extends ElementHandle {
         this.iframeManager.document.addEventListener('mouseup', this.stopDrag, false);
 
         console.log('initDrag');
+
+        let gridRow = this.iframeManager.document.getElementsByClassName('js-tailwind-x-grid-row');
+        for (let i = 0; i < gridRow.length; i++) {
+            gridRow[i].style['opacity'] = 1;
+        }
+        let gridColumn = this.iframeManager.document.getElementsByClassName('js-tailwind-x-grid-column');
+        for (let i = 0; i < gridColumn.length; i++) {
+            gridColumn[i].style['opacity'] = 1;
+        }
     }
 
     doDrag = (e) => {
@@ -185,6 +226,32 @@ export class FlexGridResizer extends ElementHandle {
             }
         }
 
+        if (instance.resizeNorthNow) {
+            let boundingClientRectNorth = this.resizeNorth.getBoundingClientRect();
+            let diffBetweenNorth = Math.abs((boundingClientRectNorth.y - e.clientY) / e.clientY * 100);
+            if (diffBetweenNorth > 23) {
+                console.log('diffBetweenNorth' + diffBetweenNorth);
+
+                if (boundingClientRectNorth.y > e.clientY) {
+                    console.log('drag top' + boundingClientRectNorth.y);
+                    let newGridRowEndNegative = (parseInt(this.liveEdit.clickedElement.style['grid-row-start']) - 1);
+                    if (newGridRowEndNegative >= 18) {
+                        return;
+                    }
+                    console.log(newGridRowEndNegative);
+                    this.liveEdit.clickedElement.style['grid-row-start'] = newGridRowEndNegative;
+                } else {
+                    console.log('drag bottom' + boundingClientRectNorth.y);
+                    let newGridRowEndNegative = (parseInt(this.liveEdit.clickedElement.style['grid-row-start']) + 1);
+                    if (newGridRowEndNegative >= 18) {
+                        return;
+                    }
+                    console.log(newGridRowEndNegative);
+                    this.liveEdit.clickedElement.style['grid-row-start'] = newGridRowEndNegative;
+                }
+            }
+        }
+
        instance.calculateHandlePosition();
        this.liveEdit.handles.clickedElementHandle.calculateHandlePosition();
 
@@ -197,6 +264,18 @@ export class FlexGridResizer extends ElementHandle {
         this.iframeManager.document.removeEventListener('mouseup', this.stopDrag, false);
 
         console.log('stopDrag');
+
+
+        let gridRow = this.iframeManager.document.getElementsByClassName('js-tailwind-x-grid-row');
+        for (let i = 0; i < gridRow.length; i++) {
+            gridRow[i].style['opacity'] = 0;
+        }
+        let gridColumn = this.iframeManager.document.getElementsByClassName('js-tailwind-x-grid-column');
+        for (let i = 0; i < gridColumn.length; i++) {
+            gridColumn[i].style['opacity'] = 0;
+        }
+
+
     }
 
 
