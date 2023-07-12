@@ -5,6 +5,10 @@ export class FlexGridResizer extends ElementHandle {
 
     public element;
 
+
+    public resizeMove;
+    public resizeMoveNow = false;
+
     public resizeNorth;
     public resizeNorthNow = false;
 
@@ -67,6 +71,7 @@ export class FlexGridResizer extends ElementHandle {
             '<button id="js-live-edit-element-handle-flex-grid-resizer-south-west" type="button"> south-west </button>' +
             '<button id="js-live-edit-element-handle-flex-grid-resizer-south-east" type="button"> south-east </button>' +
             '<button id="js-live-edit-element-handle-flex-grid-resizer-east" type="button"> east </button>' +
+            '<button id="js-live-edit-element-handle-flex-grid-resizer-move" type="button"> move </button>' +
             '' +
             '';
         this.iframeManager.body.appendChild(createElementHandle);
@@ -80,6 +85,7 @@ export class FlexGridResizer extends ElementHandle {
         this.resizeSouthWest = this.iframeManager.document.getElementById('js-live-edit-element-handle-flex-grid-resizer-south-west');
         this.resizeSouthEast = this.iframeManager.document.getElementById('js-live-edit-element-handle-flex-grid-resizer-south-east');
         this.resizeEast = this.iframeManager.document.getElementById('js-live-edit-element-handle-flex-grid-resizer-east');
+        this.resizeMove = this.iframeManager.document.getElementById('js-live-edit-element-handle-flex-grid-resizer-move');
 
 
         // grid-row-start
@@ -88,7 +94,10 @@ export class FlexGridResizer extends ElementHandle {
         // grid-column-end
 
         let instance = this;
-
+        this.resizeMove.addEventListener('click', (clickEvent) => {
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+        });
         this.resizeEast.addEventListener('click', (clickEvent) => {
             clickEvent.preventDefault();
             clickEvent.stopPropagation();
@@ -104,6 +113,18 @@ export class FlexGridResizer extends ElementHandle {
         this.resizeWest.addEventListener('click', (clickEvent) => {
             clickEvent.preventDefault();
             clickEvent.stopPropagation();
+        });
+
+        this.resizeMove.addEventListener('mousedown', (clickEvent) => {
+
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+            if (!this.liveEdit.clickedElement) {
+                return false;
+            }
+            instance.resetAllResizers();
+            instance.resizeMoveNow = true;
+            instance.initDrag(clickEvent);
         });
 
         this.resizeEast.addEventListener('mousedown', (clickEvent) => {
@@ -264,6 +285,38 @@ export class FlexGridResizer extends ElementHandle {
                     this.liveEdit.clickedElement.style['grid-row-start'] = newGridRowEndNegative;
                 }
             }
+        }
+
+        if (instance.resizeMoveNow) {
+            let boundingClientRectMove = this.resizeMove.getBoundingClientRect();
+            let diffBetweenMoveY = Math.abs((boundingClientRectMove.y - e.clientY) / e.clientY * 100);
+            if (diffBetweenMoveY > 23) {
+                console.log('diffBetweenMove' + diffBetweenMoveY);
+                if (boundingClientRectMove.y > e.clientY) {
+                    console.log('move top' + boundingClientRectMove.y);
+                    this.liveEdit.clickedElement.style['grid-row-start'] = (parseInt(this.liveEdit.clickedElement.style['grid-row-start']) - 1);
+                    this.liveEdit.clickedElement.style['grid-row-end'] = (parseInt(this.liveEdit.clickedElement.style['grid-row-end']) - 1);
+                } else {
+                    console.log('move down' + boundingClientRectMove.y);
+                    this.liveEdit.clickedElement.style['grid-row-start'] = (parseInt(this.liveEdit.clickedElement.style['grid-row-start']) + 1);
+                    this.liveEdit.clickedElement.style['grid-row-end'] = (parseInt(this.liveEdit.clickedElement.style['grid-row-end']) + 1);
+                }
+            }
+
+            let diffBetweenMoveX = Math.abs((boundingClientRectMove.x - e.clientX) / e.clientX * 100);
+            if (diffBetweenMoveX > 23) {
+                console.log('diffBetweenMove' + diffBetweenMoveX);
+                if (boundingClientRectMove.x > e.clientX) {
+                    console.log('move top' + boundingClientRectMove.x);
+                    this.liveEdit.clickedElement.style['grid-column-start'] = (parseInt(this.liveEdit.clickedElement.style['grid-column-start']) - 1);
+                    this.liveEdit.clickedElement.style['grid-column-end'] = (parseInt(this.liveEdit.clickedElement.style['grid-column-end']) - 1);
+                } else {
+                    console.log('move down' + boundingClientRectMove.x);
+                    this.liveEdit.clickedElement.style['grid-column-start'] = (parseInt(this.liveEdit.clickedElement.style['grid-column-start']) + 1);
+                    this.liveEdit.clickedElement.style['grid-column-end'] = (parseInt(this.liveEdit.clickedElement.style['grid-column-end']) + 1);
+                }
+            }
+            console.log('resizeMoveNow');
         }
 
        instance.calculateHandlePosition();
