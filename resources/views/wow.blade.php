@@ -16,12 +16,8 @@ $gridColumns = 18;
 <style>
     .js-tailwind-x-grid {
 
-        margin-top:50px;
-        margin-left:100px;
-        background: #f5f5f5;
 
-        width: 900px;
-        height: 600px;
+        background: #f5f5f5;
 
         display: grid;
         gap: 5px;
@@ -56,7 +52,7 @@ $gridColumns = 18;
             // Add grid columns display
             for (let gridColumnI = 1; gridColumnI < {{$gridColumns+1}}; gridColumnI++) {
                 let gridColumn = document.createElement("div");
-                gridColumn.setAttribute('style', 'opacity:0;grid-area: 1 / ' + gridColumnI + ' / -1 / ' + gridColumnI);
+                gridColumn.setAttribute('style', 'grid-area: 1 / ' + gridColumnI + ' / -1 / ' + gridColumnI);
                 gridColumn.classList.add('js-tailwind-x-grid-column');
                 //gridColumn.innerHTML = 'x' + gridColumnI;
 
@@ -66,7 +62,7 @@ $gridColumns = 18;
             // Add grid rows display
             for (let gridRowI = 1; gridRowI < {{$gridRows+1}}; gridRowI++) {
                 let gridRow = document.createElement("div");
-                gridRow.setAttribute('style', 'opacity:0;grid-area: ' + gridRowI + ' / 1 / ' + gridRowI + '/ -1');
+                gridRow.setAttribute('style', 'grid-area: ' + gridRowI + ' / 1 / ' + gridRowI + '/ -1');
                 gridRow.classList.add('js-tailwind-x-grid-row');
                 //gridRow.innerHTML = 'y' + gridRowI;
 
