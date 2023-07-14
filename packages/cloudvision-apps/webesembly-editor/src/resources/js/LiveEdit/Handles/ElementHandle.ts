@@ -15,15 +15,15 @@ export class ElementHandle {
             return false;
         }
 
-        if (!elementHasParentsWithAttribute(element, 'tailwind-x:editable')) {
+        if (!elementHasParentsWithAttribute(element, 'webesembly:editable')) {
             return false;
         }
 
-        if (elementHasParentsWithAttribute(element, 'tailwind-x:module')) {
+        if (elementHasParentsWithAttribute(element, 'webesembly:module')) {
             return false;
         }
 
-        if (element.hasAttribute('tailwind-x:module')) {
+        if (element.hasAttribute('webesembly:module')) {
             return false;
         }
 

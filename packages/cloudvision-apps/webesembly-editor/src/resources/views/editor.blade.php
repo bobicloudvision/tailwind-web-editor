@@ -9,7 +9,7 @@
     <script src="{{asset('webesembly-editor/webesembly-editor.js') . '?time='.time()}}"></script>
 </head>
 <body>
-    <div id="webesembly-editor-app">
+    <div id="webesembly-editor-app" class="w-screen h-screen">
         <webesembly-editor>
             Loading Webesembly Editor...
         </webesembly-editor>

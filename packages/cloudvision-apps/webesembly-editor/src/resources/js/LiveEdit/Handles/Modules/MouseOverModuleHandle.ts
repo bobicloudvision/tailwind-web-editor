@@ -43,7 +43,7 @@ export class MouseOverModuleHandle extends ElementHandle {
             let mouseOverElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
             if (mouseOverElement) {
 
-                let getElementParentModuleElement = elementHasParentsWithAttribute(mouseOverElement, 'tailwind-x:module');
+                let getElementParentModuleElement = elementHasParentsWithAttribute(mouseOverElement, 'webesembly:module');
                 if (!getElementParentModuleElement) {
                     return;
                 }
@@ -61,7 +61,7 @@ export class MouseOverModuleHandle extends ElementHandle {
                 app.handleMainElement.style.left = (mouseOverElementBounding.left + (app.iframeManager.window.scrollX - 10)) + 'px';
                 app.handleMainElement.style.display = 'block';
 
-                let moduleFriendlyName = getElementParentModuleElement.getAttribute('tailwind-x:module').toUpperCase();
+                let moduleFriendlyName = getElementParentModuleElement.getAttribute('webesembly:module').toUpperCase();
                 if (app.handleNameElement) {
                     app.handleNameElement.innerText = moduleFriendlyName;
                 }

@@ -87,7 +87,7 @@ export class ClickedModuleHandle extends ElementHandle {
             let clickedElement = app.iframeManager.document.elementFromPoint(e.clientX, e.clientY);
             if (clickedElement) {
 
-                let getElementParentModuleElement = elementHasParentsWithAttribute(clickedElement, 'tailwind-x:module');
+                let getElementParentModuleElement = elementHasParentsWithAttribute(clickedElement, 'webesembly:module');
                 if (!getElementParentModuleElement) {
                     this.liveEdit.clickedModule = null;
                     return;
@@ -104,7 +104,7 @@ export class ClickedModuleHandle extends ElementHandle {
                 app.handleMainElement.style.left = (clickedElementBounding.left + (app.iframeManager.window.scrollX - 10)) + 'px';
                 app.handleMainElement.style.display = 'block';
 
-                let moduleFriendlyName = getElementParentModuleElement.getAttribute('tailwind-x:module').toUpperCase();
+                let moduleFriendlyName = getElementParentModuleElement.getAttribute('webesembly:module').toUpperCase();
 
                 this.enableSettingsName(moduleFriendlyName);
                 this.enableSettingsButton();

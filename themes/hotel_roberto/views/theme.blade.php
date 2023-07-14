@@ -14,7 +14,7 @@
     <link rel="icon" href="{{asset('themes/hotel_roberto')}}/img/core-img/favicon.png">
 
     <!-- Stylesheet -->
-    
+
     <link rel="stylesheet" href="{{asset('themes/hotel_roberto')}}/assets/style-68b7bf4e.css">
 
 </head>
