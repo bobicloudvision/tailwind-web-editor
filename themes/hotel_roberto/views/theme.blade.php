@@ -709,7 +709,7 @@
                         <!-- Footer Nav -->
                         <div webesembly:module="menu" skin="footer" name="footer" />
 
-                    </div> 
+                    </div>
                 </div>
 
                 <!-- Single Footer Widget Area -->

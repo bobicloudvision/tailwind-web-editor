@@ -20,7 +20,7 @@ class WebsiteController
     {
         Theme::set('hotel_roberto', 'bootstrap_default');
 
-        return view('page');
+        return view('home');
     }
 
     public function wow()

@@ -63,7 +63,7 @@ class WebesemblyModuleTagCompiler extends ComponentTagCompiler
 
     protected function componentString(string $component, array $attributes)
     {
-        return "@tailwind_x_module({$component}, [".$this->attributesToString($attributes, $escapeBound = false).'])';
+        return "@webesembly_module({$component}, [".$this->attributesToString($attributes, $escapeBound = false).'])';
     }
 
     protected function attributesToString(array $attributes, $escapeBound = true)

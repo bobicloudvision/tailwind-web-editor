@@ -18,17 +18,6 @@ use Inertia\Inertia;
 Route::get('/', '\App\Http\Controllers\WebsiteController@homepage')->name('website.homepage');
 Route::get('/wow', '\App\Http\Controllers\WebsiteController@wow')->name('website.wow');
 
-Route::get('/editor', function () {
-    return Inertia::render('Editor/Page', [
-        'url' => asset('/')
-    ]);
-});
-
-Route::get('/editor-ui', function () {
-    return Inertia::render('Editor/UiPreview', [
-        'url' => asset('/')
-    ]);
-});
 
 Route::middleware([
     'auth:sanctum',
@@ -41,4 +30,4 @@ Route::middleware([
 });
 
 
-Route::get('{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');
+Route::get('page/{slug}', '\App\Http\Controllers\WebsiteController@page')->name('website.page');
