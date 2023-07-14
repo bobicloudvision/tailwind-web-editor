@@ -15,6 +15,6 @@ class WebesemblyAssetsController
 
     public function iframeCss()
     {
-        return $this->pretendResponseIsFile(__DIR__.'/../../dist/webesembly/webesembly-iframe.css');
+        return $this->pretendResponseIsFile(__DIR__.'/../../dist/webesembly/webesembly-iframe.css', 'text/css');
     }
 }
