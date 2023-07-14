@@ -1,4 +1,4 @@
 {
-    "/public/webesembly/webesembly-editor.js": "/public/webesembly/webesembly-editor.js",
-    "/public/webesembly/webesembly-iframe.css": "/public/webesembly/webesembly-iframe.css"
+    "/dist/webesembly/webesembly-editor.js": "/dist/webesembly/webesembly-editor.js",
+    "/dist/webesembly/webesembly-iframe.css": "/dist/webesembly/webesembly-iframe.css"
 }

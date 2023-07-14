@@ -38,7 +38,7 @@ class WebesemblyEditorServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/../views', 'webesembly-editor');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'webesembly-editor');
 
 
         $this->registerTagCompiler();

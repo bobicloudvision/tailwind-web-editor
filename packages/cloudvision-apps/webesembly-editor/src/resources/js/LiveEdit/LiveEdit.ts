@@ -57,7 +57,7 @@ export class LiveEdit {
            app.handles.mouseOverModuleHandle = new MouseOverModuleHandle(app);
 
             app.iframeManager.body.addEventListener("keyup", (event) => {
-                app.handles.clickedElementHandle.calculateHandlePosition();
+             //   app.handles.clickedElementHandle.calculateHandlePosition();
             });
 
            app.appendStyles();
@@ -109,7 +109,7 @@ export class LiveEdit {
         link.id = 'js-tailwind-editor-iframe-styles';
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = '/live-edit/app.css';
+        link.href = '/webesembly-editor/webesembly-iframe.css';
         link.media = 'all';
         head.appendChild(link);
     }
