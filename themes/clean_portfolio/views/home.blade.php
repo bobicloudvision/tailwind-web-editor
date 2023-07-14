@@ -8,7 +8,7 @@
             <div class="row gx-5 align-items-center">
                 <div class="col-xxl-5">
                     <!-- Header text content-->
-                    <div class="text-center text-xxl-start" tailwind-x:editable="true">
+                    <div class="text-center text-xxl-start" webesembly:editable="true">
                         <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Design &middot; Development &middot; Marketing</div></div>
                         <div class="fs-3 fw-light text-muted">I can help your business to</div>
                         <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Get online and grow fast</span></h1>
@@ -151,7 +151,7 @@
                 <div class="col-xxl-8">
                     <div class="text-center my-5">
 
-                        <div tailwind-x:editable="true">
+                        <div webesembly:editable="true">
                             <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About Me</span></h2>
                             <p class="lead fw-light mb-4">My name is Start Bootstrap and I help brands grow.</p>
                             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>

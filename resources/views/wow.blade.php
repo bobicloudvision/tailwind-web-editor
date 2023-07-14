@@ -76,7 +76,7 @@ $gridColumns = 18;
 </script>
 
 <div>
-    <div class="js-tailwind-x-grid" tailwind-x:editable="true">
+    <div class="js-tailwind-x-grid" webesembly:editable="true">
 
         <button style="z-index:1;grid-area: 6 / 3 / 7/ 9;" type="text">Mega qk Button</button>
 
