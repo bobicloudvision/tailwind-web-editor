@@ -1,3 +1,4 @@
 {
-    "/main.js": "/main.js"
+    "/public/webesembly/webesembly-editor.js": "/public/webesembly/webesembly-editor.js",
+    "/public/webesembly/webesembly-iframe.css": "/public/webesembly/webesembly-iframe.css"
 }
