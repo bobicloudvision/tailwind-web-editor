@@ -59,9 +59,8 @@
 
 <script>
 import { ref, reactive } from 'vue'
-import {usePage} from "@inertiajs/vue3";
 
-import {LiveEdit} from "../../LiveEdit/LiveEdit";
+import {LiveEdit} from "../../LiveEdit/LiveEdit.ts";
 
 import {
     BackspaceIcon,
@@ -129,10 +128,8 @@ export default {
 
     },
     data() {
-
-        const url = usePage().props.url;
         return {
-            url:url,
+            url: '/',
             deviceName,
             lastSelectedElement,
         }
