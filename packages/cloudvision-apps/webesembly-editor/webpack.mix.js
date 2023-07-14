@@ -1,5 +1,5 @@
 /*npx mix watch*/
 
 let mix = require('laravel-mix');
-mix.sass('resources/scss/live-edit/app.scss', 'live-edit');
-mix.js('resources/js/live-edit/app.js', 'live-edit').vue({ version: 3 });
+mix.sass('src/resources/scss/editor-iframe/webesembly-iframe.scss', 'public/webesembly');
+mix.js('src/resources/js/webesembly-editor.js', 'public/webesembly').vue({ version: 3 });
