@@ -14,7 +14,8 @@
     <link rel="icon" href="{{asset('themes/hotel_roberto')}}/img/core-img/favicon.png">
 
     <!-- Stylesheet -->
-    @vite(['themes/hotel_roberto/scss/style.scss'], 'hotel_roberto')
+    
+    <link rel="stylesheet" href="{{asset('themes/hotel_roberto')}}/assets/style-68b7bf4e.css">
 
 </head>
 
