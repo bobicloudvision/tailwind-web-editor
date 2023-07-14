@@ -1,7 +1,7 @@
 {
     "name": "cloudvision-apps/webesembly-editor",
     "description": "New generation of website building",
-    "type": "library",
+    "type": "project",
     "license": "Paid",
     "authors": [
         {
