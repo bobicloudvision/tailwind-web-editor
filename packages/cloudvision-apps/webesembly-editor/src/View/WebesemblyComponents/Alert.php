@@ -1,10 +1,11 @@
 <?php
 
-namespace App\View\TailwindXComponents;
+namespace WebesemblyEditor\View\WebesemblyComponents;
 
 use Illuminate\View\View;
+use function view;
 
-class Alert extends TailwindXComponent
+class Alert extends WebesemblyComponent
 {
     /**
      * Create the component instance.
@@ -19,7 +20,7 @@ class Alert extends TailwindXComponent
      */
     public function render(): View
     {
-        return view('tailwind-x-components.alert', [
+        return view('webesembly-components.alert', [
             'type' => $this->type,
             'message' => $this->message,
         ]);

@@ -3,15 +3,6 @@
 namespace App\Providers;
 
 use App\Models\Website\Page;
-use App\TailwindXModule;
-use App\TailwindXModuleBladeDirectives;
-use App\TailwindXModuleManager;
-use App\TailwindXModuleTagCompiler;
-use App\View\TailwindXComponents\Alert;
-use App\View\TailwindXComponents\Logo;
-use App\View\TailwindXComponents\Menu;
-use App\View\TailwindXComponents\SocialLinks;
-use App\View\TailwindXComponents\Text;
 use App\WebsiteHelper;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +10,15 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use RyanChandler\FilamentNavigation\Facades\FilamentNavigation;
+use WebesemblyEditor\WebesemblyModule;
+use WebesemblyEditor\WebesemblyModuleBladeDirectives;
+use WebesemblyEditor\WebesemblyModuleManager;
+use WebesemblyEditor\WebesemblyModuleTagCompiler;
+use WebesemblyEditor\View\WebesemblyComponents\Alert;
+use WebesemblyEditor\View\WebesemblyComponents\Logo;
+use WebesemblyEditor\View\WebesemblyComponents\Menu;
+use WebesemblyEditor\View\WebesemblyComponents\SocialLinks;
+use WebesemblyEditor\View\WebesemblyComponents\Text;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         include_once dirname(__DIR__,) . '/website_helpers.php';
-        $this->registerTailwindXSingleton();
     }
 
     /**
@@ -40,16 +39,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerTagCompiler();
-
-        TailwindXModule::component('alert', Alert::class);
-        TailwindXModule::component('menu', Menu::class);
-        TailwindXModule::component('text', Text::class);
-        TailwindXModule::component('logo', Logo::class);
-        TailwindXModule::component('social-links', SocialLinks::class);
-
-        Blade::directive('tailwind_x_module', [TailwindXModuleBladeDirectives::class, 'module']);
-
         Model::unguard();
 
         FilamentNavigation::addItemType('Page link', [
@@ -65,21 +54,6 @@ class AppServiceProvider extends ServiceProvider
 
         if (app()->environment('production')) {
             URL::forceScheme('https');
-        }
-    }
-
-    protected function registerTailwindXSingleton()
-    {
-        $this->app->singleton(TailwindXModuleManager::class);
-        $this->app->alias(TailwindXModuleManager::class, 'tailwind-x-module');
-    }
-
-    protected function registerTagCompiler()
-    {
-        if (method_exists($this->app['blade.compiler'], 'precompiler')) {
-            $this->app['blade.compiler']->precompiler(function ($string) {
-                return app(TailwindXModuleTagCompiler::class)->compile($string);
-            });
         }
     }
 }

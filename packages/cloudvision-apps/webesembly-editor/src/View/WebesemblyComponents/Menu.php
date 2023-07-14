@@ -1,10 +1,12 @@
 <?php
 
-namespace App\View\TailwindXComponents;
+namespace WebesemblyEditor\View\WebesemblyComponents;
 
 use Illuminate\View\View;
+use function route;
+use function view;
 
-class Menu extends TailwindXComponent
+class Menu extends WebesemblyComponent
 {
 
    public function getMenu($menu) {
@@ -44,7 +46,7 @@ class Menu extends TailwindXComponent
             $menus = $this->getMenu($this->params['name']);
         }
 
-        return view('tailwind-x-components.menu.skins.' . $this->skin, [
+        return view('webesembly-components.menu.skins.' . $this->skin, [
             'menus' => $menus,
         ]);
     }

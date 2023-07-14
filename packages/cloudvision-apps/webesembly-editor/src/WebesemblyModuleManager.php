@@ -1,11 +1,14 @@
 <?php
 
-namespace App;
+namespace WebesemblyEditor;
 
 use Illuminate\Support\Str;
-use function Termwind\render;
+use function App\str_contains;
+use function class_basename;
+use function collect;
+use function str;
 
-class TailwindXModuleManager
+class WebesemblyModuleManager
 {
     /**
      * @var string
@@ -70,7 +73,7 @@ class TailwindXModuleManager
             $viewHtml = $classInstance->render();
         }
 
-        return '<div tailwind-x:id="'.$this->id.'" tailwind-x:module="'.$this->componentName.'">
+        return '<div webesembly:id="'.$this->id.'" webesembly:module="'.$this->componentName.'">
 
         '.$viewHtml.'
 
@@ -87,13 +90,13 @@ class TailwindXModuleManager
      */
     public function component($class, $alias = null, $prefix = '')
     {
-        if (! is_null($alias) && str_contains($alias, '\\')) {
+        if (! is_null($alias) && Str::contains($alias, '\\')) {
             [$class, $alias] = [$alias, $class];
         }
 
         if (is_null($alias)) {
-            $alias = str_contains($class, '\\View\\TailwindXComponents\\')
-                ? collect(explode('\\', Str::after($class, '\\View\\TailwindXComponents\\')))->map(function ($segment) {
+            $alias = str_contains($class, '\\View\\WebesemblyComponents\\')
+                ? collect(explode('\\', Str::after($class, '\\View\\WebesemblyComponents\\')))->map(function ($segment) {
                     return Str::kebab($segment);
                 })->implode(':')
                 : Str::kebab(class_basename($class));

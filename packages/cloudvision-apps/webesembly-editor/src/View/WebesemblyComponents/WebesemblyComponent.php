@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\TailwindXComponents;
+namespace WebesemblyEditor\View\WebesemblyComponents;
 
 use Illuminate\View\Component;
 
-class TailwindXComponent extends Component
+class WebesemblyComponent extends Component
 {
     /**
      * @var string

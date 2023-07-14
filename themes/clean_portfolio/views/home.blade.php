@@ -157,7 +157,7 @@
                             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>
                         </div>
 
-                        <div tailwind-x:module="social-links" />
+                        <div webesembly:module="social-links" />
 
                     </div>
                 </div>

@@ -73,7 +73,7 @@
                 <!-- Classy Menu -->
                 <nav class="classy-navbar justify-content-between" id="robertoNav">
 
-                    <div tailwind-x:module="logo" skin="header" name="header" />
+                    <div webesembly:module="logo" skin="header" name="header" />
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -89,7 +89,7 @@
                         <!-- Nav Start -->
                         <div class="classynav">
 
-                            <div tailwind-x:module="menu" skin="header" name="header" />
+                            <div webesembly:module="menu" skin="header" name="header" />
 
                             <!-- Search -->
                             <div class="search-btn ml-4">
@@ -670,7 +670,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-footer-widget mb-80">
                         <!-- Footer Logo -->
-                        <div tailwind-x:module="logo" skin="footer" name="footer" />
+                        <div webesembly:module="logo" skin="footer" name="footer" />
 
                         <div tailwind-x:editable="true">
                             <h4>+12 345-678-9999</h4>
@@ -707,7 +707,7 @@
                         <h5 class="widget-title" tailwind-x:editable="true">Links</h5>
 
                         <!-- Footer Nav -->
-                        <div tailwind-x:module="menu" skin="footer" name="footer" />
+                        <div webesembly:module="menu" skin="footer" name="footer" />
 
                     </div>
                 </div>
@@ -739,12 +739,12 @@
                 <div class="col-12 col-md-8">
                     <!-- Copywrite Text -->
                     <div class="copywrite-text">
-                        <div tailwind-x:module="text" skin="footer-text" name="footer" />
+                        <div webesembly:module="text" skin="footer-text" name="footer" />
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <!-- Social Info -->
-                    <div tailwind-x:module="social-links" />
+                    <div webesembly:module="social-links" />
                 </div>
             </div>
         </div>

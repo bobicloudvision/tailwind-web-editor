@@ -1,10 +1,11 @@
 <?php
 
-namespace App\View\TailwindXComponents;
+namespace WebesemblyEditor\View\WebesemblyComponents;
 
 use Illuminate\View\View;
+use function view;
 
-class Text extends TailwindXComponent
+class SocialLinks extends WebesemblyComponent
 {
 
     /**
@@ -14,8 +15,9 @@ class Text extends TailwindXComponent
     {
         $text = '';
 
-        return view('tailwind-x-components.text.skins.' . $this->skin, [
+        return view('webesembly-components.social-links.skins.' . $this->skin, [
             'text' => $text,
         ]);
     }
+
 }

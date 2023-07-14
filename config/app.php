@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => 1,//(bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -197,6 +197,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+        \WebesemblyEditor\Providers\WebesemblyEditorServiceProvider::class
     ],
 
     /*

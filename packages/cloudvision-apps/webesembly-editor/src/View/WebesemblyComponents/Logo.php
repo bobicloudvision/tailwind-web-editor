@@ -1,10 +1,11 @@
 <?php
 
-namespace App\View\TailwindXComponents;
+namespace WebesemblyEditor\View\WebesemblyComponents;
 
 use Illuminate\View\View;
+use function view;
 
-class Logo extends TailwindXComponent
+class Logo extends WebesemblyComponent
 {
 
     /**
@@ -14,7 +15,7 @@ class Logo extends TailwindXComponent
     {
         $logo = '';
 
-        return view('tailwind-x-components.logo.skins.' . $this->skin, [
+        return view('webesembly-components.logo.skins.' . $this->skin, [
             'logo' => $logo,
         ]);
     }

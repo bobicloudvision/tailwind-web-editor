@@ -1,10 +1,10 @@
 <?php
-namespace App;
+namespace WebesemblyEditor;
 
-use  Illuminate\View\Compilers\ComponentTagCompiler;
-use Livewire\Exceptions\ComponentAttributeMissingOnDynamicComponentException;
+use Illuminate\View\Compilers\ComponentTagCompiler;
+use function collect;
 
-class TailwindXModuleTagCompiler extends ComponentTagCompiler
+class WebesemblyModuleTagCompiler extends ComponentTagCompiler
 {
     public function compile($value)
     {
@@ -16,7 +16,7 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
         $pattern = "/
             <div
                 \s*
-                tailwind-x:module=(['\"])([\w\-\:\.]*)(['\"])
+                webesembly:module=(['\"])([\w\-\:\.]*)(['\"])
                 \s*
                 (?<attributes>
                     (?:
@@ -48,7 +48,7 @@ class TailwindXModuleTagCompiler extends ComponentTagCompiler
                 return [(string) str($key)->trim() => $value];
             })->toArray();
 
-            preg_match("/tailwind-x:module=(['\"])([\w\-\:\.]*)(['\"]) /", $matches[0], $matchTypeOfModule);
+            preg_match("/webesembly:module=(['\"])([\w\-\:\.]*)(['\"]) /", $matches[0], $matchTypeOfModule);
 
             $component = '';
             if (isset($matchTypeOfModule[2])) {

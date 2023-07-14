@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace WebesemblyEditor;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see
  */
-class TailwindXModule extends Facade
+class WebesemblyModule extends Facade
 {
     public static function getFacadeAccessor()
     {
-        return 'tailwind-x-module';
+        return 'webesembly-module';
     }
 }
