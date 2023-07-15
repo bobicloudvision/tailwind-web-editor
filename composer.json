@@ -23,6 +23,7 @@
         "spatie/laravel-tags": "^4.3",
         "squirephp/countries-en": "^3.4",
         "squirephp/currencies-en": "^3.4",
+        "symfony/dom-crawler": "^6.3",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {

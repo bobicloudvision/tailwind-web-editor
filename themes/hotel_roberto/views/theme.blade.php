@@ -112,7 +112,7 @@
 <!-- Header Area End -->
 
 <!-- Welcome Area Start -->
-<section class="welcome-area">
+<section class="welcome-area" webesembly:section="welcome-area">
     <div class="welcome-slides owl-carousel">
         <!-- Single Welcome Slide -->
         <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({{asset('themes/hotel_roberto')}}/img/bg-img/16.jpg);" data-img-url="{{asset('themes/hotel_roberto')}}/img/bg-img/16.jpg">
@@ -175,7 +175,7 @@
 <!-- Welcome Area End -->
 
 <!-- About Us Area Start -->
-<section class="roberto-about-area section-padding-100-0">
+<section class="roberto-about-area section-padding-100-0" webesembly:section="about-us">
     <!-- Hotel Search Form Area -->
     <div class="hotel-search-form-area">
         <div class="container-fluid">
