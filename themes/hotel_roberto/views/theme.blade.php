@@ -27,7 +27,7 @@
 <!-- /Preloader -->
 
 <!-- Header Area Start -->
-<header class="header-area">
+<header class="header-area" webesembly:section="header">
     <!-- Search Form -->
     <div class="search-form d-flex align-items-center">
         <div class="container">
@@ -45,8 +45,8 @@
 
                 <div class="col-6">
                     <div class="top-header-content">
-                        <a href="#"><i class="icon_phone"></i> <span>(123) 456-789-1230</span></a>
-                        <a href="#"><i class="icon_mail"></i> <span>info.colorlib@gmail.com</span></a>
+                        <a href="#"><i class="icon_phone"></i> <span webesembly:editable="true">(123) 456-789-1230</span></a>
+                        <a href="#"><i class="icon_mail"></i> <span webesembly:editable="true">info.colorlib@gmail.com</span></a>
                     </div>
                 </div>
 
@@ -272,7 +272,7 @@
 <!-- About Us Area End -->
 
 <!-- Service Area Start -->
-<section class="roberto-service-area">
+<section class="roberto-service-area" webesembly:section="service-area">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -619,7 +619,7 @@
 <!-- Blog Area End -->
 
 <!-- Call To Action Area Start -->
-<section class="roberto-cta-area">
+<section class="roberto-cta-area" webesembly:section="call-to-action">
     <div class="container">
         <div class="cta-content bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/1.jpg);">
             <div class="row align-items-center">
@@ -662,7 +662,7 @@
 <!-- Partner Area End -->
 
 <!-- Footer Area Start -->
-<footer class="footer-area section-padding-80-0">
+<footer class="footer-area section-padding-80-0" webesembly:section="footer">
     <!-- Main Footer Area -->
     <div class="main-footer-area">
         <div class="container">
