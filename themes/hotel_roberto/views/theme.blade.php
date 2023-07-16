@@ -111,6 +111,8 @@
 </header>
 <!-- Header Area End -->
 
+<div webesembly:page="home">
+
 <!-- Welcome Area Start -->
 <section class="welcome-area" webesembly:section="welcome-area">
     <div class="welcome-slides owl-carousel">
@@ -660,6 +662,8 @@
     </div>
 </section>
 <!-- Partner Area End -->
+
+</div>
 
 <!-- Footer Area Start -->
 <footer class="footer-area section-padding-80-0" webesembly:section="footer">

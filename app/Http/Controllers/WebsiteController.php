@@ -9,7 +9,7 @@ class WebsiteController
 
     public function homepage()
     {
-        //return view('ebasi');
+        return view('wow');
 //
         Theme::set('hotel_roberto', 'bootstrap_default');
 
