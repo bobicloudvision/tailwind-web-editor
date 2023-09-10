@@ -16,3 +16,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/packages/cloudvision-apps/webesembly-editor/node_modules/
+/packages/cloudvision-apps/webesembly-editor/node_modules/.cache/

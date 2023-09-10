@@ -2,7 +2,30 @@
 
 @section('content')
 
-    <div webesembly:page="home-hotel-roberto">
+    <div webesembly:page="home-hotel-roberto"> 
+
+
+        <section webesembly:section="modules-with-grid">
+            <div webesembly:flex-grid="true">
+
+
+                <div webesembly:flex-grid-element="11 / 18 / 3 / 10">
+                    <div webesembly:editable="true">
+                        <button>qko</button>
+                    </div>
+                </div>
+
+                <div webesembly:flex-grid-element="11 / 18 / 3 / 10">
+                    <div webesembly:editable="true">
+                        <p>Qkoo</p>
+                        <p>Qkoo mega </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+<!--
+
 
 
         <section webesembly:section="modules-with-grid">
@@ -83,7 +106,7 @@
 
                 </div>
             </div>
-        </section>
+        </section>-->
 
     </div>
 

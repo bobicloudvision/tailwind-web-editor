@@ -37,7 +37,10 @@
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "@headlessui/vue": "^1.7.11",
         "@heroicons/vue": "^1.0.6",
+        "dragselect": "^2.7.4",
         "feather-icons": "^4.29.0",
+        "i": "^0.3.7",
+        "npm": "^10.0.0",
         "vite-plugin-static-copy": "^0.16.0",
         "vue-feather": "^2.0.0"
     }

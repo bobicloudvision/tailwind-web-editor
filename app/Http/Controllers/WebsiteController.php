@@ -9,9 +9,9 @@ class WebsiteController
 
     public function homepage()
     {
-      //  return view('wow');
+       return view('new-fresh');
 //
-        Theme::set('hotel_roberto', 'bootstrap_default');
+      //  Theme::set('hotel_roberto', 'bootstrap_default');
 
         return view('home');
     }
